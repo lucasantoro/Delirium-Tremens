@@ -15,17 +15,15 @@ body {
 body {
   font-family: "Trebuchet MS", sans-serif;
 
-  /* 🔥 sfondo immagine + overlay void */
-  background:
-      url("img/logo.jpg") no-repeat center center fixed,
-      radial-gradient(circle at 50% 20%, #2b0036, #0a0010 60%, #050008 100%);
-
+  /* 🔥 sfondo a schermo intero */
+  background: url("img/placeholder-hero.jpg") no-repeat center center fixed;
   background-size: cover;
 
+  /* overlay violaceo per il tema Void */
+  position: relative;
   color: #e6d6ff;
   margin: 0;
   padding: 0;
-  text-shadow: 0 0 4px #000;
   text-align: center;
 }
 
