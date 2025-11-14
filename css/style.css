@@ -43,6 +43,13 @@ main {
   padding: 20px;
 }
 
+.recruit {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: left;
+  padding: 20px;
+}
+
 /* LOGO GILDA */
 .guild-logo {
   width: 160px;
