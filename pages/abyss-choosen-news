@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<title>Abyss Choosen – News</title>
+<link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body>
+
+<header>
+<h1>Abyss Choosen</h1>
+<nav>
+<ul>
+<li><a href="../index.html">Home</a></li>
+<li><a href="roster-abyss.html">Abyss Choosen</a></li>
+<li><a href="mindbound.html">Mindbound</a></li>
+<li><a href="recruiting.html">Reclutamento</a></li>
+<li><a href="statuto.html">Statuto</a></li>
+</ul>
+</nav>
+</header>
+
+<nav class="subnav">
+  <ul>
+    <li><a href="abyss-choosen.html">Home Team</a></li>
+    <li><a href="roster-abyss.html">Roster</a></li>
+    <li><a href="abyss-choosen-news" class="active">News</a></li>
+    <li><a href="abyss-choosen-progress">Progress</a></li>
+  </ul>
+</nav>
+
+<main class="panel">
+<h2>News</h2>
+
+<ul>
+  <li><strong>Kill di Boss X</strong> — 22/02/2025</li>
+  <li>Nuovo membro nel team!</li>
+  <li>Evento settimanale: serata review logs</li>
+</ul>
+
+</main>
+
+<footer>
+<p>&copy; 2025 Delirium Tremens</p>
+</footer>
+
+</body>
+</html>
