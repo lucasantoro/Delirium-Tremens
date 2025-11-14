@@ -1,4 +1,4 @@
-/* --- Tema Cthulhu / Void --- */
+/* --- TEMA CTHULHU / VOID --- */
 body {
   font-family: "Trebuchet MS", sans-serif;
   background: radial-gradient(circle at 50% 20%, #2b0036, #0a0010 60%, #050008 100%);
@@ -6,154 +6,167 @@ body {
   margin: 0;
   padding: 0;
   text-shadow: 0 0 4px #000;
-  text-align: center; /* CENTRA TUTTO IL TESTO */
+  text-align: center;
 }
 
-/* CONTENITORE CENTRALE */
-main, .statuto, .roster-grid {
+/* CONTENITORE CENTRATO */
+main, .statuto {
   max-width: 1100px;
-  margin: 0 auto; /* CENTRA IL CONTENUTO */
-  text-align: center; /* CENTRA TESTI E CARD */
+  margin: 0 auto;
+  text-align: center;
+  padding: 20px;
 }
 
-/* LOGO */
+/* LOGO GILDA */
 .guild-logo {
   width: 160px;
-  margin: 10px auto;
+  margin: 10px auto 20px auto;
   display: block;
-  filter: drop-shadow(0 0 10px #5a1ea8);
+  filter: drop-shadow(0 0 14px #8b3dfd);
 }
 
 /* HEADER */
 header {
-  background: linear-gradient(180deg, #24002f, #15001C);
-  padding: 30px 20px;
-  text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.8);
-  border-bottom: 2px solid #4d0f78;
+  background: linear-gradient(180deg, #2f0040, #16001f);
+  padding: 35px 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.9);
+  border-bottom: 2px solid #6c19a8;
 }
 
 header h1 {
-  color: #d09bff;
+  color: #e5b0ff;
   font-size: 2.8rem;
-  margin-bottom: 5px;
-  text-shadow: 0 0 12px #6a1bb3;
+  margin-bottom: 8px;
+  text-shadow: 0 0 15px #7d2ec7;
 }
 
 header .subtitle {
-  font-size: 1.2rem;
-  color: #b97cff;
+  font-size: 1.25rem;
+  color: #d59cff;
 }
 
 /* NAVBAR */
 nav ul {
   list-style: none;
   padding: 0;
-  margin-top: 15px;
+  margin-top: 18px;
 }
 
 nav ul li {
   display: inline-block;
-  margin: 0 12px;
+  margin: 0 14px;
 }
 
 nav ul li a {
-  color: #d7b4ff;
+  color: #f5d6ff; /* più chiaro per contrasto */
   text-decoration: none;
   font-weight: bold;
-  font-size: 1.1rem;
-  padding: 8px 14px;
-  border-radius: 8px;
-  transition: 0.3s;
+  font-size: 1.15rem;
+  padding: 10px 18px;
+  border-radius: 10px;
+  transition: 0.25s;
+  text-shadow: 0 0 6px #150015;
 }
 
 nav ul li a:hover {
-  background: rgba(120, 20, 180, 0.3);
-  box-shadow: 0 0 10px #6a1bb3;
+  background: rgba(160, 60, 255, 0.35);
+  box-shadow: 0 0 14px #b060ff;
 }
 
-/* HERO */
+/* HERO CENTRATA */
+.hero {
+  max-width: 1100px;
+  margin: 20px auto;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
 .hero img {
   width: 100%;
-  max-height: 360px;
   object-fit: cover;
-  filter: brightness(0.6) saturate(1.2) drop-shadow(0 0 10px #300050);
+  max-height: 350px;
+  display: block;
+  filter: brightness(0.75) saturate(1.25) drop-shadow(0 0 12px #240044);
 }
 
 .hero h2 {
-  color: #e2b3ff;
-  text-align: center;
-  margin-top: -40px;
+  margin-top: -32px;
+  color: #f4c7ff;
   font-size: 2rem;
   text-shadow: 0 0 15px #000;
 }
 
 /* TITOLI */
 h2 {
-  color: #d09bff;
-  border-left: 4px solid #5d1a8b;
-  padding-left: 10px;
-  margin-top: 40px;
+  color: #e2b6ff;
+  border-left: 5px solid #9a40ff;
+  padding-left: 14px;
+  margin-top: 50px;
+  text-align: left;
 }
 
-/* ROSTER GRID */
+/* GRID ROSTER */
 .roster-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 25px;
+  gap: 30px;
   padding: 20px;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 
+/* CARD MEMBRO */
 .member {
-  background: rgba(30, 0, 45, 0.7);
-  padding: 18px;
-  border-radius: 12px;
-  box-shadow: 0 0 15px rgba(90, 20, 140, 0.4);
+  background: rgba(20, 0, 35, 0.7);
+  padding: 20px;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(140, 40, 200, 0.4);
   transition: 0.3s;
 }
 
 .member:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(150, 50, 200, 0.7);
+  box-shadow: 0 0 28px rgba(180, 60, 255, 0.7);
 }
 
 .member img {
   width: 100%;
   height: 240px;
+  border-radius: 12px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  border: 2px solid #5a1ea8;
+  border: 2px solid #912dff;
+  margin-bottom: 12px;
 }
 
 .member h3 {
-  color: #e8c5ff;
-  margin: 10px 0 5px;
+  color: #f1caff;
+  margin: 8px 0 6px;
 }
 
 .tagline {
   font-style: italic;
-  color: #b57aff;
-  margin-bottom: 8px;
+  color: #d38aff;
+  margin-bottom: 10px;
 }
 
 .description-long {
-  color: #e6d6ff;
+  color: #f0e3ff;
   font-size: 0.95rem;
+  line-height: 1.4;
   text-shadow: 0 0 3px #000;
 }
 
 /* STATUTO */
 .statuto h2 {
-  margin-top: 30px;
+  text-align: left;
 }
 
 /* FOOTER */
 footer {
   background: #0a0010;
-  text-align: center;
-  padding: 20px;
-  margin-top: 50px;
-  border-top: 2px solid #4d0f78;
-  color: #b97cff;
+  padding: 25px;
+  margin-top: 60px;
+  border-top: 2px solid #6c19a8;
+  color: #dba7ff;
+  text-shadow: 0 0 5px #000;
 }
