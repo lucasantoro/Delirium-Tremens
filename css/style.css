@@ -189,6 +189,12 @@ h2 {
   text-shadow: 0 0 3px #000;
 }
 
+.abyss-bg {
+  background: url("../img/abysschosen_logo.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+
 /* STATUTO */
 .statuto h2 {
   text-align: left;
