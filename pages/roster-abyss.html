@@ -2,65 +2,65 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8">
-<title>Abyss Choosen – Roster</title>
+<title>Abyss Chosen – Roster</title>
 <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
+
 <header>
-<h1>Abyss Choosen</h1>
+<h1>Abyss Chosen</h1>
 <nav>
 <ul>
 <li><a href="../index.html">Home</a></li>
 <li><a href="roster-abyss.html">Abyss Choosen</a></li>
-<li><a href="roster-mindbound.html">Mindbound</a></li>
+<li><a href="mindbound.html">Mindbound</a></li>
 <li><a href="recruiting.html">Reclutamento</a></li>
 <li><a href="statuto.html">Statuto</a></li>
 </ul>
 </nav>
 </header>
 
+<!-- SUBNAV -->
+<nav class="subnav">
+  <ul>
+    <li><a href="abyss-choosen.html">Home Team</a></li>
+    <li><a href="roster-abyss.html" class="active">Roster</a></li>
+    <li><a href="abyss-choosen-news">News</a></li>
+    <li><a href="abyss-choosen-progress">Progress</a></li>
+  </ul>
+</nav>
 
-<main>
-<h2>Roster</h2>
-<div class="roster-grid">
-<!-- TEMPLATE MEMBRI (20 SPAZI) -->
-<!-- Copia e incolla questo blocco per ogni membro -->
-<div class="member">
-<img src="../img/placeholder-member.jpg" alt="Membro">
-<h3>NOME PERSONAGGIO</h3>
-<p class="tagline">BREVE FRASE SIMPATICA</p>
-<p class="description-long">
-Descrizione lunga del personaggio. Inserisci qui biografia, ruolo nel gruppo, note divertenti, peculiarità e tutto ciò che vuoi raccontare.
-</p>
+<main class="panel">
+<!-- <h2>Roster MindBound</h2> -->
+
+<div class="roster-grid" id="roster-container">
+  <!-- qui verranno caricati i membri -->
 </div>
 
-
-<!-- Ripeti il blocco sopra fino ad avere 20 membri -->
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 2</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 3</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 4</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 5</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 6</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 7</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 8</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 9</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 10</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 11</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 12</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 13</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 14</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 15</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 16</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 17</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 18</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 19</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-<div class="member"><img src="../img/placeholder-member.jpg"><h3>Membro 20</h3><p class="tagline">Frase simpatica</p><p class="description-long">Descrizione lunga...</p></div>
-</div>
 </main>
-
 
 <footer>
 <p>&copy; 2025 Delirium Tremens</p>
 </footer>
+
+<script>
+// LISTA DEI FILE MEMBRO
+const members = [
+  "odetta.html"
+];
+
+const container = document.getElementById("roster-container");
+
+members.forEach(file => {
+  fetch(`../members/${file}`)
+    .then(response => response.text())
+    .then(html => {
+      container.innerHTML += html;
+    });
+});
+</script>
+
+
 </body>
 </html>
