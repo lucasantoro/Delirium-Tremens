@@ -39,19 +39,34 @@
 
 <!-- FORM DI CANDIDATURA -->
 <form id="applyForm" class="apply-form">
-  
+
+  <label>Discord</label>
+  <input type="text" name="Discord" placeholder="es: Odetta#1234" required>
+
   <label>Nome del personaggio</label>
   <input type="text" name="Personaggio" required>
-  
-  <label>Classe e Specializzazione</label>
-  <input type="text" name="Spec" required>
 
-  <label>Ruolo</label>
-  <select name="Ruolo" required>
-    <option value="Tank">Tank</option>
-    <option value="Healer">Healer</option>
-    <option value="Melee DPS">Melee DPS</option>
-    <option value="Range DPS">Range DPS</option>
+  <label>Classe</label>
+  <select id="classSelect" name="Classe" required>
+    <option value="">Seleziona la classe…</option>
+    <option value="Death Knight">Death Knight</option>
+    <option value="Demon Hunter">Demon Hunter</option>
+    <option value="Druid">Druid</option>
+    <option value="Evoker">Evoker</option>
+    <option value="Hunter">Hunter</option>
+    <option value="Mage">Mage</option>
+    <option value="Monk">Monk</option>
+    <option value="Paladin">Paladin</option>
+    <option value="Priest">Priest</option>
+    <option value="Rogue">Rogue</option>
+    <option value="Shaman">Shaman</option>
+    <option value="Warlock">Warlock</option>
+    <option value="Warrior">Warrior</option>
+  </select>
+
+  <label>Specializzazione</label>
+  <select id="specSelect" name="Spec" required>
+    <option value="">Seleziona prima una classe…</option>
   </select>
 
   <label>Link a Raider.IO o Warcraft Logs</label>
@@ -65,6 +80,7 @@
 
   <button type="submit" class="apply-button">Invia candidatura</button>
 </form>
+
 
 </main>
 
