@@ -6,7 +6,8 @@
 <link rel="stylesheet" href="../css/style.css">
 </head>
 
-<body>
+<body class="page-transition">
+
 <header>
 <h1>Reclutamento</h1>
 <nav>
@@ -14,8 +15,8 @@
     <li><a href="../index.html">Home</a></li>
     <li><a href="raider.html">Raider</a></li>
     <li><a href="hollowsoul.html">Hollow Soul</a></li>
-    <li><a href="../pages/recruiting.html">Reclutamento</a></li>
-    <li><a href="../pages/statuto.html">Statuto</a></li>
+    <li><a href="recruiting.html" class="active">Reclutamento</a></li>
+    <li><a href="statuto.html">Statuto</a></li>
   </ul>
 </nav>
 </header>
@@ -25,28 +26,60 @@
 
 <h2>Classi richieste</h2>
 <ul>
-<li>Tank – Chiuso</li>
-<li>Healer – Chiuso</li>
-<li>DPS – Alto bisogno</li>
-<li>Range DPS – Aperto</li>
+  <li>Tank – Chiuso</li>
+  <li>Healer – Chiuso</li>
+  <li>DPS – Alto bisogno</li>
+  <li>Range DPS – Aperto</li>
 </ul>
 
 
 <h2>Come candidarsi</h2>
-<p>Contatta un ufficiale in game oppure compila il modulo Discord (placeholder).</p>
+<p>Compila il modulo sottostante per inviare la tua candidatura. Ti risponderemo direttamente su Discord.</p>
+
+
+<!-- FORM DI CANDIDATURA -->
+<form id="applyForm" class="apply-form">
+  
+  <label>Nome del personaggio</label>
+  <input type="text" name="Personaggio" required>
+  
+  <label>Classe e Specializzazione</label>
+  <input type="text" name="Spec" required>
+
+  <label>Ruolo</label>
+  <select name="Ruolo" required>
+    <option value="Tank">Tank</option>
+    <option value="Healer">Healer</option>
+    <option value="Melee DPS">Melee DPS</option>
+    <option value="Range DPS">Range DPS</option>
+  </select>
+
+  <label>Link a Raider.IO o Warcraft Logs</label>
+  <input type="text" name="Logs">
+
+  <label>Disponibilità</label>
+  <textarea name="Disponibilità" required></textarea>
+
+  <label>Perché vuoi unirti ai Delirium Tremens?</label>
+  <textarea name="Motivazione" required></textarea>
+
+  <button type="submit" class="apply-button">Invia candidatura</button>
+</form>
+
 </main>
+
 
 <footer>
 <p>&copy; 2025 Delirium Tremens</p>
 </footer>
 
+
+<!-- SCRIPT TRANSIZIONE PAGINA -->
 <script>
-// Quando la pagina ha finito di caricare → fade-in
 document.addEventListener("DOMContentLoaded", function () {
   document.body.classList.add("page-loaded");
 });
 
-// Quando clicchi un link interno → fade-out prima di cambiare pagina
 document.querySelectorAll("a").forEach(link => {
   if (link.hostname === window.location.hostname) {
     link.addEventListener("click", function (e) {
@@ -58,6 +91,32 @@ document.querySelectorAll("a").forEach(link => {
   }
 });
 </script>
+
+
+<!-- SCRIPT INVIO FORM AL WEBHOOK DISCORD -->
+<script>
+document.getElementById("applyForm").addEventListener("submit", async function(e) {
+  e.preventDefault();
+
+  const webhookURL = "https://discord.com/api/webhooks/1439257704198832194/KIM82-eZUORCNmAYRBTZwjatEASiltvNvZ-0hAvp2_bjUw_BB0kTPo3ITRJDz-RisJnM";
+
+  const formData = new FormData(this);
+
+  const message = Array.from(formData.entries())
+    .map(([key, value]) => `**${key}:** ${value}`)
+    .join("\n");
+
+  await fetch(webhookURL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ content: message })
+  });
+
+  alert("Candidatura inviata con successo!");
+  this.reset();
+});
+</script>
+
 
 </body>
 </html>

@@ -271,6 +271,57 @@ h2 {
 }
 
 
+.apply-form {
+  max-width: 600px;
+  margin: 40px auto;
+  text-align: left;
+}
+
+.apply-form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #dab4ff;
+}
+
+.apply-form input,
+.apply-form select,
+.apply-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 4px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(60,0,90,0.35);
+  color: #fff;
+  box-shadow: 0 0 8px rgba(90,30,150,0.4) inset;
+}
+
+.apply-form textarea {
+  min-height: 120px;
+}
+
+.apply-button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #7a2ec7;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(140,60,255,0.6);
+  transition: 0.3s;
+}
+
+.apply-button:hover {
+  background: #9a4cff;
+  box-shadow: 0 0 18px rgba(180,80,255,0.9);
+}
+
+
+
 /* FOOTER */
 footer {
   background: #0a0010;
