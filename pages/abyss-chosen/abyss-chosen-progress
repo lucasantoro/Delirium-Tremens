@@ -45,8 +45,8 @@ document.querySelectorAll("a").forEach(link => {
   <ul>
     <li><a href="../abyss-chosen/abyss-chosen.html">Home Team</a></li>
     <li><a href="../abyss-chosen/roster-abyss.html">Roster</a></li>
-    <li><a href="../abyss-chosen/abyss-chosen-news">News</a></li>
-    <li><a href="../abyss-chosen/abyss-chosen-progress" class="active">Progress</a></li>
+    <li><a href="../abyss-chosen/abyss-chosen-news.html">News</a></li>
+    <li><a href="../abyss-chosen/abyss-chosen-progress.html" class="active">Progress</a></li>
   </ul>
 </nav>
 
