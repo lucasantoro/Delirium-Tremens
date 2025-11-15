@@ -31,13 +31,47 @@
 </nav>
 
 <main class="panel">
-<h2>Progress</h2>
 
+<h2>Stato del Tier</h2>
+
+<p>
+Gli <strong>Abyss Chosen</strong> affrontano il raid con l’approccio più tecnico della gilda,
+spingendo il contenuto al massimo livello disponibile.  
+Di seguito il progress aggiornato del raid corrente.
+</p>
+
+<table class="progress-table">
+  <tr>
+    <th>Boss</th><th>HC</th><th>Mythic</th><th>Data Kill</th>
+  </tr>
+
+  <tr><td>Gnarlroot</td><td>✔️</td><td>✔️</td><td>14/01/2025</td></tr>
+  <tr><td>Igira the Cruel</td><td>✔️</td><td>✔️</td><td>14/01/2025</td></tr>
+  <tr><td>Volcoross</td><td>✔️</td><td>⛔</td><td>15/01/2025</td></tr>
+  <tr><td>Larodar</td><td>✔️</td><td>⛔</td><td>-</td></tr>
+  <tr><td>Council of Dreams</td><td>✔️</td><td>⛔</td><td>-</td></tr>
+  <tr><td>Nymue</td><td>✔️</td><td>⛔</td><td>-</td></tr>
+  <tr><td>Smolderon</td><td>✔️</td><td>⛔</td><td>-</td></tr>
+  <tr><td>Tindral</td><td>✔️</td><td>⛔</td><td>-</td></tr>
+  <tr><td>Fyrakk</td><td>✔️</td><td>⛔</td><td>-</td></tr>
+</table>
+
+<h2>Progress Totale</h2>
 <ul>
-  <li>Tier attuale: 5/9 Mythic</li>
-  <li>Boss in progress: XYZ</li>
-  <li>Ultimo kill: Boss ABC</li>
+  <li><strong>Heroic:</strong> 9/9</li>
+  <li><strong>Mythic:</strong> 2/9</li>
 </ul>
+
+<h2>Timeline Kill</h2>
+<ul class="timeline">
+  <li>14/01/2025 — Gnarlroot Mythic Kill</li>
+  <li>14/01/2025 — Igira Mythic Kill</li>
+  <li>15/01/2025 — Volcoross HC Kill</li>
+</ul>
+
+<a href="https://www.warcraftlogs.com/" target="_blank" class="apply-button">
+  Apri i nostri Warcraft Logs
+</a>
 
 </main>
 
@@ -45,15 +79,15 @@
 <p>&copy; 2025 Delirium Tremens</p>
 </footer>
 
-<!-- SCRIPT TRANSIZIONE PAGINA -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+// Fade in/out transizione
+document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("page-loaded");
 });
 
 document.querySelectorAll("a").forEach(link => {
   if (link.hostname === window.location.hostname) {
-    link.addEventListener("click", function (e) {
+    link.addEventListener("click", function(e){
       e.preventDefault();
       const href = this.getAttribute("href");
       document.body.classList.remove("page-loaded");
