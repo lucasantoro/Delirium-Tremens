@@ -41,7 +41,7 @@
 <form id="applyForm" class="apply-form">
 
   <label>Discord</label>
-  <input type="text" name="Discord" placeholder="es: Odetta#1234" required>
+  <input type="text" name="Discord" placeholder="es: Odetti#1234" required>
 
   <label>Nome del personaggio</label>
   <input type="text" name="Personaggio" required>
@@ -130,6 +130,45 @@ document.getElementById("applyForm").addEventListener("submit", async function(e
 
   alert("Candidatura inviata con successo!");
   this.reset();
+});
+</script>
+
+<script>
+// Lista dinamica classi → spec
+const specByClass = {
+  "Death Knight": ["Blood", "Frost", "Unholy"],
+  "Demon Hunter": ["Havoc", "Vengeance"],
+  "Druid": ["Balance", "Feral", "Guardian", "Restoration"],
+  "Evoker": ["Devastation", "Preservation", "Augmentation"],
+  "Hunter": ["Beast Mastery", "Marksmanship", "Survival"],
+  "Mage": ["Arcane", "Fire", "Frost"],
+  "Monk": ["Brewmaster", "Mistweaver", "Windwalker"],
+  "Paladin": ["Holy", "Protection", "Retribution"],
+  "Priest": ["Discipline", "Holy", "Shadow"],
+  "Rogue": ["Assassination", "Outlaw", "Subtlety"],
+  "Shaman": ["Elemental", "Enhancement", "Restoration"],
+  "Warlock": ["Affliction", "Demonology", "Destruction"],
+  "Warrior": ["Arms", "Fury", "Protection"]
+};
+
+const classSelect = document.getElementById("classSelect");
+const specSelect = document.getElementById("specSelect");
+
+classSelect.addEventListener("change", () => {
+  const selectedClass = classSelect.value;
+  specSelect.innerHTML = "";
+
+  if (!selectedClass) {
+    specSelect.innerHTML = `<option value="">Seleziona prima una classe…</option>`;
+    return;
+  }
+
+  specByClass[selectedClass].forEach(spec => {
+    const option = document.createElement("option");
+    option.value = spec;
+    option.textContent = spec;
+    specSelect.appendChild(option);
+  });
 });
 </script>
 
