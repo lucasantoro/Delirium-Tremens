@@ -5,58 +5,6 @@
 <title>Abyss Chosen – Progress</title>
 <link rel="stylesheet" href="../../css/style.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<style>
-/* Mini CSS per layout migliorato */
-.current-progress h2,
-.historic-progress h2,
-.progress-logs h2 {
-  color: #d8b6ff;
-}
-
-.chart-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  margin: 20px auto;
-}
-
-.chart-nav {
-  background: rgba(120, 50, 200, 0.4);
-  border: 1px solid #8b3fe3;
-  color: #e6d6ff;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 8px;
-  font-size: 1.4rem;
-  transition: 0.2s;
-}
-.chart-nav:hover {
-  background: rgba(160, 70, 255, 0.6);
-}
-
-.raid-summary {
-  margin-top: 10px;
-  font-size: 1.2rem;
-  color: #caaaff;
-  text-shadow: 0 0 4px #000;
-}
-
-.accordion-toggle {
-  cursor: pointer;
-  padding: 10px;
-  background: rgba(40, 0, 60, 0.5);
-  border-radius: 10px;
-}
-
-.historic-panel {
-  margin-top: 10px;
-  background: rgba(20, 0, 30, 0.5);
-  padding: 15px;
-  border-radius: 8px;
-}
-</style>
 </head>
 
 <body class="page-transition abyss-bg">
@@ -85,210 +33,155 @@
 
 <main class="panel progress-panel">
 
-<!-- ==========================
-    SEZIONE 1 — RAID ATTIVI
-========================== -->
-<section class="current-progress">
-  <h2 id="raidTitle">Raid Progress</h2>
+  <!-- ==========================
+        RAID ATTUALE
+  =========================== -->
+  <section class="current-progress">
+    <h2 id="raidTitle">Caricamento raid...</h2>
 
-  <div class="chart-wrapper">
-    <button class="chart-nav prev">◀</button>
-    <canvas id="progressChart" width="400" height="160"></canvas>
-    <button class="chart-nav next">▶</button>
-  </div>
+    <div class="chart-wrapper">
+      <button class="chart-nav prev" type="button">◀</button>
+      <canvas id="progressChart" width="400" height="220"></canvas>
+      <button class="chart-nav next" type="button">▶</button>
+    </div>
 
-  <p id="raidSummary" class="raid-summary">Progress: – / –</p>
-</section>
+    <p id="raidSummary" class="raid-summary"></p>
+  </section>
 
+  <!-- ==========================
+        WARCRAFT LOGS
+  =========================== -->
+  <section class="progress-logs">
+    <h2>Warcraft Logs</h2>
+    <p>Analizza fight, performance, strategie e miglioramenti del team.</p>
 
-<!-- ==========================
-     SEZIONE 2 — STORICO
-========================== -->
-<section class="historic-progress">
-  <h2 onclick="toggleHistoric()" class="accordion-toggle">
-    ▼ Storico Progress
-  </h2>
-
-  <div id="historicPanel" class="historic-panel" style="display:none;">
-    <ul id="historicList">
-      <li>Caricamento storico…</li>
-    </ul>
-  </div>
-</section>
-
-
-<!-- ==========================
-     SEZIONE 3 — LOGS
-========================== -->
-<section class="progress-logs">
-  <h2>Warcraft Logs</h2>
-  <p>Analizza fight, performance, strategie e miglioramenti del team.</p>
-
-  <a href="https://www.warcraftlogs.com/guild/eu/nemesis/deliriumtremens"
-     target="_blank" class="apply-button">
-     Apri i Logs degli Abyss Chosen
-  </a>
-</section>
+    <a href="https://www.warcraftlogs.com/guild/eu/nemesis/DeliriumTremens"
+       target="_blank" class="apply-button">
+      Apri i Logs degli Abyss Chosen
+    </a>
+  </section>
 
 </main>
 
 <footer>
-  <p>&copy; 2025 Delirium Tremens</p>
+<p>&copy; 2025 Delirium Tremens</p>
 </footer>
 
+<!-- ==========================
+    FADE-IN / FADE-OUT SCRIPT
+========================== -->
 <script>
-/* ------------------------------
-   FADE IN/OUT
------------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("page-loaded");
 });
-
 document.querySelectorAll("a").forEach(link => {
   if (link.hostname === window.location.hostname) {
-    link.addEventListener("click", e => {
+    link.addEventListener("click", function(e){
       e.preventDefault();
-      const href = link.getAttribute("href");
+      const href = this.getAttribute("href");
       document.body.classList.remove("page-loaded");
-      setTimeout(() => (window.location.href = href), 300);
+      setTimeout(() => { window.location.href = href; }, 300);
     });
   }
 });
+</script>
 
-/* ------------------------------
-   TOGGLE STORICO
------------------------------- */
-function toggleHistoric() {
-  const panel = document.getElementById("historicPanel");
-  panel.style.display = panel.style.display === "none" ? "block" : "none";
+<!-- ==========================
+      URL CLOUDFLARE WORKER
+========================== -->
+<script>
+// Sostituisci qui con IL TUO WORKER:
+const WCL_PROXY = "https://red-snowflake-a386.workers.dev/progress";
+</script>
+
+<!-- ==========================
+     FETCH RAID + CHART
+========================== -->
+<script>
+async function loadWCLProgress() {
+  const res = await fetch(WCL_PROXY);
+  const json = await res.json();
+
+  const zones = json.data.guildData.guild.expansion.zones;
+
+  // Filtra solo i raid con progress reale
+  return zones
+    .filter(z => z.difficulties && z.difficulties.some(d => d.status.total > 0))
+    .map(z => ({
+      name: z.name,
+      difficulties: z.difficulties.map(d => ({
+        diff: d.difficulty,
+        killed: d.status.killed,
+        total: d.status.total
+      }))
+    }));
 }
 
-/* ------------------------------
-   FETCH RAID REALI
------------------------------- */
-const region = "eu";
-const realm  = "nemesis";
-const guild  = "DeliriumTremens";
-
-const raidSlugs = [
-  {
-    slug: "liberation-of-undermine",
-    name: "Liberation of Undermine"
-  },
-  {
-    slug: "manaforge-omega",
-    name: "Manaforge Omega"
-  }
-];
-
-let raidData = [];
-let currentRaid = 0;
 let chart;
+let currentRaid = 0;
+let raids = [];
 
-/* ------------------------------
-   FETCH Raider.IO
------------------------------- */
-async function loadProgress() {
-  const url = `https://raider.io/api/v1/guilds/profile?region=${region}&realm=${realm}&name=${guild}&fields=raid_progression`;
+function createChart(raid) {
+  const ctx = document.getElementById("progressChart").getContext("2d");
 
-  const res = await fetch(url);
-  const data = await res.json();
-
-  raidData = raidSlugs.map(r => {
-    const p = data.raid_progression[r.slug];
-    return {
-      name: r.name,
-      slug: r.slug,
-      normal: p.normal_bosses_killed ?? 0,
-      heroic: p.heroic_bosses_killed ?? 0,
-      mythic: p.mythic_bosses_killed ?? 0,
-      total: p.total_bosses ?? 0
-    };
-  });
-
-  buildHistoric(data);
-  initChart();
-}
-
-/* ------------------------------
-   STORICO (raid non attivi)
------------------------------- */
-// function buildHistoric(data) {
-//   const historic = [];
-//   for (let slug in data.raid_progression) {
-//     if (!raidSlugs.find(r => r.slug === slug)) {
-//       const p = data.raid_progression[slug];
-//       historic.push(
-//         `<li><strong>${slug}</strong>: ${p.summary}</li>`
-//       );
-//     }
-//   }
-//   document.getElementById("historicList").innerHTML = historic.join("");
-// }
-
-/* ------------------------------
-   GRAFICO CHART.JS
------------------------------- */
-function initChart() {
-  const ctx = document.getElementById("progressChart");
-  const raid = raidData[currentRaid];
+  const normal = raid.difficulties.find(d => d.diff === "Normal")?.killed ?? 0;
+  const heroic = raid.difficulties.find(d => d.diff === "Heroic")?.killed ?? 0;
+  const mythic = raid.difficulties.find(d => d.diff === "Mythic")?.killed ?? 0;
+  const total = raid.difficulties[0].total;
 
   document.getElementById("raidTitle").textContent = raid.name;
   document.getElementById("raidSummary").textContent =
-    `Progress: ${raid.mythic} / ${raid.total}`;
+    `${normal}/${total} N • ${heroic}/${total} HC • ${mythic}/${total} M`;
+
+  if (chart) chart.destroy();
 
   chart = new Chart(ctx, {
     type: "bar",
-  data: {
-    labels: ["Normal", "Heroic", "Mythic"],
-    datasets: [{
-      data: [raid.normal, raid.heroic, raid.mythic],
-        backgroundColor: ["#8c43ffcc", "#e040ffcc"],
-        borderColor: ["#a776ff", "#ff74d4"],
+    data: {
+      labels: ["Normal", "Heroic", "Mythic"],
+      datasets: [{
+        label: "Boss uccisi",
+        data: [normal, heroic, mythic],
+        backgroundColor: [
+          "rgba(120, 80, 200, 0.8)",
+          "rgba(160, 60, 220, 0.8)",
+          "rgba(200, 40, 140, 0.8)"
+        ],
         borderWidth: 2,
-        borderRadius: 8
+        borderRadius: 6
       }]
     },
     options: {
-      indexAxis: "y",
       scales: {
-        x: { ticks: { color: "#e6d6ff" }},
-        y: { ticks: { color: "#e6d6ff" }}
+        y: {
+          beginAtZero: true,
+          ticks: { color: "#e6d6ff", stepSize: 1 }
+        },
+        x: {
+          ticks: { color: "#e6d6ff" }
+        }
       },
-      plugins: {
-        legend: { display: false }
-      }
+      plugins: { legend: { display: false } }
     }
   });
-
-  setupButtons();
 }
 
-/* ------------------------------
-   FRECCE PREV/NEXT
------------------------------- */
-function setupButtons() {
-  document.querySelector(".chart-nav.prev").onclick = () => changeRaid(-1);
-  document.querySelector(".chart-nav.next").onclick = () => changeRaid(1);
+function nextRaid() {
+  currentRaid = (currentRaid + 1) % raids.length;
+  createChart(raids[currentRaid]);
+}
+function prevRaid() {
+  currentRaid = (currentRaid - 1 + raids.length) % raids.length;
+  createChart(raids[currentRaid]);
 }
 
-function changeRaid(dir) {
-  currentRaid = (currentRaid + dir + raidData.length) % raidData.length;
-  const r = raidData[currentRaid];
+window.addEventListener("DOMContentLoaded", async () => {
+  raids = await loadWCLProgress();
+  createChart(raids[0]);
 
-  document.getElementById("raidTitle").textContent = r.name;
-  document.getElementById("raidSummary").textContent =
-  `${r.normal}/${r.total} N • ${r.heroic}/${r.total} HC • ${r.mythic}/${r.total} M`;
-
-
-  chart.data.datasets[0].data = [r.normal, r.heroic, r.mythic];
-  chart.update();
-}
-
-/* ------------------------------
-   START
------------------------------- */
-loadProgress();
+  document.querySelector(".chart-nav.next").onclick = nextRaid;
+  document.querySelector(".chart-nav.prev").onclick = prevRaid;
+});
 </script>
 
 </body>
