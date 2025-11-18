@@ -213,18 +213,18 @@ async function loadProgress() {
 /* ------------------------------
    STORICO (raid non attivi)
 ------------------------------ */
-function buildHistoric(data) {
-  const historic = [];
-  for (let slug in data.raid_progression) {
-    if (!raidSlugs.find(r => r.slug === slug)) {
-      const p = data.raid_progression[slug];
-      historic.push(
-        `<li><strong>${slug}</strong>: ${p.summary}</li>`
-      );
-    }
-  }
-  document.getElementById("historicList").innerHTML = historic.join("");
-}
+// function buildHistoric(data) {
+//   const historic = [];
+//   for (let slug in data.raid_progression) {
+//     if (!raidSlugs.find(r => r.slug === slug)) {
+//       const p = data.raid_progression[slug];
+//       historic.push(
+//         `<li><strong>${slug}</strong>: ${p.summary}</li>`
+//       );
+//     }
+//   }
+//   document.getElementById("historicList").innerHTML = historic.join("");
+// }
 
 /* ------------------------------
    GRAFICO CHART.JS
