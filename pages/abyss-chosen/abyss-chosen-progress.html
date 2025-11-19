@@ -208,12 +208,26 @@ function renderLastChart(last) {
 // LOAD EVERYTHING
 // ================================
 (async () => {
+  console.log("=== FETCH FULL PROGRESS ===");
   const full = await fetchFullProgress();
+  console.log("FULL:", full);
+
+  console.log("=== FETCH LAST SESSION ===");
+  const last = await fetchLastSession();
+  console.log("LAST:", last);
+
+  // Render
   renderFullChart(full);
 
-  const last = await fetchLastSession();
+  // Titolo dinamico
+  if (last && last.difficulty) {
+    document.querySelector("section:nth-of-type(2) h2").textContent =
+      `Ultima Sessione (${last.difficulty})`;
+  }
+
   renderLastChart(last);
 })();
+
 </script>
 
 </body>
