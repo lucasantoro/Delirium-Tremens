@@ -33,24 +33,40 @@
 
 <main class="panel progress-panel">
 
-  <!-- ==========================
-        RAID ATTUALE
-  =========================== -->
+  <!-- ======================================================
+                PROGRESS COMPLETO (FULL)
+  ======================================================= -->
   <section class="current-progress">
-    <h2 id="raidTitle">Caricamento raid...</h2>
+    <h2>Progress Completo</h2>
 
     <div class="chart-wrapper">
-      <button class="chart-nav prev" type="button">◀</button>
-      <canvas id="progressChart" width="400" height="220"></canvas>
-      <button class="chart-nav next" type="button">▶</button>
+      <canvas id="fullProgressChart" height="200"></canvas>
     </div>
 
-    <p id="raidSummary" class="raid-summary"></p>
+    <p class="raid-summary">
+      Questo grafico mostra lo stato reale del progress in Normal, Heroic e Mythic.
+    </p>
   </section>
 
-  <!-- ==========================
-        WARCRAFT LOGS
-  =========================== -->
+  <!-- ======================================================
+                ULTIMA SESSIONE
+  ======================================================= -->
+  <section class="current-progress">
+    <h2>Ultima Sessione (Mythic)</h2>
+
+    <div class="chart-wrapper">
+      <canvas id="lastSessionChart" height="200"></canvas>
+    </div>
+
+    <p class="raid-summary">
+      Questo grafico mostra solo ciò che è stato fatto nell’ultimo raid registrato.
+    </p>
+  </section>
+
+
+  <!-- ======================================================
+                LINK LOGS
+  ======================================================= -->
   <section class="progress-logs">
     <h2>Warcraft Logs</h2>
     <p>Analizza fight, performance, strategie e miglioramenti del team.</p>
@@ -87,101 +103,116 @@ document.querySelectorAll("a").forEach(link => {
 </script>
 
 <!-- ==========================
-      URL CLOUDFLARE WORKER
+      URL CLOUDFLARE WORKERS
 ========================== -->
 <script>
-// Sostituisci qui con IL TUO WORKER:
-const WCL_PROXY = "https://red-snowflake-a386.workers.dev/progress";
+const WORKER = "YOUR_WORKER_URL";  
+// deve essere il dominio del worker, senza endpoint finale
+// es: "https://manaforge-progress.workers.dev"
 </script>
 
 <!-- ==========================
-     FETCH RAID + CHART
+     FETCH + CHARTJS SCRIPT
 ========================== -->
 <script>
-async function loadWCLProgress() {
-  const res = await fetch(WCL_PROXY);
-  const json = await res.json();
+// ================================
+// FETCH DATA per FULL progress
+// ================================
+async function fetchFullProgress() {
+  const diffs = ["normal", "heroic", "mythic"];
+  const results = {};
 
-  const zones = json.data.guildData.guild.expansion.zones;
+  for (const d of diffs) {
+    const res = await fetch(`${WORKER}/progress-full?difficulty=${d}`);
+    results[d] = await res.json();
+  }
 
-  // Filtra solo i raid con progress reale
-  return zones
-    .filter(z => z.difficulties && z.difficulties.some(d => d.status.total > 0))
-    .map(z => ({
-      name: z.name,
-      difficulties: z.difficulties.map(d => ({
-        diff: d.difficulty,
-        killed: d.status.killed,
-        total: d.status.total
-      }))
-    }));
+  return results;
 }
 
-let chart;
-let currentRaid = 0;
-let raids = [];
+// ================================
+// FETCH DATA per LAST SESSION
+// ================================
+async function fetchLastSession() {
+  const res = await fetch(`${WORKER}/progress-last`);
+  return res.json();
+}
 
-function createChart(raid) {
-  const ctx = document.getElementById("progressChart").getContext("2d");
+// ================================
+// RENDER FULL PROGRESS
+// ================================
+function renderFullChart(full) {
+  const bossSet = new Set();
 
-  const normal = raid.difficulties.find(d => d.diff === "Normal")?.killed ?? 0;
-  const heroic = raid.difficulties.find(d => d.diff === "Heroic")?.killed ?? 0;
-  const mythic = raid.difficulties.find(d => d.diff === "Mythic")?.killed ?? 0;
-  const total = raid.difficulties[0].total;
+  Object.values(full).forEach(diff => {
+    if (!diff.bosses) return;
+    for (const b in diff.bosses) bossSet.add(b);
+  });
 
-  document.getElementById("raidTitle").textContent = raid.name;
-  document.getElementById("raidSummary").textContent =
-    `${normal}/${total} N • ${heroic}/${total} HC • ${mythic}/${total} M`;
+  const bosses = Array.from(bossSet);
 
-  if (chart) chart.destroy();
+  const normal = bosses.map(b => full.normal?.bosses?.[b]?.kills ? 1 : 0);
+  const heroic = bosses.map(b => full.heroic?.bosses?.[b]?.kills ? 1 : 0);
+  const mythic = bosses.map(b => full.mythic?.bosses?.[b]?.kills ? 1 : 0);
 
-  chart = new Chart(ctx, {
+  new Chart(document.getElementById("fullProgressChart"), {
     type: "bar",
     data: {
-      labels: ["Normal", "Heroic", "Mythic"],
-      datasets: [{
-        label: "Boss uccisi",
-        data: [normal, heroic, mythic],
-        backgroundColor: [
-          "rgba(120, 80, 200, 0.8)",
-          "rgba(160, 60, 220, 0.8)",
-          "rgba(200, 40, 140, 0.8)"
-        ],
-        borderWidth: 2,
-        borderRadius: 6
-      }]
+      labels: bosses,
+      datasets: [
+        { label: "Normal", data: normal, backgroundColor: "#4CAF50" },
+        { label: "Heroic", data: heroic, backgroundColor: "#FFC107" },
+        { label: "Mythic", data: mythic, backgroundColor: "#E91E63" }
+      ]
     },
     options: {
+      responsive: true,
       scales: {
-        y: {
-          beginAtZero: true,
-          ticks: { color: "#e6d6ff", stepSize: 1 }
-        },
-        x: {
-          ticks: { color: "#e6d6ff" }
-        }
+        y: { max: 1, ticks: { color: "#fff" } },
+        x: { ticks: { color: "#fff" } }
       },
-      plugins: { legend: { display: false } }
+      plugins: { legend: { labels: { color: "#fff" } } }
     }
   });
 }
 
-function nextRaid() {
-  currentRaid = (currentRaid + 1) % raids.length;
-  createChart(raids[currentRaid]);
-}
-function prevRaid() {
-  currentRaid = (currentRaid - 1 + raids.length) % raids.length;
-  createChart(raids[currentRaid]);
+// ================================
+// RENDER LAST SESSION
+// ================================
+function renderLastChart(last) {
+  const bosses = Object.keys(last.bosses || {});
+  const percentages = bosses.map(b => last.bosses[b].bestPercentage ?? 0);
+
+  new Chart(document.getElementById("lastSessionChart"), {
+    type: "bar",
+    data: {
+      labels: bosses,
+      datasets: [{
+        label: "Best % (0 = kill)",
+        data: percentages,
+        backgroundColor: "#29B6F6"
+      }]
+    },
+    options: {
+      scales: {
+        y: { ticks: { color: "#fff" } },
+        x: { ticks: { color: "#fff" } }
+      },
+      plugins: { legend: { labels: { color: "#fff" } } }
+    }
+  });
 }
 
-window.addEventListener("DOMContentLoaded", async () => {
-  raids = await loadWCLProgress();
-  createChart(raids[0]);
+// ================================
+// LOAD EVERYTHING
+// ================================
+(async () => {
+  const full = await fetchFullProgress();
+  renderFullChart(full);
 
-  document.querySelector(".chart-nav.next").onclick = nextRaid;
-  document.querySelector(".chart-nav.prev").onclick = prevRaid;
-});
+  const last = await fetchLastSession();
+  renderLastChart(last);
+})();
 </script>
 
 </body>
