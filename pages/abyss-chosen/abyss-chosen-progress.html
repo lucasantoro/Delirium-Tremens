@@ -106,7 +106,8 @@ document.querySelectorAll("a").forEach(link => {
       URL CLOUDFLARE WORKERS
 ========================== -->
 <script>
-const WORKER = "YOUR_WORKER_URL";  
+const WORKER_FULL = "https://red-snowflake-a386.lucasantoro2905.workers.dev/";  
+const WORKER_LAST = "https://wild-mode-1b45.lucasantoro2905.workers.dev";  
 // deve essere il dominio del worker, senza endpoint finale
 // es: "https://manaforge-progress.workers.dev"
 </script>
@@ -123,7 +124,7 @@ async function fetchFullProgress() {
   const results = {};
 
   for (const d of diffs) {
-    const res = await fetch(`${WORKER}/progress-full?difficulty=${d}`);
+    const res = await fetch(`${WORKER_FULL}/progress-full?difficulty=${d}`);
     results[d] = await res.json();
   }
 
@@ -134,7 +135,7 @@ async function fetchFullProgress() {
 // FETCH DATA per LAST SESSION
 // ================================
 async function fetchLastSession() {
-  const res = await fetch(`${WORKER}/progress-last`);
+  const res = await fetch(`${WORKER_LAST}/progress-last`);
   return res.json();
 }
 
