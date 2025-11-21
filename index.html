@@ -8,7 +8,7 @@
 /* --- HERO --- */
 .hero {
   height: 60vh;
-  background: url('img/hero-bg.jpg') center/cover no-repeat;
+  background: url('img/logo.png') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,6 +70,38 @@ section h2 {
   opacity: 0;
   transform: scale(0.96);
   animation: fadeZoom 0.8s ease forwards;
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+/* Sheen effect */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 50%;
+  height: 300%;
+  background: linear-gradient(
+    120deg,
+    rgba(180,0,255,0) 0%,
+    rgba(180,0,255,0.25) 50%,
+    rgba(180,0,255,0) 100%
+  );
+  transform: rotate(25deg);
+  transition: .8s;
+}
+
+.card:hover::before {
+  top: -50%;
+  left: 120%;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 22px rgba(180,0,255,0.35);
+  border-color: rgba(180,0,255,0.45);
 }
 @keyframes fadeZoom { to { opacity:1; transform:scale(1);} }
 
@@ -141,7 +173,7 @@ section h2 {
 @keyframes slideRight {
   from { opacity:0; transform:translateX(25px); }
   to   { opacity:1; transform:translateX(0); }
-} 
+} }
 
 .team-card h3 {
   font-size: 1.8rem;
@@ -176,8 +208,8 @@ footer { text-align:center; padding:40px 0; color:#777; }
 <body>
 
 <header>
-<h1>Delirium Tremens</h1>
-<p class="subtitle">Dove la sanità mentale va in cooldown</p>
+<!-- <h1>Delirium Tremens</h1>
+<p class="subtitle">Dove la sanità mentale va in cooldown</p> -->
 <nav>
     <ul>
         <li><a href="index.html">Home</a></li>
@@ -194,7 +226,7 @@ footer { text-align:center; padding:40px 0; color:#777; }
 <section class="hero">
   <div class="hero-content">
     <h2>Benvenuti nei Delirium Tremens</h2>
-    <p>Dove mente, caos e divertimento convivono in perfetta armonia</p>
+    <p>Dove la sanità mentale va in cooldown</p>
   </div>
 </section>
 
@@ -237,8 +269,8 @@ footer { text-align:center; padding:40px 0; color:#777; }
     Un team che condivide gli stessi obiettivi degli Abyss Chosen – affrontare l'endgame al massimo livello – ma con un clima più rilassato,
     pensato anche per chi non ha molto tempo a disposizione. Un ambiente inclusivo, sereno e orientato alla crescita continua.
     </p>
-    <a href="pages/raider.html" class="team-btn">Scopri il team</a>
-  </div>
+    <a href="pages/raider.html" class="team-btn">Scopri il team<\/a>
+  <\/div>
 
   <div class="team-card abyss">
     <h3>Abyss Chosen</h3>
@@ -246,8 +278,8 @@ footer { text-align:center; padding:40px 0; color:#777; }
     Il nostro gruppo più rapido e strutturato, dedicato a raggiungere gli stessi traguardi dei Mindbound ma con un ritmo più celere,
     focalizzato sull'ottimizzazione del tempo e dei risultati senza sacrificare la qualità dell'ambiente.
     </p>
-    <a href="pages/raider.html" class="team-btn">Scopri il team</a>
-  </div>
+    <a href="pages/raider.html" class="team-btn">Scopri il team<\/a>
+  <\/div>
 
 </div>
 </section>
