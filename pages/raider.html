@@ -49,7 +49,7 @@ header h1 {
   color: #b86bff;
 }
 
-/* --- SUBNAV DEDICATA AI TEAM --- */
+/* --- SUBNAV RAID TEAM --- */
 .subnav {
   margin-top: 20px;
   background: rgba(20,20,20,0.8);
@@ -75,7 +75,7 @@ header h1 {
   text-shadow: 0 0 8px #b86bff;
 }
 
-/* --- HERO INTRO COME HOME (senza bg) --- */
+/* --- HERO INTRO COERENTE CON HOME --- */
 .hero-raider {
   padding: 60px 20px 40px;
   text-align: center;
@@ -100,7 +100,7 @@ header h1 {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* --- BACKGROUND UNICO COME HOME --- */
+/* --- BACKGROUND UNICO --- */
 .bg-container {
   position: relative;
   background: url('../img/logo.png') center/cover no-repeat;
@@ -118,7 +118,7 @@ header h1 {
   z-index: 2;
 }
 
-/* --- TESTO LUNGO --- */
+/* --- TESTO LUNGO RAID --- */
 .description-long {
   max-width: 900px;
   margin: 25px auto;
@@ -127,42 +127,98 @@ header h1 {
   color: #ddd;
 }
 
-/* --- CARD TEAM RIEPILOGATIVE (coerenti con home) --- */
-.team-overview {
+/* --- CARD RAID TEAM (IDENTICHE ALLA HOME) --- */
+
+.raid-teams {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 35px;
-  margin: 50px auto;
-  width: 90%;
+  gap: 40px;
+  margin-top: 50px;
 }
 
-.team-mini-card {
-  width: 360px;
-  padding: 25px;
-  border-radius: 12px;
-  background: rgba(20,20,20,0.85);
+.team-card {
+  width: 420px;
+  padding: 30px;
+  border-radius: 14px;
+  background: rgba(15,15,15,0.75);
   border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(4px);
   color: #eee;
-  transition: .35s ease;
+  backdrop-filter: blur(4px);
   opacity: 0;
-  animation: fadeZoom 0.8s ease forwards;
-  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
 }
-.team-mini-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 20px rgba(180,0,255,0.35);
-  border-color: rgba(180,0,255,0.45);
+
+/* Animazioni come home */
+.team-card.abyss {
+  animation: slideLeft .8s ease forwards;
 }
-.team-mini-card h3 {
+.team-card.mindbound {
+  animation: slideRight .8s ease forwards;
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-25px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(25px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Sheen effect identico */
+.team-card::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 50%;
+  height: 300%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.15) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: rotate(25deg);
+  transition: .8s;
+}
+.team-card:hover::before {
+  top: -50%;
+  left: 120%;
+}
+
+/* Hover glow */
+.team-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255,255,255,0.4);
+}
+.mindbound:hover {
+  box-shadow: 0 0 25px rgba(120,120,255,0.55);
+}
+.abyss:hover {
+  box-shadow: 0 0 25px rgba(255,80,80,0.55);
+}
+
+/* Colori identità */
+.mindbound { box-shadow: 0 0 15px rgba(120,120,255,0.35); }
+.abyss { box-shadow: 0 0 15px rgba(255,80,80,0.35); }
+
+.team-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
   color: #fff;
-  font-size: 1.6rem;
-  margin-bottom: 10px;
 }
+.team-card p {
+  line-height: 1.5;
+}
+
+/* Bottoni identici home */
 .team-btn {
   display: inline-block;
-  margin-top: 15px;
+  margin-top: 18px;
   padding: 10px 18px;
   border: 1px solid #fff;
   border-radius: 8px;
@@ -174,8 +230,6 @@ header h1 {
   color: #000;
 }
 
-@keyframes fadeZoom { to { opacity:1; transform:scale(1);} }
-
 /* --- FOOTER --- */
 footer {
   text-align: center;
@@ -186,7 +240,6 @@ footer {
 
 </style>
 </head>
-
 
 
 
@@ -212,7 +265,8 @@ footer {
   </ul>
 </nav>
 
-<!-- HERO INTRO PULITO -->
+
+<!-- HERO INTRO -->
 <section class="hero-raider">
   <h2>I Raider dei Delirium Tremens</h2>
   <p>
@@ -220,7 +274,8 @@ footer {
   </p>
 </section>
 
-<!-- SFONDO UNICO CON LOGO -->
+
+<!-- CONTENITORE SFONDO UNICO (come home) -->
 <div class="bg-container">
 
   <main class="panel">
@@ -242,25 +297,29 @@ footer {
       nell’aiuto reciproco e nella voglia di migliorare, insieme.
     </p>
 
-    <!-- MINI CARD TEAM (come home, più compatte) -->
-    <div class="team-overview">
+    <!-- CARD IDENTICHE ALLA HOME -->
+    <div class="raid-teams">
 
-      <div class="team-mini-card">
+      <div class="team-card abyss">
         <h3>Abyss Chosen</h3>
         <p>
           Il team più rapido e orientato all'ottimizzazione, mantenendo comunque
           un ambiente sereno e collaborativo.
         </p>
-        <a href="../pages/abyss-chosen/abyss-chosen.html" class="team-btn">Vai al team</a>
+        <a href="../pages/abyss-chosen/abyss-chosen.html" class="team-btn">
+          Scopri il team
+        </a>
       </div>
 
-      <div class="team-mini-card">
+      <div class="team-card mindbound">
         <h3>MindBound</h3>
         <p>
           Un team con gli stessi obiettivi degli Abyss, ma con un ritmo più rilassato
           e grande attenzione alla crescita personale.
         </p>
-        <a href="../pages/mindbound/mindbound.html" class="team-btn">Vai al team</a>
+        <a href="../pages/mindbound/mindbound.html" class="team-btn">
+          Scopri il team
+        </a>
       </div>
 
     </div>
