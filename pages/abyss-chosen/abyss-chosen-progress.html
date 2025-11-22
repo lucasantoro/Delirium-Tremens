@@ -1,202 +1,165 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Abyss Chosen – Progress</title>
-  <link rel="stylesheet" href="../../css/style.css">
+<meta charset="UTF-8">
+<title>Abyss Chosen – Progress</title>
+<link rel="stylesheet" href="../../css/style.css">
 
-  <style>
-    body {
-      background: #0b0b0b;
-      color: #ccc;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+<style>
+body {
+  background: #0b0b0b;
+  color: #ccc;
+  font-family: Arial, sans-serif;
+  margin: 0;
+}
 
-    /* HEADER COERENTE */
-    header {
-      text-align: center;
-      padding: 25px 0 10px;
-    }
-    header h1 {
-      color: #fff;
-      font-size: 2.2rem;
-      text-shadow: 0 0 12px rgba(255,80,80,0.5);
-      margin: 0;
-    }
-    header nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 25px;
-      padding: 0;
-      margin-top: 15px;
-    }
-    header nav a {
-      color: #fff;
-      text-decoration: none;
-      font-size: 1.05rem;
-      transition: .3s;
-    }
-    header nav a:hover,
-    header nav a.active {
-      color: #ff5050;
-      text-shadow: 0 0 8px #ff5050;
-    }
+/* HEADER */
+header {
+  text-align: center;
+  padding: 25px 0 10px;
+}
+header h1 {
+  color: #fff;
+  font-size: 2.4rem;
+  text-shadow: 0 0 12px rgba(255,80,80,0.5);
+  margin: 0;
+}
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 0;
+  margin-top: 15px;
+}
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: .3s;
+}
+header nav a:hover,
+header nav a.active {
+  color: #ff5050;
+  text-shadow: 0 0 8px #ff5050;
+}
 
-    /* HERO INTRO */
-    .hero-progress {
-      padding: 50px 20px 30px;
-      text-align: center;
-    }
-    .hero-progress h2 {
-      font-size: 2.4rem;
-      color: #fff;
-      opacity: 0;
-      animation: fadeUp .9s ease forwards;
-    }
-    .hero-progress p {
-      opacity: 0;
-      max-width: 750px;
-      margin: 18px auto 0;
-      color: #ccc;
-      font-size: 1.1rem;
-      animation: fadeUp 1.3s ease forwards;
-    }
+/* HERO */
+.hero-progress {
+  padding: 50px 20px 30px;
+  text-align: center;
+}
+.hero-progress h2 {
+  font-size: 2.4rem;
+  color: #fff;
+  animation: fadeUp .9s ease forwards;
+}
+.hero-progress p {
+  max-width: 700px;
+  margin: 18px auto 0;
+  color: #ccc;
+  font-size: 1.2rem;
+  animation: fadeUp 1.2s ease forwards;
+}
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
+/* Fade */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
 
-    /* CONTENITORE SFONDO UNICO */
-    .bg-container {
-      position: relative;
-      background: url('../../img/logo.png') center/cover no-repeat;
-      padding: 60px 0 80px;
-    }
-    .bg-container::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.55);
-      backdrop-filter: blur(2px);
-    }
-    .bg-container > * {
-      position: relative;
-      z-index: 2;
-    }
+/* BACKGROUND CON LOGO */
+.bg-container {
+  position: relative;
+  background: url('../../img/logo.png') center/cover no-repeat;
+  padding: 60px 0 80px;
+}
+.bg-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(2px);
+}
+.bg-container > * { position: relative; z-index: 2; }
 
-    main.panel {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
 
-    h2.section-title {
-      text-align: center;
-      color: #fff;
-      font-size: 2rem;
-      margin: 20px 0 10px;
-    }
-    p.section-subtitle {
-      text-align: center;
-      max-width: 800px;
-      margin: 0 auto 25px;
-      color: #ddd;
-      font-size: 1rem;
-    }
+/* SEZIONI */
+.section-title {
+  text-align: center;
+  color: #fff;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
 
-    /* CARD WIDGET / LAYOUT */
-    .widgets-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 30px;
-      margin: 35px 0 10px;
-    }
+.progress-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
 
-    .widget-card {
-      background: rgba(15,15,15,0.8);
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.15);
-      padding: 18px 18px 12px;
-      box-shadow: 0 0 18px rgba(255,80,80,0.35);
-      backdrop-filter: blur(4px);
-      position: relative;
-      overflow: hidden;
-      opacity: 0;
-      transform: scale(0.97);
-      animation: fadeZoom .7s ease forwards;
-    }
+/* CARD BOSS */
+.boss-card {
+  background: rgba(15,15,15,0.8);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 0 15px rgba(255,80,80,0.35);
+  backdrop-filter: blur(4px);
+  transition: .3s;
+  animation: fadeZoom .7s ease forwards;
+}
+@keyframes fadeZoom {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1); }
+}
+.boss-card:hover {
+  border-color: #ff5050;
+  box-shadow: 0 0 22px rgba(255,80,80,0.55);
+}
 
-    .widget-card::before {
-      content: "";
-      position: absolute;
-      top: -120%;
-      left: -120%;
-      width: 60%;
-      height: 320%;
-      background: linear-gradient(
-        120deg,
-        rgba(255,255,255,0) 0%,
-        rgba(255,255,255,0.16) 50%,
-        rgba(255,255,255,0) 100%
-      );
-      transform: rotate(25deg);
-      transition: .8s;
-    }
-    .widget-card:hover::before {
-      top: -40%;
-      left: 130%;
-    }
+/* STATUS */
+.status {
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.status-killed {
+  background: rgba(80,255,120,0.25);
+  color: #9fffba;
+}
+.status-progress {
+  background: rgba(255,200,80,0.25);
+  color: #ffeab4;
+}
+.status-unknown {
+  background: rgba(180,180,180,0.25);
+  color: #ddd;
+}
 
-    .widget-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 25px rgba(255,80,80,0.6);
-      border-color: rgba(255,80,80,0.45);
-    }
+.boss-name {
+  color: #fff;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+.boss-info {
+  color: #ccc;
+  margin: 4px 0;
+}
 
-    .widget-title {
-      font-size: 1.2rem;
-      color: #fff;
-      margin: 0 0 6px;
-    }
-    .widget-desc {
-      font-size: 0.95rem;
-      color: #ddd;
-      margin: 0 0 10px;
-    }
-
-    .widget-frame-wrapper {
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.1);
-    }
-    .widget-frame {
-      width: 100%;
-      border: 0;
-      display: block;
-    }
-
-    @keyframes fadeZoom {
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    /* FULL WIDTH SECTION PER GRAFICI */
-    .widget-full {
-      margin-top: 40px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 0;
-      color: #777;
-    }
-  </style>
+footer {
+  text-align: center;
+  padding: 30px 0;
+  color: #777;
+}
+</style>
 </head>
 
-<body class="page-transition">
+
+<body>
 
 <header>
   <h1>Abyss Chosen</h1>
@@ -212,170 +175,146 @@
 </header>
 
 <section class="hero-progress">
-  <h2>Progress Raid – Delirium Tremens</h2>
+  <h2>Progress Raid – Abyss Chosen</h2>
   <p>
-    Panoramica live della progressione della gilda nel tier attuale,
-    visibile per tutte le difficolt&agrave; e aggiornata direttamente da Warcraft Logs.
+    Stato aggiornato dei boss in Normal, Heroic e Mythic per il tier corrente,
+    con dati ufficiali da Warcraft Logs.
   </p>
 </section>
 
 <div class="bg-container">
   <main class="panel">
 
-    <!-- BLOCCO: PROGRESS ATTUALE PER DIFFICOLTÀ -->
-    <h2 class="section-title">Panoramica per difficoltà</h2>
-    <p class="section-subtitle">
-      Uno sguardo immediato al punto in cui si trova la gilda in
-      Normal, Heroic e Mythic per la raid zone attuale.
-    </p>
+    <h2 class="section-title">Progress Mythic</h2>
+    <div id="mythic-progress" class="progress-grid"></div>
 
-    <div class="widgets-grid">
+    <h2 class="section-title">Progress Heroic</h2>
+    <div id="heroic-progress" class="progress-grid"></div>
 
-      <!-- NORMAL -->
-      <div class="widget-card">
-        <h3 class="widget-title">Progress Normal</h3>
-        <p class="widget-desc">
-          Stato complessivo dei boss in difficolt&agrave; Normal per il tier corrente.
-        </p>
-        <div class="widget-frame-wrapper">
-          <iframe
-            class="widget-frame"
-            height="220"
-            src="https://www.warcraftlogs.com/v1/tiles/guild/802526/44?metric=progress"
-            scrolling="no"
-          ></iframe>
-        </div>
-      </div>
-
-      <!-- HEROIC -->
-      <div class="widget-card">
-        <h3 class="widget-title">Progress Heroic</h3>
-        <p class="widget-desc">
-          Avanzamento sullo stesso tier in difficolt&agrave; Heroic.
-        </p>
-        <div class="widget-frame-wrapper">
-          <iframe
-            class="widget-frame"
-            height="220"
-            src="https://www.warcraftlogs.com/embed/guild-progress-tile/44?difficulty=4&guild=802526"
-            scrolling="no"
-          ></iframe>
-        </div>
-      </div>
-
-      <!-- MYTHIC -->
-      <div class="widget-card">
-        <h3 class="widget-title">Progress Mythic</h3>
-        <p class="widget-desc">
-          La situazione pi&ugrave; aggiornata in Mythic: boss abbattuti, tentativi e avanzamento.
-        </p>
-        <div class="widget-frame-wrapper">
-          <iframe
-            class="widget-frame"
-            height="220"
-            src="https://www.warcraftlogs.com/embed/guild-progress-tile/44?difficulty=5&guild=802526"
-            scrolling="no"
-          ></iframe>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- BLOCCO: GRAFICO STORICO / PULL PROGRESS -->
-    <div class="widget-full">
-      <h2 class="section-title">Andamento del progress</h2>
-      <p class="section-subtitle">
-        Un grafico per visualizzare come &egrave; evoluto il progress nel tempo sui boss,
-        utile per vedere ritmo, muri e miglioramenti.
-      </p>
-
-      <div class="widget-card">
-        <h3 class="widget-title">Percentuale per pull (Mythic)</h3>
-        <p class="widget-desc">
-          Esempio di grafico con percentuale migliore per tentativo su un encounter
-          in Mythic. Puoi cambiare <code>encounterId</code> e difficolt&agrave; dal pannello Widgets.
-        </p>
-        <div class="widget-frame-wrapper">
-          <iframe
-            class="widget-frame"
-            height="360"
-            src="https://www.warcraftlogs.com/embed/fight-percentage-per-pull-chart/latest?xAxis=pull&difficulty=5&encounterId=2546&guilds=802526"
-            scrolling="no"
-          ></iframe>
-        </div>
-      </div>
-    </div>
-
-    <!-- BLOCCO: COMPOSIZIONE / LOOT (OPZIONALE, MA UTILE) -->
-    <div class="widget-full">
-      <h2 class="section-title">Composizione e attività recente</h2>
-      <p class="section-subtitle">
-        Widget opzionali per mostrare la composizione, il gear e l'attivit&agrave; recente
-        della gilda nei log.
-      </p>
-
-      <div class="widgets-grid">
-
-        <div class="widget-card">
-          <h3 class="widget-title">Attivit&agrave; recente</h3>
-          <p class="widget-desc">
-            Ultimi log e aggiornamenti della gilda dal pannello Widgets di Warcraft Logs.
-          </p>
-          <div class="widget-frame-wrapper">
-            <!-- Sostituisci l'URL con quello esatto del widget "Latest Updates"
-                 copiato dalla tua pagina Widgets -->
-            <iframe
-              class="widget-frame"
-              height="260"
-              src="https://www.warcraftlogs.com/embed/guild-latest-updates/44?guild=802526"
-              scrolling="no"
-            ></iframe>
-          </div>
-        </div>
-
-        <div class="widget-card">
-          <h3 class="widget-title">Composizione / Gear</h3>
-          <p class="widget-desc">
-            Un eventuale widget di composizione/gear copiato dalla sezione Widgets,
-            utile per chi vuole vedere con che setup si affrontano i boss.
-          </p>
-          <div class="widget-frame-wrapper">
-            <!-- Sostituisci l'URL con quello del widget di composition/gear
-                 che preferisci dalla tua pagina Widgets -->
-            <iframe
-              class="widget-frame"
-              height="260"
-              src="https://www.warcraftlogs.com/embed/guild-gear-summary/44?guild=802526"
-              scrolling="no"
-            ></iframe>
-          </div>
-        </div>
-
-      </div>
-    </div>
+    <h2 class="section-title">Progress Normal</h2>
+    <div id="normal-progress" class="progress-grid"></div>
 
   </main>
 </div>
+
 
 <footer>
   <p>&copy; 2025 Delirium Tremens</p>
 </footer>
 
+
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    document.body.classList.add("page-loaded");
+/* ================
+   CONFIGURAZIONE
+================ */
+const CLIENT_ID = "YOUR_CLIENT_ID_HERE";
+const CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE";
+const GUILD_ID = 802526;   
+const ZONE_ID = 44;        // Tier attuale
+
+
+/* =============
+   OTTENERE TOKEN
+=============== */
+async function getToken() {
+  const res = await fetch("https://www.warcraftlogs.com/oauth/token", {
+    method: "POST",
+    headers: {"Content-Type": "application/x-www-form-urlencoded"},
+    body: `grant_type=client_credentials&client_id=${CLIENT_ID}&client_secret=${CLIENT_SECRET}`
+  });
+  const data = await res.json();
+  return data.access_token;
+}
+
+
+/* ==========================
+   QUERY GRAPHQL BOSS STATUS
+=========================== */
+const QUERY = `
+query ($guildId: Int!, $zoneId: Int!, $difficulty: Int!) {
+  guildData {
+    guild(id: $guildId) {
+      zoneRankings(zoneID: $zoneId, difficulty: $difficulty) {
+        rankings {
+          encounter {
+            id
+            name
+          }
+          totalKills
+          bestPercentage
+          bestDuration
+        }
+      }
+    }
+  }
+}
+`;
+
+
+/* =====================
+   FUNZIONE CHIAVE
+   OTTIENE PROGRESS PER DIFFICOLTÀ
+===================== */
+async function loadProgress(difficulty, containerId) {
+
+  const token = await getToken();
+
+  const res = await fetch("https://www.warcraftlogs.com/api/v2/client", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      query: QUERY,
+      variables: {
+        guildId: GUILD_ID,
+        zoneId: ZONE_ID,
+        difficulty: difficulty
+      }
+    })
   });
 
-  document.querySelectorAll("a").forEach(link => {
-    if (link.hostname === window.location.hostname) {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        const href = this.getAttribute("href");
-        document.body.classList.remove("page-loaded");
-        setTimeout(() => { window.location.href = href; }, 300);
-      });
+  const json = await res.json();
+  const bosses = json.data.guildData.guild.zoneRankings.rankings;
+
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+
+  bosses.forEach(b => {
+
+    let statusClass = "status-unknown";
+    let statusText = "Non iniziato";
+
+    if (b.totalKills > 0) {
+      statusClass = "status-killed";
+      statusText = "Kill";
+    } else if (b.bestPercentage < 100 && b.bestPercentage !== null) {
+      statusClass = "status-progress";
+      statusText = "Progress";
     }
+
+    const card = document.createElement("div");
+    card.className = "boss-card";
+    card.innerHTML = `
+      <span class="status ${statusClass}">${statusText}</span>
+      <div class="boss-name">${b.encounter.name}</div>
+      <div class="boss-info"><strong>Best %:</strong> ${b.bestPercentage ?? "-"}%</div>
+      <div class="boss-info"><strong>Kill:</strong> ${b.totalKills}</div>
+      <div class="boss-info"><strong>Miglior tempo:</strong> ${b.bestDuration ? (b.bestDuration/1000).toFixed(1) + "s" : "-"}</div>
+    `;
+    container.appendChild(card);
   });
+
+}
+
+
+/* =====================
+   CARICAMENTO PAGINA
+===================== */
+loadProgress(5, "mythic-progress");  // Mythic
+loadProgress(4, "heroic-progress");  // Heroic
+loadProgress(3, "normal-progress");  // Normal
 </script>
 
 </body>
