@@ -4,358 +4,543 @@
 <meta charset="UTF-8">
 <title>Delirium Tremens - Gilda WoW</title>
 <link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
 <style>
+  /* BASE */
+  body {
+    background:#0b0b0b;
+    color:#ccc;
+    font-family:Arial, sans-serif;
+    margin:0;
+    padding:0;
+  }
 
-/* --- HERO (senza background) --- */
-.hero {
-  padding: 80px 20px;
-  background: none;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-.hero::after { display: none; }
+  /* NAVBAR UNIFICATA (come pagine interne) */
+  header {
+    display:flex;
+    justify-content:center;
+    padding:20px 0 10px;
+  }
+  .mainnav ul {
+    list-style:none;
+    display:flex;
+    gap:25px;
+    padding:0;
+    margin:0;
+  }
+  .mainnav a {
+    color:#fff;
+    text-decoration:none;
+    font-size:1.05rem;
+    transition:.3s;
+  }
+  .mainnav a:hover,
+  .mainnav a.active {
+    color:#ff5050;
+    text-shadow:0 0 8px #ff5050;
+  }
 
-.hero-content {
-  position: relative;
-  color: #fff;
-  text-align: center;
-  z-index: 2;
-}
-.hero h2 {
-  font-size: 3rem;
-  margin-bottom: 10px;
-  opacity: 0;
-  transform: translateY(25px);
-  animation: fadeUp .9s ease forwards;
-}
-.hero p {
-  font-size: 1.3rem;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 1.3s ease forwards;
-}
+  /* HERO (senza background, stile epico) */
+  .hero {
+    padding:80px 20px 60px;
+    background:none;
+    height:auto;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+  }
+  .hero-tagline {
+    font-size:0.9rem;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#ff9ad1;
+    margin-bottom:8px;
+    opacity:0;
+    transform:translateY(10px);
+    animation:fadeUp .7s ease forwards;
+  }
+  .hero h1 {
+    font-size:3.1rem;
+    margin:0 0 10px;
+    color:#fff;
+    text-shadow:0 0 12px rgba(180,0,255,0.6);
+    opacity:0;
+    transform:translateY(25px);
+    animation:fadeUp .95s ease forwards;
+  }
+  .hero p {
+    font-size:1.25rem;
+    max-width:760px;
+    margin:10px auto 0;
+    color:#ddd;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeUp 1.3s ease forwards;
+  }
 
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
+  .hero-cta {
+    margin-top:28px;
+    opacity:0;
+    transform:translateY(20px);
+    animation:fadeUp 1.6s ease forwards;
+  }
+  .hero-cta a {
+    display:inline-block;
+    padding:12px 22px;
+    border-radius:999px;
+    border:1px solid #fff;
+    color:#fff;
+    text-decoration:none;
+    font-size:1rem;
+    letter-spacing:0.5px;
+    transition:.3s;
+  }
+  .hero-cta a:hover {
+    background:#fff;
+    color:#000;
+  }
 
-/* --- BACKGROUND UNICO --- */
-.bg-container {
-  position: relative;
-  background: url('img/logo.png') center/cover no-repeat;
-  padding: 60px 0;
-}
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
 
-.bg-container::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55); /* fade come hero */
-  backdrop-filter: blur(2px);
-}
+  /* BACKGROUND UNICO CON LOGO */
+  .bg-container {
+    position:relative;
+    background:url('img/logo.png') center/cover no-repeat;
+    padding:60px 0 70px;
+  }
+  .bg-container::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    backdrop-filter:blur(2px);
+  }
+  .bg-container > * {
+    position:relative;
+    z-index:2;
+  }
 
-.bg-container > * {
-  position: relative;
-  z-index: 2;
-}
+  main {
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 20px;
+  }
 
-/* --- SECTION TITLE --- */
-section h2 {
-  text-align: center;
-  margin-bottom: 25px;
-  font-size: 2rem;
-  color: #fff;
-}
+  /* TITOLI DI SEZIONE */
+  .section-title {
+    text-align:center;
+    margin:10px 0 8px;
+    font-size:2rem;
+    color:#fff;
+  }
+  .section-subtitle {
+    text-align:center;
+    max-width:800px;
+    margin:0 auto 25px;
+    font-size:1rem;
+    color:#ddd;
+  }
 
-/* --- GRID CARDS --- */
-.grid-cards {
-  display: grid;
-  gap: 30px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  margin: 40px auto;
-  width: 90%;
-}
-.card {
-  background: rgba(20,20,20,0.8);
-  border: 1px solid rgba(255,255,255,0.1);
-  padding: 25px;
-  border-radius: 12px;
-  color: #ddd;
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  transform: scale(0.96);
-  animation: fadeZoom 0.8s ease forwards;
-  position: relative;
-  overflow: hidden;
-  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-}
+  .description-long {
+    max-width:900px;
+    margin:25px auto;
+    font-size:1.05rem;
+    line-height:1.6;
+    color:#ddd;
+  }
 
-/* Sheen effect */
-.card::before {
-  content: "";
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 50%;
-  height: 300%;
-  background: linear-gradient(
-    120deg,
-    rgba(180,0,255,0) 0%,
-    rgba(180,0,255,0.25) 50%,
-    rgba(180,0,255,0) 100%
-  );
-  transform: rotate(25deg);
-  transition: .8s;
-}
+  /* GRID CARDS (stile home/gilda) */
+  .grid-cards {
+    display:grid;
+    gap:30px;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    margin:40px auto;
+    width:90%;
+  }
+  .card {
+    background:rgba(20,20,20,0.8);
+    border:1px solid rgba(255,255,255,0.1);
+    padding:25px;
+    border-radius:12px;
+    color:#ddd;
+    backdrop-filter:blur(4px);
+    opacity:0;
+    transform:scale(0.96);
+    animation:fadeZoom .8s ease forwards;
+    position:relative;
+    overflow:hidden;
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .card::before {
+    content:"";
+    position:absolute;
+    top:-100%;
+    left:-100%;
+    width:50%;
+    height:300%;
+    background:linear-gradient(
+      120deg,
+      rgba(180,0,255,0) 0%,
+      rgba(180,0,255,0.25) 50%,
+      rgba(180,0,255,0) 100%
+    );
+    transform:rotate(25deg);
+    transition:.8s;
+  }
+  .card:hover::before {
+    top:-50%;
+    left:120%;
+  }
+  .card:hover {
+    transform:translateY(-6px);
+    box-shadow:0 0 22px rgba(180,0,255,0.35);
+    border-color:rgba(180,0,255,0.45);
+  }
+  @keyframes fadeZoom {
+    to { opacity:1; transform:scale(1); }
+  }
 
-.card:hover::before {
-  top: -50%;
-  left: 120%;
-}
+  .card h3 {
+    font-size:1.4rem;
+    margin-bottom:10px;
+    color:#fff;
+  }
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 22px rgba(180,0,255,0.35);
-  border-color: rgba(180,0,255,0.45);
-}
-@keyframes fadeZoom { to { opacity:1; transform:scale(1);} }
+  .card p {
+    font-size:0.98rem;
+    line-height:1.55;
+  }
 
-/* --- RAID TEAMS --- */
-.raid-teams {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 50px;
-}
-.team-card {
-  width: 420px;
-  padding: 30px;
-  border-radius: 14px;
-  background: rgba(15,15,15,0.75);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #eee;
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  position: relative;
-  overflow: hidden;
-  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-}
+  /* BOTTONI STILE GILDA */
+  .team-btn {
+    display:inline-block;
+    margin-top:18px;
+    padding:10px 18px;
+    border:1px solid #fff;
+    border-radius:8px;
+    color:#fff;
+    text-decoration:none;
+    transition:.3s;
+    font-size:0.95rem;
+  }
+  .team-btn:hover {
+    background:#fff;
+    color:#000;
+  }
 
-.team-card.abyss {
-  animation: slideLeft .8s ease forwards;
-}
+  /* RAID TEAMS (epici) */
+  .raid-teams {
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:40px;
+    margin:40px auto 10px;
+  }
+  .team-card {
+    width:420px;
+    padding:30px;
+    border-radius:14px;
+    background:rgba(15,15,15,0.78);
+    border:1px solid rgba(255,255,255,0.15);
+    color:#eee;
+    backdrop-filter:blur(4px);
+    opacity:0;
+    position:relative;
+    overflow:hidden;
+    transition:transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .team-card::before {
+    content:"";
+    position:absolute;
+    top:-100%;
+    left:-100%;
+    width:50%;
+    height:300%;
+    background:linear-gradient(
+      120deg,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,0.18) 50%,
+      rgba(255,255,255,0) 100%
+    );
+    transform:rotate(25deg);
+    transition:.8s;
+  }
+  .team-card:hover::before {
+    top:-50%;
+    left:120%;
+  }
 
-.team-card.mindbound {
-  animation: slideRight .8s ease forwards;
-}
+  .team-card h3 {
+    font-size:1.8rem;
+    margin-bottom:12px;
+    color:#fff;
+  }
 
-.team-card::before {
-  content: "";
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 50%;
-  height: 300%;
-  background: linear-gradient(
-    120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.15) 50%,
-    rgba(255,255,255,0) 100%
-  );
-  transform: rotate(25deg);
-  transition: .8s;
-}
+  .team-card p {
+    line-height:1.5;
+    font-size:0.98rem;
+  }
 
-.team-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 0 25px rgba(255,255,255,0.15);
-  border-color: rgba(255,255,255,0.4);
-}
+  .team-card.abyss {
+    box-shadow:0 0 15px rgba(255,80,80,0.35);
+    animation:slideLeft .8s ease forwards;
+  }
+  .team-card.abyss:hover {
+    box-shadow:0 0 25px rgba(255,80,80,0.6);
+    border-color:rgba(255,80,80,0.45);
+  }
 
-.mindbound:hover {
-  box-shadow: 0 0 25px rgba(120,120,255,0.55);
-}
+  .team-card.mindbound {
+    box-shadow:0 0 15px rgba(120,120,255,0.35);
+    animation:slideRight .8s ease forwards;
+  }
+  .team-card.mindbound:hover {
+    box-shadow:0 0 25px rgba(120,120,255,0.6);
+    border-color:rgba(120,120,255,0.45);
+  }
 
-.abyss:hover {
-  box-shadow: 0 0 25px rgba(255,80,80,0.55);
-}
+  @keyframes slideLeft {
+    from { opacity:0; transform:translateX(-25px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
+  @keyframes slideRight {
+    from { opacity:0; transform:translateX(25px); }
+    to   { opacity:1; transform:translateX(0); }
+  }
 
-@keyframes slideLeft {
-  from { opacity:0; transform:translateX(-25px); }
-  to   { opacity:1; transform:translateX(0); }
-}
+  /* SEZIONE CTA FINALE */
+  .cta-final {
+    text-align:center;
+    margin:50px auto 0;
+    max-width:640px;
+  }
+  .cta-final p {
+    font-size:1.05rem;
+    line-height:1.6;
+    color:#ddd;
+    margin-bottom:18px;
+  }
+  .cta-final .team-btn {
+    border-radius:999px;
+    padding:11px 24px;
+  }
 
-@keyframes slideRight {
-  from { opacity:0; transform:translateX(25px); }
-  to   { opacity:1; transform:translateX(0); }
-}
-
-.team-card h3 {
-  font-size: 1.8rem;
-  margin-bottom: 12px;
-  color: #fff;
-}
-.team-card p { line-height: 1.5; }
-.team-btn {
-  display: inline-block;
-  margin-top: 18px;
-  padding: 10px 18px;
-  border: 1px solid #fff;
-  border-radius: 8px;
-  color: #fff;
-  transition: .3s;
-}
-.team-btn:hover {
-  background: #fff;
-  color: #000;
-}
-
-header {
-  display: flex;
-  justify-content: center;
-  padding: 20px 0;
-}
-
-header nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 25px;
-  padding: 0;
-  margin-top: 15px;
-}
-header nav a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.05rem;
-  transition: .3s;
-}
-header nav a:hover,
-header nav a.active {
-  color: #ff5050;
-  text-shadow: 0 0 8px #ff5050;
-}
-
-/* Color Identity */
-.mindbound { box-shadow: 0 0 15px rgba(120,120,255,0.35); }
-.abyss { box-shadow: 0 0 15px rgba(255,80,80,0.35); }
-
-body { background:#0b0b0b; color:#ccc; font-family:Arial, sans-serif; }
-header nav ul { display:flex; gap:20px; list-style:none; }
-header nav a { color:white; }
-footer { text-align:center; padding:40px 0; color:#777; }
-
+  footer {
+    text-align:center;
+    padding:40px 0;
+    color:#777;
+  }
 </style>
 </head>
+
 <body>
 
 <header>
-<nav>
+  <nav class="mainnav">
     <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="pages/raider.html">Raider</a></li>
-        <li><a href="pages/hollowsoul.html">Hollow Soul</a></li>
-        <li><a href="pages/recruiting.html">Reclutamento</a></li>
-        <li><a href="pages/statuto.html">Statuto</a></li>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="pages/raider.html">Raider</a></li>
+      <li><a href="pages/hollowsoul.html">Hollow Soul</a></li>
+      <li><a href="pages/recruiting.html">Reclutamento</a></li>
+      <li><a href="pages/statuto.html">Statuto</a></li>
     </ul>
-</nav>
+  </nav>
 </header>
 
 <main>
 
-<!-- HERO senza background -->
-<section class="hero">
-  <div class="hero-content">
-    <h2>Benvenuti nei Delirium Tremens</h2>
-    <p>Dove la sanità mentale va in cooldown</p>
-  </div>
-</section>
-
-<!-- CONTENITORE UNICO CON LOGO -->
-<div class="bg-container">
-
-  <!-- CHI SIAMO -->
-  <section class="section-logo-bg">
-  <h2>Chi siamo</h2>
-  <div class="grid-cards">
-
-    <div class="card">
-      <h3>La nostra community</h3>
+  <!-- HERO EPICO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-tagline">Gilda italiana – Nemesis EU</div>
+      <h1>Delirium Tremens</h1>
       <p>
-      Siamo una gilda italiana che vive World of Warcraft con passione,
-      maturità e un pizzico di follia controllata. Non siamo solo un gruppo
-      di giocatori: siamo un ambiente dove ci si supporta, si cresce e si ride insieme.
+        Una gilda dove il progress incontra la follia controllata,  
+        i log incontrano le risate, e ogni serata di raid inizia con una certezza:
+        <strong>non sarai mai da solo nella tua avventura</strong>.
       </p>
+      <div class="hero-cta">
+        <a href="pages/recruiting.html">Entra nel Delirio</a>
+      </div>
     </div>
-
-    <div class="card">
-      <h3>Due anime, un'unica identità</h3>
-      <p>
-      Nei Delirium Tremens convivono due percorsi: quello dei raid team e quello
-      degli Hollow Soul, la nostra anima sociale. Chiunque può trovare un ruolo:
-      progress, M+, chiacchiere su Discord o attività quotidiana di gilda.
-      </p>
-      <a href="pages/hollowsoul.html" class="team-btn">Scopri la Community</a>
-    </div>
-
-    <div class="card">
-      <h3>I nostri valori</h3>
-      <p>
-      Rispetto, inclusività, disciplina senza rigidità, divertimento senza tossicità.
-      Giochiamo per migliorare, ma ricordiamo che le persone vengono prima dei personaggi.
-      </p>
-      <a href="pages/statuto.html" class="team-btn">Leggi lo Statuto</a>
-    </div>
-
-  </div>
   </section>
 
-  <!-- COSA FACCIAMO -->
-  <section class="section-logo-bg">
-  <h2>Cosa facciamo</h2>
-  <div class="grid-cards">
+  <!-- CONTENITORE SFONDO CON LOGO -->
+  <div class="bg-container">
+    <main>
 
-    <div class="card">
-      <h3>Raid Progress</h3>
-      <p>
-      Organizziamo raid strutturati per chi vuole affrontare i contenuti più impegnativi
-      con disciplina, coordinazione e un ambiente maturo.
-      </p>
-      <a href="pages/raider.html" class="team-btn">Vai ai Team Raid</a>
-    </div>
+      <!-- CHI SIAMO / LA NOSTRA STORIA -->
+      <section>
+        <h2 class="section-title">Chi siamo</h2>
+        <p class="section-subtitle">
+          Una gilda nata per unire giocatori adulti, appassionati e autoironici,
+          che vogliono affrontare l’endgame con serietà, senza perdere il gusto di ridere in vocale.
+        </p>
 
-    <div class="card">
-      <h3>Mythic+</h3>
-      <p>
-      Creando amicizie e legami all’interno della gilda, non sarai mai solo: potrai sempre trovare 
-      un compagno di avventure con cui affrontare Mythic+, migliorarti e divertirti insieme.
-      </p>
-    </div>
+        <p class="description-long">
+          I <strong>Delirium Tremens</strong> sono una community italiana su <strong>Nemesis – EU</strong>
+          che vive World of Warcraft come un gioco di squadra.  
+          Non ci interessa solo il “quanto” si pulisce, ma il <strong>come</strong> ci si arriva:
+          con rispetto, organizzazione, responsabilità verso il gruppo e un tono sempre leggero,
+          anche quando si wipa al 0.5%.
+          <br><br>
+          Dentro la gilda convivono due anime raid ben definite – <strong>Abyss Chosen</strong> e
+          <strong>MindBound</strong> – e una grande anima sociale, gli <strong>Hollow Soul</strong>,
+          che tengono vivo il server anche fuori dalle sessioni di progress.
+        </p>
 
-    <div class="card">
-      <h3>Community & Eventi</h3>
-      <p>
-      Serate chill, attività social, Discord vivo e accogliente: un luogo dove
-      divertirsi anche fuori dal ritmo del progress.
-      </p>
-      <a href="pages/recruiting.html" class="team-btn">Unisciti ai Delirium Tremens</a>
-    </div>
+        <div class="grid-cards">
+          <div class="card">
+            <h3>Da dove veniamo</h3>
+            <p>
+              Siamo nati dall’esigenza di avere un posto stabile, maturo e affidabile
+              dove raidare e crescere nel tempo, senza drama inutili e senza la sensazione
+              di essere “un numero in lista”.  
+              Qui le persone hanno un nome, una voce e un posto al tavolo.
+            </p>
+          </div>
 
-  </div>
-  </section>
+          <div class="card">
+            <h3>Come giochiamo</h3>
+            <p>
+              Preparazione, puntuali agli orari, rispetto delle call, log letti con onestà
+              e voglia di migliorarsi.  
+              Ma sempre con un tono umano: si può tryhardare anche senza avvelenare l’atmosfera.
+            </p>
+          </div>
 
+          <div class="card">
+            <h3>Per chi siamo</h3>
+            <p>
+              Per chi vuole affrontare il raid in modo serio ma non militare,  
+              per chi cerca una community stabile con cui fare Mythic+, raid, vecchi contenuti
+              e chiacchiere notturne in Discord.  
+              Se ti rivedi in questo, probabilmente sei nel posto giusto.
+            </p>
+          </div>
+        </div>
+      </section>
 
-</div>
-<!-- fine bg-container -->
+      <!-- VALORI -->
+      <section>
+        <h2 class="section-title">I nostri valori</h2>
+        <p class="section-subtitle">
+          Il nostro “codice non scritto”. Quello che ci guida quando decidiamo chi vogliamo in gilda
+          e che tipo di ambiente vogliamo proteggere.
+        </p>
+
+        <div class="grid-cards">
+          <div class="card">
+            <h3>Rispetto prima di tutto</h3>
+            <p>
+              Nessun insulto, nessuna tossicità, nessun protagonista che schiaccia gli altri.
+              Si può performare bene senza calpestare nessuno.  
+              Le persone vengono sempre prima dei personaggi.
+            </p>
+            <a href="pages/statuto.html" class="team-btn">Leggi lo Statuto</a>
+          </div>
+
+          <div class="card">
+            <h3>Disciplina senza rigidità</h3>
+            <p>
+              Calendario chiaro, comunicazione trasparente, impegni presi sul serio.  
+              Ma sappiamo che esiste una vita fuori dal gioco: si parla, ci si organizza,
+              si trova un equilibrio che non bruci nessuno.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>Divertimento senza drama</h3>
+            <p>
+              Wipe, errori e serate storte capitano a tutti.  
+              L’importante è saperci ridere sopra, analizzare con lucidità
+              e ripartire come gruppo, non come “colpevole / innocente”.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- RAID TEAMS -->
+      <section>
+        <h2 class="section-title">I nostri raid team</h2>
+        <p class="section-subtitle">
+          Due team, un’unica identità di gilda.  
+          Stessi valori, stesso approccio pulito, ritmi diversi per adattarsi agli stili di gioco.
+        </p>
+
+        <div class="raid-teams">
+
+          <div class="team-card abyss">
+            <h3>Abyss Chosen</h3>
+            <p>
+              Il team con il ritmo più serrato e la maggiore attenzione al dettaglio.
+              Studia a fondo le meccaniche, cerca di spingere il progress al massimo
+              mantenendo un ambiente solido, organizzato e rispettoso.  
+              Perfetto per chi ama ottimizzare e non ha paura del tryhard… con cervello.
+            </p>
+            <a href="pages/abyss-chosen/abyss-chosen.html" class="team-btn">Vai alla pagina del team</a>
+          </div>
+
+          <div class="team-card mindbound">
+            <h3>MindBound</h3>
+            <p>
+              Condivide gli stessi obiettivi degli Abyss Chosen – affrontare l’endgame
+              in modo serio e coordinato – ma con un clima più rilassato e flessibile.  
+              Ideale per chi ha tempi più stretti ma non vuole rinunciare a raidare bene,
+              crescere e chiudere il tier insieme al gruppo.
+            </p>
+            <a href="pages/mindbound/mindbound.html" class="team-btn">Vai alla pagina del team</a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- HOLLOW SOUL -->
+      <section>
+        <h2 class="section-title">Hollow Soul – Il cuore della community</h2>
+        <p class="section-subtitle">
+          Non tutti vogliono stare in progress raid, ma tutti meritano una casa di gilda.
+          Gli Hollow Soul sono la parte sociale, creativa e rumorosa dei Delirium Tremens.
+        </p>
+
+        <p class="description-long">
+          Qui trovi chi fa Mythic+ in compagnia, chi livella alt a oltranza,
+          chi organizza serate chill, chi spamma meme in chat, chi si mette a disposizione
+          per aiutare i nuovi.  
+          È il luogo perfetto per chi vuole vivere WoW in modo rilassato ma non casuale,
+          circondato da persone con cui costruire legami che durano pi&ugrave; di una season.
+        </p>
+
+        <div style="text-align:center; margin-top:10px;">
+          <a href="pages/hollowsoul.html" class="team-btn">Scopri gli Hollow Soul</a>
+        </div>
+      </section>
+
+      <!-- CTA FINALE -->
+      <section class="cta-final">
+        <h2 class="section-title">Vuoi entrare nel Delirio?</h2>
+        <p>
+          Se cerchi una gilda italiana stabile, organizzata, senza tossicità e con
+          un forte spirito di community, potresti essere uno di noi.  
+          Che tu sia un raider, un appassionato di Mythic+ o un giocatore sociale,
+          qui puoi trovare il tuo posto.
+        </p>
+        <a href="pages/recruiting.html" class="team-btn">Vai alla pagina Reclutamento</a>
+      </section>
+
+    </main>
+  </div> <!-- fine bg-container -->
 
 </main>
 
 <footer>
-<p>&copy; 2025 Delirium Tremens – Sito ufficiale</p>
+  <p>&copy; 2025 Delirium Tremens – Sito ufficiale</p>
 </footer>
 
 </body>
