@@ -1,41 +1,202 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>Abyss Chosen – Progress</title>
-<link rel="stylesheet" href="../../css/style.css">
-<link rel="icon" href="data:;base64,iVBORw0KGgo=">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<style>
-.chart-loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-}
+  <meta charset="UTF-8">
+  <title>Abyss Chosen – Progress</title>
+  <link rel="stylesheet" href="../../css/style.css">
 
-.loader {
-  border: 6px solid rgba(255,255,255,0.2);
-  border-top: 6px solid #fff;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  animation: spin 0.9s linear infinite;
-}
+  <style>
+    body {
+      background: #0b0b0b;
+      color: #ccc;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
 
-@keyframes spin {
-  100% { transform: rotate(360deg); }
-}
+    /* HEADER COERENTE */
+    header {
+      text-align: center;
+      padding: 25px 0 10px;
+    }
+    header h1 {
+      color: #fff;
+      font-size: 2.2rem;
+      text-shadow: 0 0 12px rgba(255,80,80,0.5);
+      margin: 0;
+    }
+    header nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      padding: 0;
+      margin-top: 15px;
+    }
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      font-size: 1.05rem;
+      transition: .3s;
+    }
+    header nav a:hover,
+    header nav a.active {
+      color: #ff5050;
+      text-shadow: 0 0 8px #ff5050;
+    }
 
-.hidden {
-  display: none !important;
-}
-</style>
+    /* HERO INTRO */
+    .hero-progress {
+      padding: 50px 20px 30px;
+      text-align: center;
+    }
+    .hero-progress h2 {
+      font-size: 2.4rem;
+      color: #fff;
+      opacity: 0;
+      animation: fadeUp .9s ease forwards;
+    }
+    .hero-progress p {
+      opacity: 0;
+      max-width: 750px;
+      margin: 18px auto 0;
+      color: #ccc;
+      font-size: 1.1rem;
+      animation: fadeUp 1.3s ease forwards;
+    }
 
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
+    /* CONTENITORE SFONDO UNICO */
+    .bg-container {
+      position: relative;
+      background: url('../../img/logo.png') center/cover no-repeat;
+      padding: 60px 0 80px;
+    }
+    .bg-container::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(2px);
+    }
+    .bg-container > * {
+      position: relative;
+      z-index: 2;
+    }
+
+    main.panel {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    h2.section-title {
+      text-align: center;
+      color: #fff;
+      font-size: 2rem;
+      margin: 20px 0 10px;
+    }
+    p.section-subtitle {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 25px;
+      color: #ddd;
+      font-size: 1rem;
+    }
+
+    /* CARD WIDGET / LAYOUT */
+    .widgets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin: 35px 0 10px;
+    }
+
+    .widget-card {
+      background: rgba(15,15,15,0.8);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 18px 18px 12px;
+      box-shadow: 0 0 18px rgba(255,80,80,0.35);
+      backdrop-filter: blur(4px);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.97);
+      animation: fadeZoom .7s ease forwards;
+    }
+
+    .widget-card::before {
+      content: "";
+      position: absolute;
+      top: -120%;
+      left: -120%;
+      width: 60%;
+      height: 320%;
+      background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.16) 50%,
+        rgba(255,255,255,0) 100%
+      );
+      transform: rotate(25deg);
+      transition: .8s;
+    }
+    .widget-card:hover::before {
+      top: -40%;
+      left: 130%;
+    }
+
+    .widget-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 25px rgba(255,80,80,0.6);
+      border-color: rgba(255,80,80,0.45);
+    }
+
+    .widget-title {
+      font-size: 1.2rem;
+      color: #fff;
+      margin: 0 0 6px;
+    }
+    .widget-desc {
+      font-size: 0.95rem;
+      color: #ddd;
+      margin: 0 0 10px;
+    }
+
+    .widget-frame-wrapper {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .widget-frame {
+      width: 100%;
+      border: 0;
+      display: block;
+    }
+
+    @keyframes fadeZoom {
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* FULL WIDTH SECTION PER GRAFICI */
+    .widget-full {
+      margin-top: 40px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 0;
+      color: #777;
+    }
+  </style>
 </head>
 
-<body class="page-transition abyss-bg">
+<body class="page-transition">
 
 <header>
   <h1>Abyss Chosen</h1>
@@ -50,304 +211,171 @@
   </nav>
 </header>
 
-<nav class="subnav">
-  <ul>
-    <li><a href="../abyss-chosen/abyss-chosen.html">Home Team</a></li>
-    <li><a href="../abyss-chosen/roster-abyss.html">Roster</a></li>
-    <li><a href="../abyss-chosen/abyss-chosen-news.html">News</a></li>
-    <li><a href="../abyss-chosen/abyss-chosen-progress.html" class="active">Progress</a></li>
-  </ul>
-</nav>
+<section class="hero-progress">
+  <h2>Progress Raid – Delirium Tremens</h2>
+  <p>
+    Panoramica live della progressione della gilda nel tier attuale,
+    visibile per tutte le difficolt&agrave; e aggiornata direttamente da Warcraft Logs.
+  </p>
+</section>
 
-<main class="panel progress-panel">
+<div class="bg-container">
+  <main class="panel">
 
-  <!-- ======================================================
-                PROGRESS COMPLETO (FULL)
-  ======================================================= -->
-  <section class="current-progress">
-    <h2>Progress Completo</h2>
+    <!-- BLOCCO: PROGRESS ATTUALE PER DIFFICOLTÀ -->
+    <h2 class="section-title">Panoramica per difficoltà</h2>
+    <p class="section-subtitle">
+      Uno sguardo immediato al punto in cui si trova la gilda in
+      Normal, Heroic e Mythic per la raid zone attuale.
+    </p>
 
-    <div class="chart-wrapper">
-      <div id="loaderFull" class="chart-loader">
-        <div class="loader"></div>
+    <div class="widgets-grid">
+
+      <!-- NORMAL -->
+      <div class="widget-card">
+        <h3 class="widget-title">Progress Normal</h3>
+        <p class="widget-desc">
+          Stato complessivo dei boss in difficolt&agrave; Normal per il tier corrente.
+        </p>
+        <div class="widget-frame-wrapper">
+          <iframe
+            class="widget-frame"
+            height="220"
+            src="https://www.warcraftlogs.com/embed/guild-progress-tile/44?difficulty=3&guild=802526"
+            scrolling="no"
+          ></iframe>
+        </div>
       </div>
-      <canvas id="fullProgressChart" class="hidden" height="200"></canvas>
+
+      <!-- HEROIC -->
+      <div class="widget-card">
+        <h3 class="widget-title">Progress Heroic</h3>
+        <p class="widget-desc">
+          Avanzamento sullo stesso tier in difficolt&agrave; Heroic.
+        </p>
+        <div class="widget-frame-wrapper">
+          <iframe
+            class="widget-frame"
+            height="220"
+            src="https://www.warcraftlogs.com/embed/guild-progress-tile/44?difficulty=4&guild=802526"
+            scrolling="no"
+          ></iframe>
+        </div>
+      </div>
+
+      <!-- MYTHIC -->
+      <div class="widget-card">
+        <h3 class="widget-title">Progress Mythic</h3>
+        <p class="widget-desc">
+          La situazione pi&ugrave; aggiornata in Mythic: boss abbattuti, tentativi e avanzamento.
+        </p>
+        <div class="widget-frame-wrapper">
+          <iframe
+            class="widget-frame"
+            height="220"
+            src="https://www.warcraftlogs.com/embed/guild-progress-tile/44?difficulty=5&guild=802526"
+            scrolling="no"
+          ></iframe>
+        </div>
+      </div>
+
     </div>
 
+    <!-- BLOCCO: GRAFICO STORICO / PULL PROGRESS -->
+    <div class="widget-full">
+      <h2 class="section-title">Andamento del progress</h2>
+      <p class="section-subtitle">
+        Un grafico per visualizzare come &egrave; evoluto il progress nel tempo sui boss,
+        utile per vedere ritmo, muri e miglioramenti.
+      </p>
 
-
-    <p class="raid-summary">
-      Questo grafico mostra lo stato reale del progress in Normal, Heroic e Mythic.
-    </p>
-  </section>
-
-  <!-- ======================================================
-                ULTIMA SESSIONE
-  ======================================================= -->
-  <section class="current-progress">
-    <h2>Ultima Sessione (Mythic)</h2>
-
-    <div class="chart-wrapper">
-      <div id="loaderLast" class="chart-loader">
-        <div class="loader"></div>
+      <div class="widget-card">
+        <h3 class="widget-title">Percentuale per pull (Mythic)</h3>
+        <p class="widget-desc">
+          Esempio di grafico con percentuale migliore per tentativo su un encounter
+          in Mythic. Puoi cambiare <code>encounterId</code> e difficolt&agrave; dal pannello Widgets.
+        </p>
+        <div class="widget-frame-wrapper">
+          <iframe
+            class="widget-frame"
+            height="360"
+            src="https://www.warcraftlogs.com/embed/fight-percentage-per-pull-chart/latest?xAxis=pull&difficulty=5&encounterId=2546&guilds=802526"
+            scrolling="no"
+          ></iframe>
+        </div>
       </div>
-      <canvas id="lastSessionChart" class="hidden" height="200"></canvas>
     </div>
 
+    <!-- BLOCCO: COMPOSIZIONE / LOOT (OPZIONALE, MA UTILE) -->
+    <div class="widget-full">
+      <h2 class="section-title">Composizione e attività recente</h2>
+      <p class="section-subtitle">
+        Widget opzionali per mostrare la composizione, il gear e l'attivit&agrave; recente
+        della gilda nei log.
+      </p>
 
+      <div class="widgets-grid">
 
-    <p class="raid-summary">
-      Questo grafico mostra solo ciò che è stato fatto nell’ultimo raid registrato.
-    </p>
-  </section>
+        <div class="widget-card">
+          <h3 class="widget-title">Attivit&agrave; recente</h3>
+          <p class="widget-desc">
+            Ultimi log e aggiornamenti della gilda dal pannello Widgets di Warcraft Logs.
+          </p>
+          <div class="widget-frame-wrapper">
+            <!-- Sostituisci l'URL con quello esatto del widget "Latest Updates"
+                 copiato dalla tua pagina Widgets -->
+            <iframe
+              class="widget-frame"
+              height="260"
+              src="https://www.warcraftlogs.com/embed/guild-latest-updates/44?guild=802526"
+              scrolling="no"
+            ></iframe>
+          </div>
+        </div>
 
+        <div class="widget-card">
+          <h3 class="widget-title">Composizione / Gear</h3>
+          <p class="widget-desc">
+            Un eventuale widget di composizione/gear copiato dalla sezione Widgets,
+            utile per chi vuole vedere con che setup si affrontano i boss.
+          </p>
+          <div class="widget-frame-wrapper">
+            <!-- Sostituisci l'URL con quello del widget di composition/gear
+                 che preferisci dalla tua pagina Widgets -->
+            <iframe
+              class="widget-frame"
+              height="260"
+              src="https://www.warcraftlogs.com/embed/guild-gear-summary/44?guild=802526"
+              scrolling="no"
+            ></iframe>
+          </div>
+        </div>
 
-  <!-- ======================================================
-                LINK LOGS
-  ======================================================= -->
-  <section class="progress-logs">
-    <h2>Warcraft Logs</h2>
-    <p>Analizza fight, performance, strategie e miglioramenti del team.</p>
+      </div>
+    </div>
 
-    <a href="https://www.warcraftlogs.com/guild/eu/nemesis/DeliriumTremens"
-       target="_blank" class="apply-button">
-      Apri i Logs degli Abyss Chosen
-    </a>
-  </section>
-
-</main>
+  </main>
+</div>
 
 <footer>
-<p>&copy; 2025 Delirium Tremens</p>
+  <p>&copy; 2025 Delirium Tremens</p>
 </footer>
 
-<!-- ==========================
-    FADE-IN / FADE-OUT SCRIPT
-========================== -->
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  document.body.classList.add("page-loaded");
-});
-document.querySelectorAll("a").forEach(link => {
-  if (link.hostname === window.location.hostname) {
-    link.addEventListener("click", function(e){
-      e.preventDefault();
-      const href = this.getAttribute("href");
-      document.body.classList.remove("page-loaded");
-      setTimeout(() => { window.location.href = href; }, 300);
-    });
-  }
-});
-</script>
-
-<!-- ==========================
-      URL CLOUDFLARE WORKERS
-========================== -->
-<script>
-const WORKER_FULL = "https://red-snowflake-a386.lucasantoro2905.workers.dev";  
-const WORKER_LAST = "https://wild-mode-1b45.lucasantoro2905.workers.dev";  
-// deve essere il dominio del worker, senza endpoint finale
-// es: "https://manaforge-progress.workers.dev"
-</script>
-
-<!-- ==========================
-     FETCH + CHARTJS SCRIPT
-========================== -->
-<script>
-// ================================
-// FETCH DATA per FULL progress
-// ================================
-async function fetchFullProgress() {
-  const diffs = ["normal", "heroic", "mythic"];
-  const results = {};
-
-  for (const d of diffs) {
-    const res = await fetch(`${WORKER_FULL}/progress-full?difficulty=${d}`);
-    results[d] = await res.json();
-  }
-
-  return results;
-}
-
-// ================================
-// FETCH DATA per LAST SESSION
-// ================================
-async function fetchLastSession() {
-  const res = await fetch(`${WORKER_LAST}/progress-last`);
-  return res.json();
-}
-
-// ================================
-// RENDER FULL PROGRESS
-// ================================
-function renderFullChart(full) {
-  document.getElementById("loaderFull").classList.add("hidden");
-  document.getElementById("fullProgressChart").classList.remove("hidden");
-
-  const bossSet = new Set();
-
-  Object.values(full).forEach(diff => {
-    if (!diff.bosses) return;
-    for (const b in diff.bosses) bossSet.add(b);
+  document.addEventListener("DOMContentLoaded", function () {
+    document.body.classList.add("page-loaded");
   });
 
-  const bosses = Array.from(bossSet);
-
-  const normal = bosses.map(b => full.normal?.bosses?.[b]?.kills ? 1 : 0);
-  const heroic = bosses.map(b => full.heroic?.bosses?.[b]?.kills ? 1 : 0);
-  const mythic = bosses.map(b => full.mythic?.bosses?.[b]?.kills ? 1 : 0);
-
-  new Chart(document.getElementById("fullProgressChart"), {
-    type: "bar",
-    data: {
-      labels: bosses,
-      datasets: [
-        { label: "Normal", data: normal, backgroundColor: "#4CAF50" },
-        { label: "Heroic", data: heroic, backgroundColor: "#FFC107" },
-        { label: "Mythic", data: mythic, backgroundColor: "#E91E63" }
-      ]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: { max: 1, ticks: { color: "#fff" } },
-        x: { ticks: { color: "#fff" } }
-      },
-      plugins: { legend: { labels: { color: "#fff" } } }
+  document.querySelectorAll("a").forEach(link => {
+    if (link.hostname === window.location.hostname) {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const href = this.getAttribute("href");
+        document.body.classList.remove("page-loaded");
+        setTimeout(() => { window.location.href = href; }, 300);
+      });
     }
   });
-}
-
-
-// ================================
-// RENDER LAST SESSION
-// ================================
-function renderLastChart(last) {
-
-  // Nasconde il loader e mostra il canvas
-  document.getElementById("loaderLast").classList.add("hidden");
-  const canvas = document.getElementById("lastSessionChart");
-  canvas.classList.remove("hidden");
-
-  const bosses = Object.keys(last.bosses || {});
-
-  if (bosses.length === 0) {
-    canvas.outerHTML = "<p style='color:white;text-align:center;'>Nessun dato per l'ultimo raid.</p>";
-    return;
-  }
-
-  const pulls = bosses.map(b => last.bosses[b].pulls);
-  const wipes = bosses.map(b => last.bosses[b].wipes);
-  const kills = bosses.map(b => last.bosses[b].kills);
-  const bestPct = bosses.map(b => last.bosses[b].bestPercentage ?? 100);
-
-  // deduce the actual difficulty played
-  const diffs = new Set();
-  bosses.forEach(b => last.bosses[b].difficultiesSeen?.forEach(d => diffs.add(d)));
-
-  const diffName =
-    diffs.has(5) ? "Mythic" :
-    diffs.has(4) ? "Heroic" :
-    diffs.has(3) ? "Normal" :
-    "N/A";
-
-  // update title dynamically
-  document.querySelector("section.current-progress:nth-of-type(2) h2").textContent =
-    `Ultima Sessione (${diffName})`;
-
-  const ctx = canvas.getContext("2d");
-
-  new Chart(ctx, {
-    data: {
-      labels: bosses,
-      datasets: [
-        {
-          type: "bar",
-          label: "Pulls",
-          data: pulls,
-          backgroundColor: "rgba(41,150,246,0.7)"
-        },
-        {
-          type: "bar",
-          label: "Wipes",
-          data: wipes,
-          backgroundColor: "rgba(255,90,0,0.7)"
-        },
-        {
-          type: "bar",
-          label: "Kills",
-          data: kills,
-          backgroundColor: "rgba(0,200,70,0.8)"
-        },
-        {
-          type: "line",
-          label: "Best % (0 = kill)",
-          data: bestPct,
-          borderColor: "#ff005d",
-          backgroundColor: "#ff005d",
-          pointRadius: 4,
-          pointHoverRadius: 6,
-          tension: 0.3,
-          yAxisID: "y1",
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          type: "linear",
-          position: "left",
-          beginAtZero: true,
-          title: { display: true, text: "Pulls / Wipes / Kills", color: "#fff" },
-          ticks: { color: "#fff" }
-        },
-        y1: {
-          type: "linear",
-          position: "right",
-          beginAtZero: true,
-          max: 100,
-          title: { display: true, text: "Best %", color: "#ff69a6" },
-          ticks: { color: "#ff69a6" },
-          grid: { drawOnChartArea: false }
-        },
-        x: {
-          ticks: { color: "#fff" }
-        }
-      },
-      plugins: {
-        legend: { labels: { color: "#fff" } }
-      }
-    }
-  });
-}
-
-
-
-// ================================
-// LOAD EVERYTHING
-// ================================
-(async () => {
-  console.log("=== FETCH FULL PROGRESS ===");
-  const full = await fetchFullProgress();
-  console.log("FULL:", full);
-
-  console.log("=== FETCH LAST SESSION ===");
-  const last = await fetchLastSession();
-  console.log("LAST:", last);
-
-  // Render
-  renderFullChart(full);
-
-  // Titolo dinamico
-  if (last && last.difficulty) {
-    document.querySelector("section:nth-of-type(2) h2").textContent =
-      `Ultima Sessione (${last.difficulty})`;
-  }
-
-  renderLastChart(last);
-})();
-
 </script>
 
 </body>
