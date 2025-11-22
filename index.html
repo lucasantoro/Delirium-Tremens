@@ -7,10 +7,14 @@
 <style>
 /* ---------------------- HERO ---------------------- */
 .hero {
-  min-height: 180vh;
+  min-height: 220vh; /* più spazio per evitare overlap */
   padding-top: 80px;
-  padding-bottom: 120px;
+  padding-bottom: 150px;
   background: url('img/logo.png') center/contain no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
   position: relative;
   display: flex;
   justify-content: center;
@@ -61,11 +65,28 @@
   max-width: 1200px;
   margin-top: 20px;
   display: grid;
-  gap: 30px;
+  gap: 40px; /* più spazio evita sovrapposizioni */
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: auto; /* evita overlap */
+  justify-items: center; /* centra tutte le card */
 }
 
-.card, .team-card { width:350px; margin:auto; padding:25px; border-radius:12px; background:rgba(20,20,20,0.8); border:1px solid rgba(255,255,255,0.1); color:#ddd; backdrop-filter:blur(4px); opacity:0; position:relative; overflow:hidden; transform:scale(0.96); animation:fadeZoom .8s ease forwards; transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+.card, .team-card {
+  width: 350px;
+  padding: 25px;
+  border-radius: 12px;
+  background: rgba(20,20,20,0.8);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: #ddd;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
+  transform: scale(0.96);
+  animation: fadeZoom .8s ease forwards;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  justify-self: center; /* centra nella griglia */
+}: transform .35s ease, box-shadow .35s ease, border-color .35s ease;: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
 }
 
 /* Sheen */
