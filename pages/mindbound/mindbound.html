@@ -4,13 +4,200 @@
 <meta charset="UTF-8">
 <title>MindBound - Team</title>
 <link rel="stylesheet" href="../../css/style.css">
+
+<style>
+
+/* Stile base coerente */
+body {
+  background: #0b0b0b;
+  color: #ccc;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* Header coerente con sito */
+header {
+  text-align: center;
+  padding: 25px 0 10px;
+}
+header h1 {
+  color: #fff;
+  font-size: 2.4rem;
+  text-shadow: 0 0 12px rgba(120,120,255,0.55);
+}
+header nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 25px;
+  padding: 0;
+  margin-top: 15px;
+}
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: .3s;
+}
+header nav a:hover,
+header nav a.active {
+  color: #8892ff;
+  text-shadow: 0 0 8px #8892ff;
+}
+
+/* Hero minimal del team */
+.hero-team {
+  padding: 60px 20px 40px;
+  text-align: center;
+}
+.hero-team h2 {
+  font-size: 2.4rem;
+  color: #fff;
+  opacity: 0;
+  animation: fadeUp .9s ease forwards;
+}
+.hero-team p {
+  opacity: 0;
+  max-width: 700px;
+  margin: 18px auto 0;
+  color: #ccc;
+  font-size: 1.2rem;
+  animation: fadeUp 1.3s ease forwards;
+}
+
+/* Animazione fade */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Contenitore sfondo unico */
+.bg-container {
+  position: relative;
+  background: url('../../img/mindbound_logo.png') center/cover no-repeat;
+  padding: 60px 0;
+}
+.bg-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(2px);
+}
+.bg-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Testi */
+.description-long {
+  max-width: 900px;
+  margin: 25px auto;
+  font-size: 1.1rem;
+  line-height: 1.55;
+  color: #ddd;
+}
+
+/* Card identiche alla Home */
+.raid-teams {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.team-card {
+  width: 420px;
+  padding: 30px;
+  border-radius: 14px;
+  background: rgba(15,15,15,0.75);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #eee;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  position: relative;
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+
+/* Sheen effect */
+.team-card::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 50%;
+  height: 300%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(160,160,255,0.25) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: rotate(25deg);
+  transition: .8s;
+}
+.team-card:hover::before {
+  top: -50%;
+  left: 120%;
+}
+
+/* Glow MindBound blu/viola */
+.team-card.mindbound {
+  box-shadow: 0 0 15px rgba(120,120,255,0.35);
+  animation: slideLeft .8s ease forwards;
+}
+.team-card.mindbound:hover {
+  box-shadow: 0 0 25px rgba(120,120,255,0.55);
+  border-color: rgba(120,120,255,0.45);
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-25px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.team-card h3 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  color: #fff;
+}
+.team-card p {
+  line-height: 1.5;
+}
+
+/* Bottoni */
+.team-btn {
+  display: inline-block;
+  margin-top: 18px;
+  padding: 10px 18px;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  color: #fff;
+  transition: .3s;
+}
+.team-btn:hover {
+  background: #fff;
+  color: #000;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 40px 0;
+  color: #777;
+  margin-top: 60px;
+}
+
+</style>
 </head>
 
-<body class="page-transition mindbound-bg">
+<body class="page-transition">
 
 <header>
 <h1>MindBound</h1>
-<!-- <p style="color:#e6d6ff; text-shadow:0 0 12px #000;">« Dove la mente affronta il vuoto… e vince. »</p> -->
 <nav>
   <ul>
     <li><a href="../../index.html">Home</a></li>
@@ -22,57 +209,55 @@
 </nav>
 </header>
 
-<!-- NAVBAR SECONDARIA -->
-<nav class="subnav">
-  <ul>
-    <li><a href="../mindbound/mindbound.html" class="active">Home Team</a></li>
-    <li><a href="../mindbound/roster-mindbound.html">Roster</a></li>
-    <li><a href="../mindbound/mindbound-news.html">News</a></li>
-    <li><a href="../mindbound/mindbound-progress.html">Progress</a></li>
-  </ul>
-</nav>
-
-<!-- HERO 
-<section class="hero" style="background:url('../img/mindbound_logo.png') center/cover no-repeat; height:350px; border-radius:20px; max-width:1100px; margin:20px auto; display:flex; flex-direction:column; justify-content:flex-end; padding:25px; box-shadow:0 0 25px rgba(150,60,255,0.5);">
-  <p style="color:#e6d6ff; text-shadow:0 0 12px #000;">« Dove la mente affronta il vuoto… e vince. »</p>
-</section>
--->
-
+<!-- SFONDO UNICO -->
+<div class="bg-container">
 <main class="panel">
-<h2>Chi siamo</h2>
+
+<h2 style="text-align:center; color:#fff;">Chi siamo</h2>
+
 <p class="description-long">
-<strong>La mente ferma nel caos. La forza che cresce insieme.</strong><br><br>
+<strong>Un team solido, costante e accogliente.</strong><br><br>
+I MindBound sono l’altro pilastro raid dei Delirium Tremens: un gruppo che affronta il contenuto con serietà,
+collaborazione e mentalità positiva, ma con un ritmo più disteso e sostenibile rispetto agli Abyss Chosen.<br><br>
 
-I MindBound rappresentano l’altra anima del raid progress dei Delirium Tremens.<br>
-Un gruppo che condivide gli stessi obiettivi di alto livello, la stessa cura nella preparazione e nella strategia, ma li vive con un ambiente più disteso, social e accogliente.<br>
-
-Non significa minor impegno:<br>
-significa che il percorso di progress viene affrontato con serietà, ma senza rinunciare all’atmosfera rilassata che caratterizza il team.<br>
-Ogni serata è organizzata, ogni ruolo è chiaro, ogni obiettivo è condiviso — e raggiunto insieme.<br>
-
-MindBound è il luogo perfetto per chi vuole performare, migliorare e crescere, 
-ma con un equilibrio tra disciplina e convivialità.
+Condividono gli stessi valori, gli stessi obiettivi e la stessa cura nella preparazione, ma offrono un ambiente
+più rilassato, perfetto per chi vuole giocare ad alto livello senza sacrificare il proprio tempo o serenità.
+Ogni membro porta qualcosa al gruppo: disciplina, voglia di crescere e rispetto reciproco.
 </p>
 
-<h2>Obiettivi</h2>
-<ul>
-  <li>Progress di alto livello in un clima sereno</li>
-  <li>Serate coordinate e senza stress</li>
-  <li>Miglioramento costante</li>
-  <li>Costruire un team stabile e positivo</li>
-</ul>
+<!-- CARD: Home Team / Roster / Progress -->
+<div class="raid-teams">
+
+  <div class="team-card mindbound">
+    <h3>Roster</h3>
+    <p>
+      Conosci i membri del team: ruoli, classi, specializzazioni e la squadra che affronta il raid insieme.
+    </p>
+    <a href="roster-mindbound.html" class="team-btn">Vai al Roster</a>
+  </div>
+
+  <div class="team-card mindbound">
+    <h3>Progress</h3>
+    <p>
+      Scopri l’avanzamento del team nel raid attuale: boss uccisi, progress, statistiche e miglioramenti.
+    </p>
+    <a href="mindbound-progress.html" class="team-btn">Vai al Progress</a>
+  </div>
+
+</div>
+
 </main>
+</div><!-- bg container -->
 
 <footer>
 <p>&copy; 2025 Delirium Tremens</p>
 </footer>
 
-<!-- SCRIPT TRANSIZIONE PAGINA -->
+<!-- TRANSIZIONE -->
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   document.body.classList.add("page-loaded");
 });
-
 document.querySelectorAll("a").forEach(link => {
   if (link.hostname === window.location.hostname) {
     link.addEventListener("click", function (e) {
