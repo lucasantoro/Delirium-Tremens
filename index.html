@@ -5,21 +5,19 @@
 <title>Delirium Tremens - Gilda WoW</title>
 <link rel="stylesheet" href="css/style.css">
 <style>
-/* --- HERO --- */
+
+/* --- HERO (senza background) --- */
 .hero {
-  height: 60vh;
-  background: url('img/logo.png') center/cover no-repeat;
+  padding: 80px 20px;
+  background: none;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-}
+.hero::after { display: none; }
+
 .hero-content {
   position: relative;
   color: #fff;
@@ -42,6 +40,25 @@
 
 @keyframes fadeUp {
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- BACKGROUND SEZIONI CON LOGO --- */
+.section-logo-bg {
+  position: relative;
+  padding: 80px 0;
+  background: url('img/logo.png') center/cover no-repeat;
+}
+
+.section-logo-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55); /* identico a hero originale */
+}
+
+.section-logo-bg > * {
+  position: relative;
+  z-index: 2;
 }
 
 /* --- SECTION TITLE --- */
@@ -165,6 +182,7 @@ section h2 {
 .abyss:hover {
   box-shadow: 0 0 25px rgba(255,80,80,0.55);
 }
+
 @keyframes slideLeft {
   from { opacity:0; transform:translateX(-25px); }
   to   { opacity:1; transform:translateX(0); }
@@ -224,13 +242,12 @@ body { background:#0b0b0b; color:#ccc; font-family:Arial, sans-serif; }
 header nav ul { display:flex; gap:20px; list-style:none; }
 header nav a { color:white; }
 footer { text-align:center; padding:40px 0; color:#777; }
+
 </style>
 </head>
 <body>
 
 <header>
-<!-- <h1>Delirium Tremens</h1>
-<p class="subtitle">Dove la sanità mentale va in cooldown</p> -->
 <nav>
     <ul>
         <li><a href="index.html">Home</a></li>
@@ -244,6 +261,7 @@ footer { text-align:center; padding:40px 0; color:#777; }
 
 <main>
 
+<!-- HERO senza background -->
 <section class="hero">
   <div class="hero-content">
     <h2>Benvenuti nei Delirium Tremens</h2>
@@ -251,7 +269,8 @@ footer { text-align:center; padding:40px 0; color:#777; }
   </div>
 </section>
 
-<section>
+<!-- CHI SIAMO con logo -->
+<section class="section-logo-bg">
 <h2>Chi siamo</h2>
 <div class="grid-cards">
   <div class="card">
@@ -280,24 +299,25 @@ footer { text-align:center; padding:40px 0; color:#777; }
 </div>
 </section>
 
-<section>
+<!-- RAID TEAM con logo -->
+<section class="section-logo-bg">
 <h2>I Nostri Raid Team</h2>
 <div class="raid-teams">
-
-  <div class="team-card mindbound">
-    <h3>Mindbound</h3>
-    <p>
-    Un team che condivide gli stessi obiettivi degli Abyss Chosen – affrontare l'endgame al massimo livello – ma con un clima più rilassato,
-    pensato anche per chi non ha molto tempo a disposizione. Un ambiente inclusivo, sereno e orientato alla crescita continua.
-    </p>
-    <a href="pages/raider.html" class="team-btn">Scopri il team</a>
-  </div>
 
   <div class="team-card abyss">
     <h3>Abyss Chosen</h3>
     <p>
     Il nostro gruppo più rapido e strutturato, dedicato a raggiungere gli stessi traguardi dei Mindbound ma con un ritmo più celere,
     focalizzato sull'ottimizzazione del tempo e dei risultati senza sacrificare la qualità dell'ambiente.
+    </p>
+    <a href="pages/raider.html" class="team-btn">Scopri il team</a>
+  </div>
+
+  <div class="team-card mindbound">
+    <h3>Mindbound</h3>
+    <p>
+    Un team che condivide gli stessi obiettivi degli Abyss Chosen – affrontare l'endgame al massimo livello – ma con un clima più rilassato,
+    pensato anche per chi non ha molto tempo a disposizione. Un ambiente inclusivo, sereno e orientato alla crescita continua.
     </p>
     <a href="pages/raider.html" class="team-btn">Scopri il team</a>
   </div>
