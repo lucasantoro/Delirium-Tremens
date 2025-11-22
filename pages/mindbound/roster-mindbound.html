@@ -4,24 +4,200 @@
 <meta charset="UTF-8">
 <title>MindBound – Roster</title>
 <link rel="stylesheet" href="../../css/style.css">
+
+<style>
+/* --- BASE SITE --- */
+body {
+  background: #0b0b0b;
+  color: #ccc;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 10px;
+}
+header nav ul {
+  display: flex;
+  gap: 25px;
+  list-style: none;
+  padding: 0;
+}
+header nav a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.05rem;
+  transition: 0.3s;
+}
+header nav a:hover,
+header nav a.active {
+  color: #ff5050;
+  text-shadow: 0 0 8px #ff5050;
+}
+
+/* SUBNAV */
+.subnav {
+  background: rgba(20,20,20,0.8);
+  padding: 12px 0;
+  backdrop-filter: blur(4px);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.subnav ul {
+  list-style: none;
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  padding: 0;
+}
+.subnav a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.subnav a:hover,
+.subnav a.active {
+  color: #7ea8ff;
+  text-shadow: 0 0 8px #7ea8ff;
+}
+
+/* BACKGROUND LOGO */
+.bg-container {
+  position: relative;
+  background: url('../../img/mindbound_logo.png') center/cover no-repeat;
+  padding: 60px 0 80px;
+}
+.bg-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  backdrop-filter: blur(2px);
+}
+.bg-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* TITLE */
+.page-title {
+  text-align: center;
+  font-size: 2.3rem;
+  color: #fff;
+  margin: 20px 0 30px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp .9s forwards;
+}
+
+/* GRID ROSTER */
+.roster-grid {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 25px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 35px;
+  margin-top: 30px;
+}
+
+/* MEMBER CARD */
+.member-card {
+  background: rgba(20,20,20,0.8);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 22px;
+  border-radius: 14px;
+  color: #eee;
+  backdrop-filter: blur(4px);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.96);
+  animation: fadeZoom 0.8s forwards;
+  box-shadow: 0 0 18px rgba(120,120,255,0.35);
+}
+
+/* Sheen effect */
+.member-card::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: -100%;
+  width: 50%;
+  height: 300%;
+  background: linear-gradient(
+    120deg,
+    rgba(255,255,255,0) 0%,
+    rgba(120,120,255,0.22) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  transform: rotate(25deg);
+  transition: 0.8s;
+}
+.member-card:hover::before {
+  top: -40%;
+  left: 130%;
+}
+
+/* Hover effects */
+.member-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(120,120,255,0.45);
+  box-shadow: 0 0 25px rgba(120,120,255,0.55);
+}
+
+/* TEXT INSIDE CARD */
+.member-card h3 {
+  color: #fff;
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+.member-card p {
+  line-height: 1.45;
+  margin: 6px 0;
+}
+
+@keyframes fadeZoom {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 45px 0;
+  color: #777;
+  margin-top: 60px;
+}
+</style>
 </head>
 
-<body class="page-transition mindbound-bg">
+<body class="page-transition">
 
 <header>
-<h1>MindBound</h1>
-<nav>
-  <ul>
-    <li><a href="../../index.html">Home</a></li>
-    <li><a href="../raider.html">Raider</a></li>
-    <li><a href="../hollowsoul.html">Hollow Soul</a></li>
-    <li><a href="../recruiting.html">Reclutamento</a></li>
-    <li><a href="../statuto.html">Statuto</a></li>
-  </ul>
-</nav>
+  <nav>
+    <ul>
+      <li><a href="../../index.html">Home</a></li>
+      <li><a href="../raider.html">Raider</a></li>
+      <li><a href="../hollowsoul.html">Hollow Soul</a></li>
+      <li><a href="../recruiting.html">Reclutamento</a></li>
+      <li><a href="../statuto.html">Statuto</a></li>
+    </ul>
+  </nav>
 </header>
 
-<!-- SUBNAV -->
 <nav class="subnav">
   <ul>
     <li><a href="../mindbound/mindbound.html">Home Team</a></li>
@@ -31,14 +207,17 @@
   </ul>
 </nav>
 
-<main class="panel">
-<!-- <h2>Roster MindBound</h2> -->
+<div class="bg-container">
+  <main class="panel">
 
-<div class="roster-grid" id="roster-container">
-  <!-- qui verranno caricati i membri -->
+    <h2 class="page-title">Roster MindBound</h2>
+
+    <div class="roster-grid" id="roster-container">
+      <!-- caricamento membri -->
+    </div>
+
+  </main>
 </div>
-
-</main>
 
 <footer>
 <p>&copy; 2025 Delirium Tremens</p>
@@ -58,16 +237,17 @@ const container = document.getElementById("roster-container");
 
 members.forEach(file => {
   fetch(`../../members/${file}`)
-    .then(response => response.text())
+    .then(res => res.text())
     .then(html => {
-      container.innerHTML += html;
+      // Wrap dei membri per aggiungere classi
+      container.innerHTML += `<div class="member-card">${html}</div>`;
     });
 });
 </script>
 
-<!-- SCRIPT TRANSIZIONE PAGINA -->
+<!-- PAGE TRANSITION -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("page-loaded");
 });
 
@@ -82,7 +262,6 @@ document.querySelectorAll("a").forEach(link => {
   }
 });
 </script>
-
 
 </body>
 </html>
