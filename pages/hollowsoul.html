@@ -5,239 +5,6 @@
 <title>Delirium Tremens – Hollow Soul</title>
 <link rel="stylesheet" href="../css/style.css">
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
-<style>
-  /* BASE */
-  body {
-    background: #0b0b0b;
-    color: #ccc;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-  }
-
-  /* HEADER COERENTE CON IL SITO */
-  header {
-    display: flex;
-    justify-content: center;
-    padding: 20px 0 10px;
-  }
-  .mainnav ul {
-    list-style: none;
-    display: flex;
-    gap: 25px;
-    padding: 0;
-    margin: 0;
-  }
-  .mainnav a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.05rem;
-    transition: .3s;
-  }
-  .mainnav a:hover,
-  .mainnav a.active {
-    color: #ff5050;
-    text-shadow: 0 0 8px #ff5050;
-  }
-
-  /* HERO SENZA BACKGROUND (STILE HOME) */
-  .hero {
-    padding: 80px 20px 50px;
-    background: none;
-    height: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  .hero h2 {
-    font-size: 3rem;
-    color: #fff;
-    margin-bottom: 12px;
-    opacity: 0;
-    transform: translateY(25px);
-    animation: fadeUp .9s ease forwards;
-  }
-  .hero p {
-    font-size: 1.3rem;
-    opacity: 0;
-    max-width: 720px;
-    margin: 0 auto;
-    transform: translateY(20px);
-    animation: fadeUp 1.3s ease forwards;
-  }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* SFONDO UNICO CON LOGO (COME HOME) */
-  .bg-container {
-    position: relative;
-    background: url('../img/logo.png') center/cover no-repeat;
-    padding: 60px 0 80px;
-  }
-  .bg-container::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(2px);
-  }
-  .bg-container > * {
-    position: relative;
-    z-index: 2;
-  }
-
-  main.panel {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-
-  h2.section-title {
-    text-align: center;
-    color: #fff;
-    font-size: 2rem;
-    margin: 20px 0 10px;
-  }
-  p.section-subtitle {
-    text-align: center;
-    max-width: 800px;
-    margin: 0 auto 25px;
-    color: #ddd;
-    font-size: 1rem;
-  }
-
-  .description-long {
-    max-width: 900px;
-    margin: 25px auto;
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: #ddd;
-  }
-
-  /* GRID CARDS (RIUSO STILE HOME) */
-  .grid-cards {
-    display: grid;
-    gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    margin: 40px auto;
-    width: 90%;
-  }
-  .card {
-    background: rgba(20,20,20,0.8);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 25px;
-    border-radius: 12px;
-    color: #ddd;
-    backdrop-filter: blur(4px);
-    opacity: 0;
-    transform: scale(0.96);
-    animation: fadeZoom 0.8s ease forwards;
-    position: relative;
-    overflow: hidden;
-    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-  }
-  .card::before {
-    content: "";
-    position: absolute;
-    top: -100%;
-    left: -100%;
-    width: 50%;
-    height: 300%;
-    background: linear-gradient(
-      120deg,
-      rgba(120,120,255,0) 0%,
-      rgba(120,120,255,0.25) 50%,
-      rgba(120,120,255,0) 100%
-    );
-    transform: rotate(25deg);
-    transition: .8s;
-  }
-  .card:hover::before {
-    top: -50%;
-    left: 120%;
-  }
-  .card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 0 22px rgba(120,120,255,0.35);
-    border-color: rgba(120,120,255,0.45);
-  }
-
-  @keyframes fadeZoom {
-    to { opacity:1; transform:scale(1);}
-  }
-
-  .card h3 {
-    font-size: 1.4rem;
-    margin-bottom: 10px;
-    color: #fff;
-  }
-
-  .team-btn {
-    display: inline-block;
-    margin-top: 18px;
-    padding: 10px 18px;
-    border: 1px solid #fff;
-    border-radius: 8px;
-    color: #fff;
-    text-decoration: none;
-    transition: .3s;
-    font-size: 0.95rem;
-  }
-  .team-btn:hover {
-    background: #fff;
-    color: #000;
-  }
-
-  /* STATISTICHE RAIDER.IO */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
-    margin: 30px auto 10px;
-    width: 90%;
-  }
-  .stat-card {
-    background: rgba(15,15,25,0.9);
-    border-radius: 14px;
-    padding: 20px 22px;
-    border: 1px solid rgba(180,180,255,0.25);
-    box-shadow: 0 0 20px rgba(120,120,255,0.4);
-    backdrop-filter: blur(5px);
-  }
-  .stat-label {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: #aeb4ff;
-    margin-bottom: 6px;
-  }
-  .stat-value {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #fff;
-    margin-bottom: 4px;
-  }
-  .stat-hint {
-    font-size: 0.9rem;
-    color: #ccc;
-  }
-  .stats-note {
-    text-align: center;
-    font-size: 0.85rem;
-    color: #aaa;
-    margin-top: 10px;
-  }
-
-  footer {
-    text-align: center;
-    padding: 40px 0;
-    color: #777;
-  }
-</style>
 </head>
 
 <body class="page-transition">
@@ -254,7 +21,7 @@
   </nav>
 </header>
 
-<!-- HERO INTRO COMMUNITY -->
+<!-- HERO -->
 <section class="hero">
   <div class="hero-content">
     <h2>Hollow Soul</h2>
@@ -265,102 +32,88 @@
   </div>
 </section>
 
-<div class="bg-container">
+<!-- BACKGROUND CON LOGO -->
+<div class="bg-container bg-main-logo">
   <main class="panel">
 
-    <!-- SEZIONE: LA NOSTRA COMMUNITY -->
+    <!-- COMMUNITY -->
     <h2 class="section-title">La nostra Community</h2>
     <p class="section-subtitle">
-      Gli Hollow Soul sono la parte pi&ugrave; libera, creativa e rumorosa della gilda:
+      Gli Hollow Soul sono la parte più libera, creativa e rumorosa della gilda:
       qui non contano solo i numeri, ma le persone, le risate e il senso di appartenenza.
     </p>
 
     <p class="description-long">
-      Gli <strong>Hollow Soul</strong> rappresentano l’anima sociale e quotidiana dei Delirium Tremens.
-      Sono i giocatori che, al di là del progress, tengono viva la community: chiacchiere su Discord,
-      gruppi per Mythic+, alt run, serate chill, PvP improvvisato, meme, aiuti ai nuovi arrivati
-      e tutta quella parte di gioco che trasforma una gilda in una vera <strong>big family</strong>.
-      <br><br>
-      Senza gli Hollow Soul, la gilda non avrebbe atmosfera, ritmo, né quella sensazione di “entrare in casa”
-      quando logghi. Sono le persone che salutano, che creano gruppi, che ti scrivono
-      <em>“vieni in voc?”</em> anche solo per fare due chiacchiere.
+      Gli <strong>Hollow Soul</strong> rappresentano l’anima sociale quotidiana della gilda.
+      Sono i giocatori che tengono viva la community: chiacchiere, Mythic+, alt run, serate chill,
+      PvP improvvisato, meme e supporto ai nuovi arrivati — tutto ciò che trasforma una gilda in
+      una <strong>big family</strong>.
     </p>
 
-    <!-- CARD: COSA SI FA NEGLI HOLLOW SOUL -->
+    <!-- COSA FACCIAMO -->
     <section>
       <h2 class="section-title">Cosa facciamo</h2>
       <p class="section-subtitle">
-        Non solo progress: gli Hollow Soul sono il luogo perfetto per vivere WoW in modo rilassato,
-        sociale e divertente, senza perdere la voglia di migliorarsi.
+        Non solo progress raid: gli Hollow Soul vivono WoW in modo rilassato, sociale e divertente.
       </p>
 
       <div class="grid-cards">
         <div class="card">
           <h3>Mythic+ in compagnia</h3>
           <p>
-            Gruppi costanti, atmosfera serena e zero pressione tossica.
-            L’obiettivo è divertirsi, migliorare il proprio personaggio e avere sempre qualcuno
-            con cui fare chiavi – senza mai sentirsi soli.
+            Gruppi costanti, atmosfera serena e zero tossicità.
+            Perfetto per migliorare senza pressioni.
           </p>
         </div>
 
         <div class="card">
-          <h3>Alt, livellamento & collezionismo</h3>
+          <h3>Alt, collezionismo & vecchi contenuti</h3>
           <p>
-            Mount, transmog, alt, vecchi raid, achievement run: se ti piace “girare il mondo”
-            più che stare sempre nello stesso raid, qui trovi sempre qualcuno che ha voglia
-            di fare qualcosa di diverso.
+            Mount, transmog, achievement e vecchi raid.
+            Sempre qualcuno online con cui condividere un obiettivo.
           </p>
         </div>
 
         <div class="card">
           <h3>Community & serate social</h3>
           <p>
-            Serate chill in vocale, eventi interni, mini-giochi, serate “scemi su Discord”.
-            Gli Hollow Soul sono il motore di tutto ciò che rende la gilda un posto in cui rimanere,
-            non solo un posto da joinare.
+            Serate chill, giochi interni, eventi, nottate su Discord.
+            Gli Hollow Soul sono il cuore pulsante della gilda.
           </p>
           <a href="recruiting.html" class="team-btn">Unisciti agli Hollow Soul</a>
         </div>
       </div>
     </section>
 
-    <!-- STATISTICHE DA RAIDER.IO (via WORKER) -->
+    <!-- STATISTICHE WORKER -->
     <section>
       <h2 class="section-title">Numeri della nostra community</h2>
       <p class="section-subtitle">
-        Alcune statistiche della gilda ottenute da Raider.IO: una foto veloce di quanto &egrave;
-        viva e attiva la nostra community.
+        Panoramica rapida basata sui dati disponibili su Raider.IO.
       </p>
 
       <div class="stats-grid">
         <div class="stat-card">
           <div class="stat-label">Personaggi in gilda</div>
           <div class="stat-value" id="stat-characters">–</div>
-          <div class="stat-hint">
-            Totale dei personaggi presenti nel roster su Raider.IO.
-          </div>
+          <div class="stat-hint">Totale dei personaggi presenti nel roster.</div>
         </div>
 
         <div class="stat-card">
           <div class="stat-label">Giocatori attivi (30 giorni)</div>
           <div class="stat-value" id="stat-active">–</div>
-          <div class="stat-hint">
-            Giocatori con attivit&agrave; recente registrata negli ultimi 30 giorni.
-          </div>
+          <div class="stat-hint">Giocatori unici con attività recente.</div>
         </div>
 
         <div class="stat-card">
           <div class="stat-label">Punteggio medio M+ (Top 10)</div>
           <div class="stat-value" id="stat-avg-score">–</div>
-          <div class="stat-hint">
-            Media del punteggio Mythic+ dei 10 personaggi pi&ugrave; attivi in gilda.
-          </div>
+          <div class="stat-hint">Media del punteggio Mythic+ dei top 10.</div>
         </div>
       </div>
 
       <p class="stats-note" id="stats-note">
-        Dati indicativi, aggiornati in base alle informazioni disponibili su Raider.IO.
+        Dati aggiornati tramite Worker.
       </p>
     </section>
 
@@ -371,25 +124,24 @@
   <p>&copy; 2025 Delirium Tremens</p>
 </footer>
 
-<!-- SCRIPT TRANSIZIONE PAGINA -->
+<!-- TRANSIZIONE PAGINE -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("page-loaded");
 });
-
-document.querySelectorAll("a").forEach(link => {
-  if (link.hostname === window.location.hostname) {
-    link.addEventListener("click", function (e) {
+document.querySelectorAll("a").forEach(a => {
+  if (a.hostname === location.hostname) {
+    a.addEventListener("click", e => {
       e.preventDefault();
-      const href = this.getAttribute("href");
+      const href = a.getAttribute("href");
       document.body.classList.remove("page-loaded");
-      setTimeout(() => { window.location.href = href; }, 300);
+      setTimeout(() => { window.location = href; }, 300);
     });
   }
 });
 </script>
 
-<!-- STATS RAIDER.IO via WORKER -->
+<!-- WORKER STATS -->
 <script>
 async function loadHollowSoulStats() {
   const elChars  = document.getElementById("stat-characters");
@@ -406,10 +158,10 @@ async function loadHollowSoulStats() {
     elAvg.textContent    = data.avgScoreTop10 ?? "–";
 
     note.textContent =
-      "Statistiche ottenute da Raider.IO via Worker, basate su giocatori unici (deduplicati).";
+      "Statistiche aggiornate via Worker, basate su giocatori unici (deduplicati).";
 
-  } catch (err) {
-    console.error("Errore caricando stats Hollow Soul:", err);
+  } catch (e) {
+    console.error("Errore stats:", e);
     elChars.textContent = elActive.textContent = elAvg.textContent = "–";
     note.textContent = "Impossibile caricare le statistiche al momento.";
   }
