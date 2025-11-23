@@ -1,229 +1,11 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<title>Delirium Tremens – Raider</title>
-<link rel="stylesheet" href="../css/style.css">
-
-<style>
-
-/* ————————————————————————
-   BASE & RESET
-———————————————————————— */
-body {
-  background: #0b0b0b;
-  color: #ccc;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-/* ————————————————————————
-   HEADER (identico Home)
-———————————————————————— */
-header {
-  display: flex;
-  justify-content: center;
-  padding: 20px 0 10px;
-}
-.mainnav ul {
-  list-style: none;
-  display: flex;
-  gap: 25px;
-  padding: 0;
-  margin: 0;
-}
-.mainnav a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.05rem;
-  transition: .3s;
-}
-.mainnav a:hover,
-.mainnav a.active {
-  color: #ff5050;
-  text-shadow: 0 0 8px #ff5050;
-}
-
-/* ————————————————————————
-   HERO (uguale Home)
-———————————————————————— */
-.hero {
-  padding: 80px 20px;
-  background: none;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.hero h2 {
-  font-size: 3rem;
-  color: #e2b6ff;
-  margin-bottom: 12px;
-  opacity: 0;
-  transform: translateY(25px);
-  animation: fadeUp .9s ease forwards;
-}
-.hero p {
-  font-size: 1.3rem;
-  opacity: 0;
-  max-width: 720px;
-  margin: 0 auto;
-  transform: translateY(20px);
-  animation: fadeUp 1.3s ease forwards;
-}
-
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ————————————————————————
-   BACKGROUND UNICO (identico Home)
-———————————————————————— */
-.bg-container {
-  position: relative;
-  background: url('../img/logo.png') center/cover no-repeat;
-  padding: 60px 0 80px;
-}
-.bg-container::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(2px);
-}
-.bg-container > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* ————————————————————————
-   CONTENUTO
-———————————————————————— */
-.description-long {
-  max-width: 900px;
-  margin: 25px auto;
-  font-size: 1.1rem;
-  line-height: 1.55;
-  color: #ddd;
-  text-align: center;
-}
-
-/* ————————————————————————
-   CARD RAID TEAM (uguali Home)
-———————————————————————— */
-.raid-teams {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 40px;
-  margin-top: 50px;
-}
-
-.team-card {
-  width: 420px;
-  padding: 30px;
-  border-radius: 14px;
-  background: rgba(15,15,15,0.75);
-  border: 1px solid rgba(255,255,255,0.12);
-  color: #eee;
-  backdrop-filter: blur(4px);
-  opacity: 0;
-  position: relative;
-  overflow: hidden;
-  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-}
-
-/* Animazioni */
-.team-card.abyss   { animation: slideLeft .8s ease forwards; }
-.team-card.mindbound { animation: slideRight .8s ease forwards; }
-
-@keyframes slideLeft {
-  from { opacity:0; transform:translateX(-25px); }
-  to   { opacity:1; transform:translateX(0); }
-}
-@keyframes slideRight {
-  from { opacity:0; transform:translateX(25px); }
-  to   { opacity:1; transform:translateX(0); }
-}
-
-/* Sheen effect */
-.team-card::before {
-  content: "";
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 50%;
-  height: 300%;
-  background: linear-gradient(
-    120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,0.15) 50%,
-    rgba(255,255,255,0) 100%
-  );
-  transform: rotate(25deg);
-  transition: .8s;
-}
-.team-card:hover::before {
-  top: -50%;
-  left: 120%;
-}
-
-/* Hover glow */
-.team-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(255,255,255,0.35);
-}
-.mindbound:hover {
-  box-shadow: 0 0 25px rgba(120,120,255,0.55);
-}
-.abyss:hover {
-  box-shadow: 0 0 25px rgba(255,80,80,0.55);
-}
-
-/* Identità colore */
-.mindbound { box-shadow: 0 0 15px rgba(120,120,255,0.35); }
-.abyss     { box-shadow: 0 0 15px rgba(255,80,80,0.35); }
-
-.team-card h3 {
-  font-size: 1.8rem;
-  margin-bottom: 12px;
-  color: #fff;
-}
-.team-card p {
-  line-height: 1.5;
-}
-
-/* Bottoni identici alla home */
-.team-btn {
-  display: inline-block;
-  margin-top: 18px;
-  padding: 10px 18px;
-  border: 1px solid #fff;
-  border-radius: 8px;
-  color: #fff;
-  transition: .3s;
-}
-.team-btn:hover {
-  background: #fff;
-  color: #000;
-}
-
-/* ————————————————————————
-   FOOTER
-———————————————————————— */
-footer {
-  text-align: center;
-  padding: 40px 0;
-  color: #777;
-  margin-top: 60px;
-}
-
-</style>
+  <meta charset="UTF-8">
+  <title>Delirium Tremens – Raider</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
-
-
 
 <body class="page-transition">
 
@@ -239,44 +21,41 @@ footer {
   </nav>
 </header>
 
-<!-- HERO (come Home) -->
+<!-- HERO (coerente con tutto il sito) -->
 <section class="hero">
   <div class="hero-content">
     <h2>I Raider dei Delirium Tremens</h2>
     <p>
-      Due team, una sola identità: affrontare l’endgame con disciplina, serenità e voglia di migliorare insieme.
+      Due team, una sola identità: disciplina, serenità e crescita costante.
     </p>
   </div>
 </section>
 
-<!-- SFONDO UNICO -->
-<div class="bg-container">
-
+<!-- SFONDO CON LOGO PRINCIPALE -->
+<div class="bg-container bg-main-logo">
   <main class="panel">
 
-    <h2 style="text-align:center; color:#fff;">Chi sono i Raider</h2>
+    <h2 class="section-title">Chi sono i Raider</h2>
 
     <p class="description-long">
-      I Raider dei Delirium Tremens sono giocatori organizzati, affidabili e motivati,
-      uniti dalla voglia di affrontare insieme le sfide del raid con rispetto,
-      costanza e spirito di squadra.
+      I Raider dei Delirium Tremens sono giocatori affidabili, motivati e rispettosi,
+      uniti dalla volontà di affrontare il raid con organizzazione, responsabilità e spirito di squadra.
     </p>
 
     <p class="description-long">
       La nostra struttura si basa su due team distinti ma complementari:
       <strong>Abyss Chosen</strong> e <strong>MindBound</strong>.
-      Ognuno segue gli stessi valori e affronta gli stessi contenuti,
-      con ritmi e approcci diversi per adattarsi alle esigenze dei giocatori.
+      Stessi valori, stessi obiettivi, due modi diversi di affrontare il raid.
     </p>
 
-    <!-- CARD TEAM -->
+    <!-- CARD RAID TEAMS -->
     <div class="raid-teams">
 
       <div class="team-card abyss">
         <h3>Abyss Chosen</h3>
         <p>
-          Il gruppo più rapido e metodico: affronta gli stessi contenuti degli
-          MindBound ma con un ritmo più serrato e un focus sulla massimizzazione del tempo.
+          Il gruppo più rapido e metodico, con un ritmo serrato e grande attenzione al dettaglio.
+          Ideale per chi vuole ottimizzare e spingere al massimo il progress.
         </p>
         <a href="../pages/abyss-chosen/abyss-chosen.html" class="team-btn">Scopri il team</a>
       </div>
@@ -284,9 +63,8 @@ footer {
       <div class="team-card mindbound">
         <h3>MindBound</h3>
         <p>
-          Un ambiente disteso, sereno e orientato alla crescita personale.
-          Perfetto per chi vuole affrontare l’endgame ad alto livello
-          ma con un ritmo più flessibile.
+          Ambiente sereno e flessibile, orientato alla crescita del singolo e del gruppo.
+          Perfetto per chi vuole affrontare l’endgame ad alto livello senza pressioni eccessive.
         </p>
         <a href="../pages/mindbound/mindbound.html" class="team-btn">Scopri il team</a>
       </div>
@@ -294,14 +72,11 @@ footer {
     </div>
 
   </main>
-
-</div><!-- bg-container -->
+</div>
 
 <footer>
-  <p>&copy; 2025 Delirium Tremens</p>
+  <p>&copy; 2025 Delirium Tremens – Sito ufficiale</p>
 </footer>
-
-
 
 <!-- TRANSIZIONE PAGINE -->
 <script>
