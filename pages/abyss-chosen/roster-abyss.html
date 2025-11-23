@@ -151,26 +151,69 @@ members.forEach(file => {
   fetch(`../../members/${file}`)
     .then(res => res.text())
     .then(html => {
+      // metto l'html in un DOM virtuale
+      const temp = document.createElement("div");
+      temp.innerHTML = html;
 
-      // ESTRAZIONE METADATI
-      const className = html.match(/data-class="([^"]+)"/)?.[1] ?? null;
-      const roleName  = html.match(/data-role="([^"]+)"/)?.[1]?.toUpperCase() ?? null;
-      const rioURL    = html.match(/data-rio="([^"]+)"/)?.[1] ?? null;
+      const memberDiv = temp.querySelector(".member");
+      const metaDiv   = temp.querySelector("div[data-rio]");
 
-      container.innerHTML += `
-        <div class="member-card">
+      if (!memberDiv) return;
 
-          <div class="member-header">
-            ${className ? `<img class="class-icon" src="${classIcon(className)}">` : ""}
-            <div>
-              ${html}
-              ${roleName ? `<span class="role-badge ${roleMap[roleName]}">${roleName}</span>` : ""}
-            </div>
-          </div>
+      // --- Estrazione dati Role / Class / Raider.IO ---
+      let rioUrl   = null;
+      let role     = null;
+      let wowClass = null;
 
-          ${rioURL ? `<a href="${rioURL}" target="_blank" class="rio-btn">Profilo Raider.IO</a>` : ""}
-        </div>`;
-    });
+      if (metaDiv) {
+        metaDiv.style.display = "none"; // 🔥 lo nascondiamo del tutto
+
+        rioUrl = metaDiv.getAttribute("data-rio") || null;
+
+        const roleMatch  = metaDiv.innerHTML.match(/Role:\s*([^<]+)/i);
+        const classMatch = metaDiv.innerHTML.match(/Class:\s*([^<]+)/i);
+
+        role     = roleMatch  ? roleMatch[1].trim()  : null;
+        wowClass = classMatch ? classMatch[1].trim() : null;
+      }
+
+      // --- Badge e icona ---
+      const roleKey = role ? role.toLowerCase() : null;
+      const roleCss = roleKey && roleClasses[roleKey] ? roleClasses[roleKey] : "";
+      const iconUrl = wowClass
+        ? `../../img/classes/${wowClass.toLowerCase().replace(/\s+/g, "")}.png`
+        : null;
+
+      // --- Costruzione sezione meta ---
+      let metaHTML = `<div class="member-meta">`;
+
+      if (iconUrl || role) {
+        metaHTML += `<div class="member-meta-top">`;
+
+        if (iconUrl) {
+          metaHTML += `<img src="${iconUrl}" alt="${wowClass}" class="class-icon">`;
+        }
+
+        if (role) {
+          metaHTML += `<span class="role-badge ${roleCss}">${role}</span>`;
+        }
+
+        metaHTML += `</div>`;
+      }
+
+      if (rioUrl) {
+        metaHTML += `<a href="${rioUrl}" target="_blank" class="rio-btn">Profilo Raider.IO</a>`;
+      }
+
+      metaHTML += `</div>`;
+
+      // Appendo la sezione meta alla card
+      memberDiv.insertAdjacentHTML("beforeend", metaHTML);
+
+      // Aggiungo la card al roster
+      container.appendChild(memberDiv);
+    })
+    .catch(err => console.error("Errore caricando membro:", file, err));
 });
 </script>
 
