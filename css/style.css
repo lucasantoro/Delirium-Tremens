@@ -246,7 +246,7 @@ header nav a.active {
 /* Varianti di background: applicare AL DIV insieme a .bg-container:
    <div class="bg-container bg-main-logo"> ... */
 .bg-main-logo {
-  background: url('../img/logo.png') center/cover no-repeat;
+  background: url('img/logo.png') center/cover no-repeat;
 }
 .bg-main-logo-home {
   background: url('../img/logo.png') center/cover no-repeat;  /* per index.html */
