@@ -223,25 +223,27 @@ header nav a.active {
    BACKGROUND UNICO PER CONTENUTI (logo in fade)
    - Usa .bg-container + una classe specifica per il logo
    ========================================================= */
-
 .bg-container {
-  position: relative;
+  position: relative;      /* Fix fondamentale */
   padding: 60px 0 80px;
+  z-index: 0;
 }
 
-/* Overlay scuro per leggere il testo sopra l’immagine */
 .bg-container::after {
   content: "";
   position: absolute;
   inset: 0;
   background: rgba(0,0,0,0.55);
   backdrop-filter: blur(2px);
+  z-index: 1;
 }
 
+/* Tutti i contenuti sopravvissuti devono stare sopra l’overlay */
 .bg-container * {
   position: relative;
   z-index: 2;
 }
+
 
 /* Varianti di background: applicare AL DIV insieme a .bg-container:
    <div class="bg-container bg-main-logo"> ... */
