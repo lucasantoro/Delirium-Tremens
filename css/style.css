@@ -531,6 +531,65 @@ header nav a.active {
   text-align: left;
 }
 
+/* Contenitore meta finale */
+.member-meta {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Icona classe */
+.class-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.3);
+}
+
+/* Badge Ruolo */
+.role-badge {
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+/* Colori ruolo */
+.role-tank { background: #2b6cb0; }
+.role-healer { background: #38a169; }
+.role-dps { background: #e53e3e; }
+
+/* Bottone RaiderIO */
+.rio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 6px;
+  color: #fff;
+  font-size: 0.85rem;
+  text-decoration: none;
+  transition: 0.25s;
+}
+.rio-btn:hover {
+  background: rgba(255,255,255,0.22);
+  transform: translateY(-2px);
+}
+
+/* Logo Raider.IO */
+.rio-logo {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+
 /* =========================================================
    FORM RECLUTAMENTO
    ========================================================= */
