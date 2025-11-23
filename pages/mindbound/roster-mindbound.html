@@ -6,106 +6,22 @@
 <link rel="stylesheet" href="../../css/style.css">
 
 <style>
-/* --- BASE SITE --- */
-body {
-  background: #0b0b0b;
-  color: #ccc;
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-}
-
-/* HEADER */
-header {
-  display: flex;
-  justify-content: center;
-  padding: 20px 0 10px;
-}
-header nav ul {
-  display: flex;
-  gap: 25px;
-  list-style: none;
-  padding: 0;
-}
-header nav a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 1.05rem;
-  transition: 0.3s;
-}
-header nav a:hover,
-header nav a.active {
-  color: #ff5050;
-  text-shadow: 0 0 8px #ff5050;
-}
-
-/* SUBNAV */
-.subnav {
-  background: rgba(20,20,20,0.8);
-  padding: 12px 0;
-  backdrop-filter: blur(4px);
-  border-top: 1px solid rgba(255,255,255,0.12);
-  border-bottom: 1px solid rgba(255,255,255,0.12);
-}
-.subnav ul {
-  list-style: none;
-  display: flex;
-  gap: 40px;
-  justify-content: center;
-  padding: 0;
-}
-.subnav a {
-  color: #fff;
-  text-decoration: none;
-  transition: 0.3s;
-}
-.subnav a:hover,
-.subnav a.active {
-  color: #7ea8ff;
-  text-shadow: 0 0 8px #7ea8ff;
-}
-
-/* BACKGROUND LOGO */
-.bg-container {
-  position: relative;
-  background: url('../../img/mindbound_logo.png') center/cover no-repeat;
-  padding: 60px 0 80px;
-}
-.bg-container::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(2px);
-}
-.bg-container > * {
-  position: relative;
-  z-index: 2;
-}
-
-/* TITLE */
-.page-title {
-  text-align: center;
-  font-size: 2.3rem;
-  color: #fff;
-  margin: 20px 0 30px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp .9s forwards;
-}
-
-/* GRID ROSTER */
+/* =======================================================================
+   ROSTER – LAYOUT 2 COLONNE
+   ======================================================================= */
 .roster-grid {
   max-width: 1100px;
   margin: 0 auto;
   padding: 0 25px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: 35px;
   margin-top: 30px;
 }
 
-/* MEMBER CARD */
+/* =======================================================================
+   CARD MEMBRO
+   ======================================================================= */
 .member-card {
   background: rgba(20,20,20,0.8);
   border: 1px solid rgba(255,255,255,0.12);
@@ -121,70 +37,122 @@ header nav a.active {
   box-shadow: 0 0 18px rgba(120,120,255,0.35);
 }
 
-/* Sheen effect */
-.member-card::before {
-  content: "";
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 50%;
-  height: 300%;
-  background: linear-gradient(
-    120deg,
-    rgba(255,255,255,0) 0%,
-    rgba(120,120,255,0.22) 50%,
-    rgba(255,255,255,0) 100%
-  );
-  transform: rotate(25deg);
-  transition: 0.8s;
-}
-.member-card:hover::before {
-  top: -40%;
-  left: 130%;
-}
-
-/* Hover effects */
 .member-card:hover {
   transform: translateY(-6px);
   border-color: rgba(120,120,255,0.45);
   box-shadow: 0 0 25px rgba(120,120,255,0.55);
 }
 
-/* TEXT INSIDE CARD */
+/* HEADER – solo contenuto membro, nessuna icona */
+.member-header {
+  display: block;
+}
+
+/* =======================================================================
+   TESTO
+   ======================================================================= */
 .member-card h3 {
   color: #fff;
   font-size: 1.4rem;
-  margin-bottom: 10px;
+  margin: 0 0 10px;
 }
+
 .member-card p {
   line-height: 1.45;
   margin: 6px 0;
 }
 
-@keyframes fadeZoom {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* =======================================================================
+   FOOTER A DUE COLONNE
+   ======================================================================= */
+.member-footer {
+  margin-top: 18px;
+  padding-top: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
-/* FOOTER */
-footer {
-  text-align: center;
-  padding: 45px 0;
-  color: #777;
-  margin-top: 60px;
+/* LEFT SIDE */
+.footer-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Icona classe */
+.class-icon-small {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  border: none;
+}
+
+/* Badge ruolo */
+.role-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 999px;
+  font-size: .85rem;
+  font-weight: bold;
+  color: #000;
+}
+
+/* Colori ruolo */
+.role-tank   { background: #3da4ff; }
+.role-healer { background: #5cff9e; }
+.role-dps    { background: #ff5050; }
+
+/* RIGHT SIDE */
+.footer-right {
+  position: relative;
+}
+
+/* RaiderIO button */
+.rio-btn {
+  display: inline-flex;
+  width: 55px;
+  height: 55px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  padding: 6px;
+  transition: .25s;
+  position: relative;
+}
+
+.rio-btn:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.45);
+  transform: translateY(-2px);
+}
+
+.rio-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Tooltip */
+.rio-btn:hover::after {
+  content: "Apri profilo Raider.IO";
+  position: absolute;
+  right: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.85);
+  color: #fff;
+  padding: 6px 10px;
+  font-size: .8rem;
+  white-space: nowrap;
+  border-radius: 6px;
 }
 </style>
+
 </head>
 
-<body class="page-transition">
+<body class="page-transition mindbound-bg">
 
 <header>
   <nav>
@@ -202,7 +170,6 @@ footer {
   <ul>
     <li><a href="../mindbound/mindbound.html">Home Team</a></li>
     <li><a href="../mindbound/roster-mindbound.html" class="active">Roster</a></li>
-    <!-- <li><a href="../mindbound/mindbound-news.html">News</a></li> -->
     <li><a href="../mindbound/mindbound-progress.html">Progress</a></li>
   </ul>
 </nav>
@@ -212,36 +179,76 @@ footer {
 
     <h2 class="page-title">Roster MindBound</h2>
 
-    <div class="roster-grid" id="roster-container">
-      <!-- caricamento membri -->
-    </div>
+    <div class="roster-grid" id="roster-container"></div>
 
   </main>
 </div>
 
 <footer>
-<p>&copy; 2025 Delirium Tremens</p>
+  <p>&copy; 2025 Delirium Tremens</p>
 </footer>
 
+<!-- SCRIPT: COSTRUZIONE CARD DINAMICA -->
 <script>
-// LISTA DEI FILE MEMBRO
+// LISTA DEI MEMBRI MINDBOUND
 const members = [
   "odetta.html",
   "aqualara.html",
+  "gearstrike.html",
   "zepyrot.html",
-  "trolluido.html",
-  "rocoro.html"
+  "trolluido.html"
 ];
+
+// Mappa ruoli
+const roleMap = {
+  "TANK": "role-tank",
+  "HEALER": "role-healer",
+  "DPS": "role-dps"
+};
+
+// Icone classi
+function classIcon(name) {
+  return `../../img/classes/${name.toLowerCase().replace(" ", "")}.png`;
+}
 
 const container = document.getElementById("roster-container");
 
+// Caricamento dinamico
 members.forEach(file => {
   fetch(`../../members/${file}`)
     .then(res => res.text())
     .then(html => {
-      // Wrap dei membri per aggiungere classi
-      container.innerHTML += `<div class="member-card">${html}</div>`;
-    });
+
+      // Metadata
+      const className = html.match(/data-class="([^"]+)"/)?.[1] ?? null;
+      const roleName  = html.match(/data-role="([^"]+)"/)?.[1]?.toUpperCase() ?? null;
+      const rioURL    = html.match(/data-rio="([^"]+)"/)?.[1] ?? null;
+
+      container.innerHTML += `
+        <div class="member-card">
+
+          <div class="member-header">
+            <div>${html}</div>
+          </div>
+
+          <div class="member-footer">
+            <div class="footer-left">
+              ${className ? `<img class="class-icon-small" src="${classIcon(className)}">` : ""}
+              ${roleName ? `<span class="role-badge ${roleMap[roleName]}">${roleName}</span>` : ""}
+            </div>
+
+            <div class="footer-right">
+              ${rioURL ? `
+                <a href="${rioURL}" target="_blank" class="rio-btn">
+                  <img src="../../img/raiderio_logo.png" class="rio-logo">
+                </a>
+              ` : ""}
+            </div>
+          </div>
+
+        </div>`;
+    })
+    .catch(err => console.error("Errore caricando membro:", file, err));
 });
 </script>
 
@@ -249,17 +256,6 @@ members.forEach(file => {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   document.body.classList.add("page-loaded");
-});
-
-document.querySelectorAll("a").forEach(link => {
-  if (link.hostname === window.location.hostname) {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const href = this.getAttribute("href");
-      document.body.classList.remove("page-loaded");
-      setTimeout(() => { window.location.href = href; }, 300);
-    });
-  }
 });
 </script>
 
