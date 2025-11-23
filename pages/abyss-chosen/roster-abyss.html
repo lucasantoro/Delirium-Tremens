@@ -39,18 +39,7 @@
 
 /* HEADER */
 .member-header {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Icona classe grande (nel contenuto iniziale del membro) */
-.class-icon {
-  width: 42px;
-  height: 42px;
-  object-fit: contain;
-  border-radius: 6px;
-  border: none;
+  display: block;
 }
 
 /* Titolo */
@@ -231,7 +220,6 @@ members.forEach(file => {
         <div class="member-card">
 
           <div class="member-header">
-            ${className ? `<img class="class-icon" src="${classIcon(className)}">` : ""}
             <div>${html}</div>
           </div>
 
