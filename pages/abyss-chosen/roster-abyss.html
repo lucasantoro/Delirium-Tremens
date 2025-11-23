@@ -230,6 +230,11 @@ members.forEach(file => {
       container.innerHTML += `
         <div class="member-card">
 
+          <div class="member-header">
+            ${className ? `<img class="class-icon" src="${classIcon(className)}">` : ""}
+            <div>${html}</div>
+          </div>
+
           <div class="member-footer">
             <div class="footer-left">
               ${className ? `<img class="class-icon-small" src="${classIcon(className)}">` : ""}
