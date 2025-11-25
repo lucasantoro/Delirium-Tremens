@@ -5,120 +5,6 @@
   <title>MindBound – Progress</title>
   <link rel="stylesheet" href="../../css/style.css">
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
-
-  <style>
-    /* SFONDO CON LOGO MINDBOUND (usiamo la classe globale) */
-    .bg-container.bg-mindbound-logo {
-      background: url("../../img/mindbound_logo.png") center/cover no-repeat;
-    }
-
-    /* ================================
-       TIMELINE ULTIMA SESSIONE – STILE A
-       ================================ */
-
-    /* Contenitore della timeline (usa già display:flex da style.css) */
-    #last-session-timeline {
-      position: relative;
-      margin-top: 20px;
-      padding-left: 26px; /* spazio per la linea e i pallini */
-    }
-
-    /* Linea verticale */
-    #last-session-timeline::before {
-      content: "";
-      position: absolute;
-      left: 10px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: rgba(255, 255, 255, 0.18);
-    }
-
-    /* Singolo step boss */
-    .timeline-step {
-      position: relative;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-
-    /* Pallino sulla linea */
-    .timeline-dot {
-      width: 14px;
-      height: 14px;
-      border-radius: 50%;
-      border: 2px solid rgba(255, 255, 255, 0.5);
-      background: #151515;
-      margin-top: 3px;
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.6);
-    }
-
-    /* Colori per kill / progress */
-    .timeline-step.kill  .timeline-dot {
-      border-color: #4dff93;
-      background: #102518;
-      box-shadow: 0 0 10px rgba(77, 255, 147, 0.5);
-    }
-    .timeline-step.progress .timeline-dot {
-      border-color: #ffcc66;
-      background: #2a1d0f;
-      box-shadow: 0 0 10px rgba(255, 204, 102, 0.45);
-    }
-
-    /* Box contenuto a destra del pallino */
-    .timeline-content {
-      flex: 1;
-      background: rgba(15, 15, 15, 0.9);
-      border-radius: 10px;
-      padding: 8px 12px;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 0 14px rgba(120, 120, 255, 0.35);
-    }
-
-    .timeline-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 4px;
-    }
-
-    .timeline-boss {
-      font-weight: bold;
-      font-size: 1rem;
-      color: #fff;
-    }
-
-    .timeline-result {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      padding: 3px 8px;
-      border-radius: 999px;
-      font-weight: 600;
-    }
-
-    .timeline-step.kill .timeline-result {
-      background: rgba(77, 255, 147, 0.12);
-      color: #92ffb7;
-      border: 1px solid rgba(77, 255, 147, 0.7);
-    }
-
-    .timeline-step.progress .timeline-result {
-      background: rgba(255, 204, 102, 0.12);
-      color: #ffd588;
-      border: 1px solid rgba(255, 204, 102, 0.7);
-    }
-
-    .timeline-meta {
-      font-size: 0.85rem;
-      color: #ccc;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 2px;
-    }
-  </style>
 </head>
 
 <body class="page-transition">
@@ -135,7 +21,6 @@
   </nav>
 </header>
 
-<!-- SUBNAV MINDBOUND -->
 <nav class="subnav">
   <ul>
     <li><a href="../mindbound/mindbound.html">Home Team</a></li>
@@ -148,77 +33,37 @@
 <div class="bg-container bg-mindbound-logo">
   <main class="panel">
 
-    <!-- PANORAMICA PER DIFFICOLTÀ -->
+    <!-- ============================== -->
     <h2 class="section-title">Panoramica per difficoltà</h2>
     <p class="section-subtitle">
-      Stato del raid per Normal, Heroic e Mythic: quanti boss sono stati sconfitti,
-      quali sono ancora in progress e qual &egrave; stato il miglior pull.
+      Stato del raid in Normal, Heroic e Mythic.
     </p>
 
     <div class="widgets-grid">
-      <!-- NORMAL -->
-      <div class="widget-card">
-        <h3 class="widget-title">Normal</h3>
-        <p class="widget-desc">Progress del team in difficolt&agrave; Normal.</p>
-        <div class="progress-content" id="card-normal">
-          Caricamento...
-        </div>
-      </div>
-
-      <!-- HEROIC -->
-      <div class="widget-card">
-        <h3 class="widget-title">Heroic</h3>
-        <p class="widget-desc">Stato dell'avanzamento in Heroic.</p>
-        <div class="progress-content" id="card-heroic">
-          Caricamento...
-        </div>
-      </div>
-
-      <!-- MYTHIC -->
-      <div class="widget-card">
-        <h3 class="widget-title">Mythic</h3>
-        <p class="widget-desc">La punta del progress del team, in Mythic.</p>
-        <div class="progress-content" id="card-mythic">
-          Caricamento...
-        </div>
-      </div>
+      <div class="widget-card"><h3 class="widget-title">Normal</h3><p class="widget-desc">Avanzamento in Normal</p><div id="card-normal" class="progress-content">Caricamento...</div></div>
+      <div class="widget-card"><h3 class="widget-title">Heroic</h3><p class="widget-desc">Avanzamento in Heroic</p><div id="card-heroic" class="progress-content">Caricamento...</div></div>
+      <div class="widget-card"><h3 class="widget-title">Mythic</h3><p class="widget-desc">Avanzamento in Mythic</p><div id="card-mythic" class="progress-content">Caricamento...</div></div>
     </div>
 
-    <!-- ULTIMA SESSIONE – TIMELINE COMPATTA -->
-    <div class="widget-full">
-      <h2 class="section-title" id="last-session-title">Ultima sessione raid</h2>
-      <p class="section-subtitle">
-        Resoconto completo dei boss affrontati nell’ultima serata MindBound:
-        pull, kill, progress e migliori percentuali.
-      </p>
+    <!-- ============================== -->
+    <section class="widget-full" style="margin-top:40px;">
+      <h2 class="section-title">Live del Raid</h2>
+      <p class="section-subtitle">Guarda la diretta del team MindBound o vedi gli ultimi VOD.</p>
+      <div id="twitch-live-container" style="text-align:center;"></div>
+    </section>
 
-      <div class="session-summary-card" id="last-session-summary">
-        Caricamento dati dell'ultima sessione...
-      </div>
+    <!-- ============================== -->
+    <h2 class="section-title" id="last-session-title">Ultima sessione</h2>
+    <p class="section-subtitle">Riassunto compatto dei boss affrontati.</p>
 
-      <div class="timeline-container" id="last-session-timeline">
-        <!-- Step dei boss generati via JS -->
-      </div>
-    </div>
+    <div id="last-session-summary" class="session-summary-card">Caricamento...</div>
 
-    <!-- LINK LOGS GENERALE -->
-    <div class="widget-full" style="margin-top: 40px;">
-      <h2 class="section-title">Warcraft Logs</h2>
-      <p class="section-subtitle">
-        Per analisi dettagliate dell’ultima serata MindBound puoi aprire direttamente
-        il report completo su Warcraft Logs.
-      </p>
-      <div style="text-align:center; margin-top: 15px;">
-        <a
-          id="last-session-report-link"
-          href="#"
-          target="_blank"
-          class="apply-button"
-          style="display:none;"
-        >
-          Apri il report dell’ultima sessione
-        </a>
-      </div>
+    <div class="pill-timeline" id="pill-timeline"></div>
+
+    <div class="widget-full" style="text-align:center; margin-top:25px;">
+      <a id="last-session-report-link" class="apply-button" style="display:none;" target="_blank">
+        Apri il report completo
+      </a>
     </div>
 
   </main>
@@ -228,185 +73,122 @@
   <p>&copy; 2025 Delirium Tremens</p>
 </footer>
 
-<!-- TRANSIZIONE PAGINE -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  document.body.classList.add("page-loaded");
-});
+document.addEventListener("DOMContentLoaded", () => document.body.classList.add("page-loaded"));
 
-document.querySelectorAll("a").forEach(link => {
-  if (link.hostname === window.location.hostname) {
-    link.addEventListener("click", function (e) {
+document.querySelectorAll("a").forEach(a => {
+  if (a.hostname === location.hostname) {
+    a.addEventListener("click", e => {
       e.preventDefault();
-      const href = this.getAttribute("href");
       document.body.classList.remove("page-loaded");
-      setTimeout(() => { window.location.href = href; }, 300);
+      setTimeout(() => location.href = a.href, 250);
     });
   }
 });
 </script>
 
-<!-- URL WORKERS (MindBound) -->
+<!-- WORKER URL -->
 <script>
   const WORKER_FULL = "https://red-snowflake-a386.lucasantoro2905.workers.dev";
   const WORKER_LAST = "https://wild-mode-1b45.lucasantoro2905.workers.dev";
+
+  const TWITCH_WORKER = "URL_DEL_TUO_WORKER_TWITCH";
+  const TWITCH_CHANNEL = "il_tuo_canale";
 </script>
 
-<!-- LOGICA PROGRESS (CARD + ULTIMA SESSIONE TIMELINE) -->
+<!-- LOGICA PROGRESS + TIMELINE -->
 <script>
-async function loadDifficulty(diff, elementId) {
-  const el = document.getElementById(elementId);
-  if (!el) return;
-
+async function loadDifficulty(diff, id) {
+  const box = document.getElementById(id);
   try {
     const res = await fetch(`${WORKER_FULL}/progress-full?difficulty=${diff}`);
     const data = await res.json();
-
     const bosses = Object.keys(data.bosses || {});
-    const total = bosses.length;
-
     const killed = bosses.filter(b => data.bosses[b].kills > 0);
-    const inProgress = bosses.filter(
-      b => data.bosses[b].kills === 0 &&
-           data.bosses[b].bestPercentage !== null &&
-           data.bosses[b].bestPercentage < 100
-    );
+    const inProg = bosses.filter(b => data.bosses[b].kills === 0 && data.bosses[b].bestPercentage < 100);
 
-    let html = `
-      <div class="progress-line"><strong>Boss sconfitti:</strong> ${killed.length} / ${total}</div>
-      <div class="progress-line"><strong>Boss in progress:</strong> ${inProgress.length}</div>
-    `;
+    const best = inProg.length ? Math.min(...inProg.map(b => data.bosses[b].bestPercentage)) : "–";
 
-    const bestPulls = inProgress.map(b => data.bosses[b].bestPercentage);
-    const bestOverall = bestPulls.length > 0 ? Math.min(...bestPulls) : null;
-    html += `<div class="progress-line"><strong>Miglior pull:</strong> ${bestOverall !== null ? bestOverall + "%" : "–"}</div>`;
-
-    html += `<div class="boss-list">`;
-    killed.forEach(b => {
-      html += `<span class="boss-killed">${b}</span>`;
-    });
-    inProgress.forEach(b => {
-      html += `<span class="boss-progress">${b} (${data.bosses[b].bestPercentage}%)</span>`;
-    });
-    html += `</div>`;
-
-    el.innerHTML = html;
-
-  } catch (err) {
-    console.error("Errore caricamento progress", diff, err);
-    el.textContent = "Errore nel caricamento dei dati.";
-  }
-}
-
-async function fetchLastSession() {
-  const res = await fetch(`${WORKER_LAST}/progress-last`);
-  return res.json();
-}
-
-function formatDuration(ms) {
-  if (!ms || ms <= 0) return "N/D";
-  const h = Math.floor(ms / 3600000);
-  const m = Math.floor((ms % 3600000) / 60000);
-  return `${h > 0 ? h + "h " : ""}${m}m`;
-}
-
-function renderLastSessionTimeline(last) {
-  const timeline = document.getElementById("last-session-timeline");
-  const summary = document.getElementById("last-session-summary");
-
-  const bosses = Object.values(last.bosses || {});
-  if (bosses.length === 0) {
-    summary.innerHTML = "Nessun dato trovato per l'ultimo raid.";
-    timeline.innerHTML = "";
-    return;
-  }
-
-  // Difficulty auto
-  const diffs = new Set();
-  bosses.forEach(b => b.difficultiesSeen?.forEach(d => diffs.add(d)));
-
-  const diffName =
-    diffs.has(5) ? "Mythic" :
-    diffs.has(4) ? "Heroic" :
-    diffs.has(3) ? "Normal" :
-    "N/A";
-
-  const titleEl = document.getElementById("last-session-title");
-  titleEl.textContent = `Ultima sessione raid (${diffName})`;
-
-  // Link al report completo
-  const linkEl = document.getElementById("last-session-report-link");
-  if (linkEl && last.latestReport && last.latestReport.code) {
-    linkEl.href = `https://www.warcraftlogs.com/reports/${last.latestReport.code}`;
-    linkEl.style.display = "inline-block";
-  }
-
-  // SUMMARY
-  const pullsTotal = bosses.reduce((sum, b) => sum + b.pulls, 0);
-  const wipesTotal = bosses.reduce((sum, b) => sum + b.wipes, 0);
-  const killsTotal = bosses.reduce((sum, b) => sum + b.kills, 0);
-
-  const sessionStart = last.latestReport?.startTime || null;
-  const sessionEnd   = last.latestReport?.endTime || null;
-  const durationMs   = (sessionStart && sessionEnd) ? (sessionEnd - sessionStart) : null;
-
-  summary.innerHTML = `
-    <strong>Boss affrontati:</strong> ${bosses.length}<br>
-    <strong>Pull totali:</strong> ${pullsTotal}<br>
-    <strong>Wipe totali:</strong> ${wipesTotal}<br>
-    <strong>Kill totali:</strong> ${killsTotal}<br>
-    <strong>Durata sessione:</strong> ${formatDuration(durationMs)}
-  `;
-
-  // TIMELINE ORDINATA PER NOME BOSS (puoi cambiare in ordine cronologico se hai timestamp)
-  bosses.sort((a, b) => a.bossName.localeCompare(b.bossName));
-
-  timeline.innerHTML = "";
-
-  bosses.forEach(b => {
-    const isKill = b.kills > 0;
-    const bestPct = b.bestPercentage ?? "—";
-
-    const step = document.createElement("div");
-    step.className = "timeline-step " + (isKill ? "kill" : "progress");
-
-    step.innerHTML = `
-      <div class="timeline-dot"></div>
-      <div class="timeline-content">
-        <div class="timeline-row">
-          <span class="timeline-boss">${b.bossName}</span>
-          <span class="timeline-result">
-            ${isKill ? "Kill ✔️" : "Progress"}
-          </span>
-        </div>
-        <div class="timeline-meta">
-          <span><strong>Pulls:</strong> ${b.pulls}</span>
-          <span><strong>Wipe:</strong> ${b.wipes}</span>
-          <span><strong>Best %:</strong> ${bestPct !== "—" ? bestPct + "%" : "—"}</span>
-        </div>
+    box.innerHTML = `
+      <div><strong>Kill:</strong> ${killed.length}/${bosses.length}</div>
+      <div><strong>Progress:</strong> ${inProg.length}</div>
+      <div><strong>Best Pull:</strong> ${best}%</div>
+      <div class="boss-list">
+        ${killed.map(b => `<span class="boss-killed">${b}</span>`).join("")}
+        ${inProg.map(b => `<span class="boss-progress">${b} (${data.bosses[b].bestPercentage}%)</span>`).join("")}
       </div>
     `;
-
-    timeline.appendChild(step);
-  });
+  } catch {
+    box.innerHTML = "Errore nel caricamento.";
+  }
 }
 
-(async () => {
-  // Panoramica per difficoltà
-  loadDifficulty("normal", "card-normal");
-  loadDifficulty("heroic", "card-heroic");
-  loadDifficulty("mythic", "card-mythic");
+async function fetchLast() {
+  const summary = document.getElementById("last-session-summary");
+  const pill = document.getElementById("pill-timeline");
 
-  // Ultima sessione
-  try {
-    const last = await fetchLastSession();
-    console.log("Last session (MindBound):", last);
-    renderLastSessionTimeline(last);
-  } catch (err) {
-    console.error("Errore nel caricamento dell'ultima sessione", err);
-    const summary = document.getElementById("last-session-summary");
-    summary.innerHTML = "Errore nel caricamento dell'ultima sessione.";
+  const res = await fetch(`${WORKER_LAST}/progress-last`);
+  const last = await res.json();
+  const bosses = Object.values(last.bosses || {});
+
+  if (last.latestReport?.code) {
+    const l = document.getElementById("last-session-report-link");
+    l.href = `https://www.warcraftlogs.com/reports/${last.latestReport.code}`;
+    l.style.display = "inline-block";
   }
+
+  const pulls = bosses.reduce((a,b)=>a+b.pulls,0);
+  const wipes = bosses.reduce((a,b)=>a+b.wipes,0);
+  const kills = bosses.reduce((a,b)=>a+b.kills,0);
+
+  summary.innerHTML = `
+    <strong>Boss:</strong> ${bosses.length} —
+    <strong>Pull:</strong> ${pulls} —
+    <strong>Wipe:</strong> ${wipes} —
+    <strong>Kill:</strong> ${kills}
+  `;
+
+  pill.innerHTML = bosses.map(b => `
+    <div class="pill ${b.kills>0 ? "kill" : "progress"}">
+      <div class="pill-title">${b.bossName}</div>
+      <div class="pill-info">${b.kills>0?"Kill ✔️":`Best ${b.bestPercentage}%`}</div>
+    </div>
+  `).join("");
+}
+
+async function loadTwitch() {
+  const c = document.getElementById("twitch-live-container");
+  const r = await fetch(`${TWITCH_WORKER}?channel=${TWITCH_CHANNEL}`);
+  const d = await r.json();
+
+  if (d.isLive) {
+    c.innerHTML = `
+      <div class="twitch-wrapper">
+        <iframe
+          src="https://player.twitch.tv/?channel=${TWITCH_CHANNEL}&parent=lucasantoro.github.io"
+          frameborder="0"
+          allowfullscreen="true"
+          scrolling="no"
+          height="420"
+          width="100%">
+        </iframe>
+      </div>`;
+  } else {
+    c.innerHTML = `
+      <div class="twitch-offline">
+        <h3>Live offline</h3>
+        <p>Guarda i VOD dell'ultima serata!</p>
+        <a href="https://twitch.tv/${TWITCH_CHANNEL}/videos" class="vod-button" target="_blank">Vai ai VOD</a>
+      </div>`;
+  }
+}
+
+(async ()=>{
+  loadDifficulty("normal","card-normal");
+  loadDifficulty("heroic","card-heroic");
+  loadDifficulty("mythic","card-mythic");
+  await fetchLast();
+  await loadTwitch();
 })();
 </script>
 

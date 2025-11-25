@@ -911,6 +911,80 @@ header nav a.active {
   margin-top: 10px;
 }
 
+/* ========= TWITCH ========= */
+.twitch-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(120,120,255,0.4);
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+.twitch-offline {
+  max-width: 650px;
+  margin: 0 auto;
+  padding: 25px 30px;
+  background: rgba(20,20,20,0.85);
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 0 25px rgba(120,120,255,0.35);
+  backdrop-filter: blur(4px);
+  text-align: center;
+}
+
+.vod-button {
+  display:inline-block;
+  padding:12px 24px;
+  border-radius:8px;
+  background:#7a2ec7;
+  color:#fff;
+  text-decoration:none;
+  font-weight:bold;
+  box-shadow:0 0 12px rgba(120,60,255,0.6);
+  transition:.3s;
+}
+
+.vod-button:hover {
+  background:#9a4cff;
+  box-shadow:0 0 18px rgba(160,80,255,0.9);
+}
+
+/* TIMELINE PILL */
+.pill-timeline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.pill {
+  background: rgba(20,20,20,0.85);
+  border-radius: 12px;
+  padding: 12px 18px;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 0 12px rgba(120,120,255,0.2);
+}
+
+.pill.kill {
+  border-color: rgba(80,255,120,0.5);
+  box-shadow: 0 0 15px rgba(80,255,120,0.3);
+}
+
+.pill.progress {
+  border-color: rgba(255,200,80,0.4);
+  box-shadow: 0 0 15px rgba(255,200,80,0.3);
+}
+
+.pill-title {
+  color:#fff; font-weight:bold;
+}
+
+.pill-info {
+  color:#ddd; font-size:.9rem;
+}
+
+
 /* =========================================================
    ANIMAZIONI GLOBALI
    ========================================================= */
