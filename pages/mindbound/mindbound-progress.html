@@ -101,6 +101,157 @@
     @keyframes fadeZoom {
       to { opacity: 1; transform: scale(1); }
     }
+
+    /* ============ LIVE TWITCH ============ */
+    .live-raid-wrapper {
+      margin-top: 25px;
+    }
+    .live-raid-card {
+      background: rgba(15,15,15,0.9);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 16px 18px 18px;
+      box-shadow: 0 0 18px rgba(120,120,255,0.35);
+      backdrop-filter: blur(4px);
+    }
+    .live-player-shell {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    .live-player-shell iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .live-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .live-status-pill .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #999;
+    }
+    .live-status-live {
+      background: rgba(220,20,60,0.15);
+      border-color: rgba(255,80,120,0.8);
+      color: #ff9ea8;
+    }
+    .live-status-live .live-dot {
+      background: #ff3b5c;
+      box-shadow: 0 0 6px rgba(255,0,70,0.9);
+    }
+    .live-status-offline {
+      background: rgba(80,80,80,0.2);
+      color: #ccc;
+    }
+    .live-description {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin: 0 0 4px;
+    }
+
+    /* ============ TOOLTIP DOTS ============ */
+    .dot {
+      position: relative;
+    }
+    .dot::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: 140%;
+      transform: translateX(-50%) translateY(6px);
+      background: rgba(5,5,5,0.95);
+      color: #f5f5f5;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      white-space: pre-line;
+      max-width: 240px;
+      text-align: left;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+      z-index: 20;
+      transition: opacity .15s ease, transform .15s ease;
+    }
+    .dot::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 130%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: rgba(5,5,5,0.95) transparent transparent transparent;
+      opacity: 0;
+      transition: opacity .15s ease;
+      z-index: 19;
+    }
+    .dot:hover::after,
+    .dot:hover::before {
+      opacity: 1;
+    }
+    .dot:hover::after {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ============ ROSTER CARD ============ */
+    .session-roster-card {
+      margin-top: 25px;
+      background: rgba(15,15,15,0.85);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 16px 18px 18px;
+      box-shadow: 0 0 18px rgba(120,120,255,0.25);
+    }
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px 14px;
+      font-size: 0.9rem;
+    }
+    .roster-item-main {
+      font-weight: 600;
+    }
+    .roster-meta {
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+    .roster-role-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: inline-block;
+      margin-left: 4px;
+    }
+    .roster-role-tank {
+      border-color: #4fd1c5;
+    }
+    .roster-role-heal {
+      border-color: #63b3ed;
+    }
+    .roster-role-dps {
+      border-color: #f6ad55;
+    }
   </style>
 </head>
 
@@ -166,6 +317,23 @@
         Passa col mouse sui pallini per vedere i dettagli.
       </p>
 
+      <!-- LIVE TWITCH -->
+      <div id="live-raid-wrapper" class="live-raid-wrapper">
+        <div class="live-raid-card" id="live-raid-card">
+          <div class="live-status-pill live-status-offline" id="live-status-pill">
+            <span class="live-dot"></span> Offline
+          </div>
+          <h3 class="widget-title">Diretta raid – Twitch</h3>
+          <p class="live-description" id="live-description">
+            La diretta verrà mostrata qui quando il canale sarà online.
+          </p>
+          <div class="live-player-shell" id="live-player-shell">
+            <!-- iframe Twitch verrà inserito via JS -->
+          </div>
+        </div>
+      </div>
+      <!-- /LIVE TWITCH -->
+
       <div class="session-summary-card" id="last-session-summary">
         Caricamento…
       </div>
@@ -181,6 +349,16 @@
           Apri il report dell’ultima sessione
         </a>
       </div>
+
+      <!-- ROSTER DALL'ULTIMO REPORT -->
+      <div class="session-roster-card" id="live-roster-card">
+        <h3 class="widget-title">Roster attuale</h3>
+        <p class="section-subtitle" style="margin-bottom:10px;">
+          Giocatori presenti nell’ultima sessione registrata su Warcraft Logs.
+        </p>
+        <div id="live-roster">Caricamento roster…</div>
+      </div>
+
     </div>
 
   </main>
@@ -201,6 +379,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <script>
   const WORKER_FULL = "https://red-snowflake-a386.lucasantoro2905.workers.dev";
   const WORKER_LAST = "https://wild-mode-1b45.lucasantoro2905.workers.dev";
+
+  /* LIVE TWITCH */
+  const TWITCH_CHANNEL = "londe83";
+  const WORKER_TWITCH = "https://twitch-live.lucasantoro2905.workers.dev"; // cambia se usi un altro URL
 </script>
 
 <!-- PROGRESS LOGIC -->
@@ -241,6 +423,104 @@ async function loadDifficulty(diff, id) {
 async function fetchLastSession() {
   const res = await fetch(`${WORKER_LAST}/progress-last`);
   return res.json();
+}
+
+/* ========= LIVE TWITCH ========= */
+async function fetchTwitchLive() {
+  const url = `${WORKER_TWITCH}/twitch-live?channel=${encodeURIComponent(TWITCH_CHANNEL)}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error("Errore worker Twitch");
+  return res.json();
+}
+
+function renderTwitchLive(liveData) {
+  const pill = document.getElementById("live-status-pill");
+  const descr = document.getElementById("live-description");
+  const shell = document.getElementById("live-player-shell");
+  if (!pill || !descr || !shell) return;
+
+  if (!liveData || !liveData.live) {
+    pill.classList.remove("live-status-live");
+    pill.classList.add("live-status-offline");
+    pill.innerHTML = '<span class="live-dot"></span> Offline';
+    descr.textContent = "Il canale Twitch è attualmente offline. La prossima diretta raid verrà mostrata qui appena saremo live.";
+    shell.innerHTML = "";
+    return;
+  }
+
+  pill.classList.remove("live-status-offline");
+  pill.classList.add("live-status-live");
+  pill.innerHTML = '<span class="live-dot"></span> Live ora';
+
+  const title = liveData.title || "Diretta raid MindBound";
+  const game = liveData.game_name;
+  const viewers = liveData.viewer_count;
+
+  let descText = title;
+  if (game) descText += ` • Giocando: ${game}`;
+  if (viewers != null) descText += ` • Viewers: ${viewers}`;
+  descr.textContent = descText;
+
+  const parent = window.location.hostname;
+  const embedUrl =
+    `https://player.twitch.tv/?channel=${encodeURIComponent(TWITCH_CHANNEL)}&parent=${encodeURIComponent(parent)}`;
+
+  shell.innerHTML = `
+    <iframe
+      src="${embedUrl}"
+      allowfullscreen="true"
+      scrolling="no"
+      allow="autoplay; fullscreen">
+    </iframe>
+  `;
+}
+
+/* ========= ROSTER ========= */
+function renderRoster(last) {
+  const container = document.getElementById("live-roster");
+  if (!container) return;
+
+  const roster = last.roster || [];
+  if (!roster.length) {
+    container.textContent = "Roster non disponibile dal worker. Assicurati che il worker progress-last esponga il campo 'roster'.";
+    return;
+  }
+
+  const roleOrder = { tank: 0, healer: 1, heal: 1, dps: 2 };
+  const sorted = roster.slice().sort((a, b) => {
+    const ra = roleOrder[(a.role || "").toLowerCase()] ?? 3;
+    const rb = roleOrder[(b.role || "").toLowerCase()] ?? 3;
+    if (ra !== rb) return ra - rb;
+    return (a.name || "").localeCompare(b.name || "");
+  });
+
+  const html = sorted.map(p => {
+    const role = (p.role || "").toLowerCase();
+    const roleClass =
+      role === "tank" ? "roster-role-tank" :
+      role === "healer" || role === "heal" ? "roster-role-heal" :
+      role === "dps" ? "roster-role-dps" : "";
+
+    const ilvl = p.ilvl ? ` • ilvl ${p.ilvl}` : "";
+    const spec = p.spec ? ` – ${p.spec}` : "";
+    const cls = p.class || "";
+    const roleLabel = role
+      ? `<span class="roster-role-tag ${roleClass}">${role}</span>`
+      : "";
+
+    return `
+      <div class="roster-item">
+        <div class="roster-item-main">
+          ${p.name || "?"} ${roleLabel}
+        </div>
+        <div class="roster-meta">
+          ${cls}${spec}${ilvl}
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  container.innerHTML = `<div class="roster-grid">${html}</div>`;
 }
 
 /* ========= TIMELINE A PALLINI ========= */
@@ -291,23 +571,54 @@ function renderLastSessionTimeline(last) {
 
       const d = document.createElement("div");
       let cls = "dot-wipe";
-      let tip = `Wipe – Pull #${i+1}`;
 
-      // % HP rimanente se presente
-      if (b.hpPercentHistory && b.hpPercentHistory[i] != null) {
-        tip += ` – HP rimanente: ${b.hpPercentHistory[i]}%`;
+      const pullNumber = i + 1;
+      const isKill = (i === b.pulls - 1 && b.kills > 0);
+      const isBest = (b.bestPullIndex === i);
+
+      const parts = [];
+
+      if (isKill) {
+        parts.push(`KILL – Pull #${pullNumber}`);
+      } else if (isBest) {
+        parts.push(`Best try – ${b.bestPercentage}% – Pull #${pullNumber}`);
+      } else {
+        parts.push(`Wipe – Pull #${pullNumber}`);
       }
 
-      // kill
-      if (i === b.pulls-1 && b.kills > 0) {
+      // HP rimanente
+      if (!isKill && b.hpPercentHistory && b.hpPercentHistory[i] != null) {
+        parts.push(`HP boss: ${b.hpPercentHistory[i]}%`);
+      }
+
+      // Durata (in secondi) se presente: b.pullDurations[i]
+      if (b.pullDurations && b.pullDurations[i] != null) {
+        const sec = b.pullDurations[i];
+        const m = Math.floor(sec / 60);
+        const s = sec % 60;
+        const durStr = m > 0 ? `${m}m ${s}s` : `${s}s`;
+        parts.push(`Durata: ${durStr}`);
+      }
+
+      // Dettagli avanzati opzionali (dal worker, se li passi)
+      const detail = b.pullDetails && b.pullDetails[i];
+      if (detail) {
+        if (detail.startTime) parts.push(`Ora: ${detail.startTime}`);
+        if (detail.wipeReason) parts.push(`Motivo: ${detail.wipeReason}`);
+        if (detail.partyDiedAt) parts.push(`Party morto al: ${detail.partyDiedAt}%`);
+        if (detail.dps) parts.push(`DPS raid: ${detail.dps.toLocaleString("it-IT")}`);
+        if (detail.hps) parts.push(`HPS raid: ${detail.hps.toLocaleString("it-IT")}`);
+      }
+
+      let tip = parts.join(" • ");
+
+      // classi colore
+      if (isKill) {
         cls = "dot-kill";
-        tip = `KILL – Pull #${i+1}`;
-      }
-
-      // best try
-      if (b.bestPullIndex === i) {
+      } else if (isBest) {
         cls = "dot-progress";
-        tip = `Best Try – ${b.bestPercentage}% – Pull #${i+1}`;
+      } else {
+        cls = "dot-wipe";
       }
 
       d.className = `dot ${cls}`;
@@ -344,9 +655,22 @@ function renderLastSessionTimeline(last) {
   try {
     const last = await fetchLastSession();
     renderLastSessionTimeline(last);
+    renderRoster(last);
   } catch (e) {
     document.getElementById("last-session-summary").textContent =
       "Errore nel caricare l'ultima sessione.";
+    const roster = document.getElementById("live-roster");
+    if (roster) roster.textContent = "Errore nel caricare il roster.";
+  }
+
+  // LIVE TWITCH
+  try {
+    const live = await fetchTwitchLive();
+    renderTwitchLive(live);
+  } catch (e) {
+    console.error(e);
+    const d = document.getElementById("live-description");
+    if (d) d.textContent = "Impossibile controllare lo stato della live Twitch.";
   }
 })();
 </script>
