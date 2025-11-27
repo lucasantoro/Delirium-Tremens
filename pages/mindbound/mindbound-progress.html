@@ -7,190 +7,255 @@
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 
   <style>
-/* ==========================================
-   HERO & GENERAL – unchanged
-========================================== */
-.hero {
-  padding: 80px 20px 50px;
-  background: none;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-.hero h2 {
-  font-size: 3rem;
-  color: #fff;
-  margin-bottom: 12px;
-  opacity: 0;
-  transform: translateY(25px);
-  animation: fadeUp .9s ease forwards;
-}
-.hero p {
-  font-size: 1.3rem;
-  opacity: 0;
-  max-width: 720px;
-  margin: 0 auto;
-  transform: translateY(20px);
-  animation: fadeUp 1.3s ease forwards;
-}
-@keyframes fadeUp {
-  to { opacity: 1; transform: translateY(0); }
-}
+    /* HERO */
+    .hero {
+      padding: 80px 20px 50px;
+      background: none;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .hero h2 {
+      font-size: 3rem;
+      color: #fff;
+      margin-bottom: 12px;
+      opacity: 0;
+      transform: translateY(25px);
+      animation: fadeUp .9s ease forwards;
+    }
+    .hero p {
+      font-size: 1.3rem;
+      opacity: 0;
+      max-width: 720px;
+      margin: 0 auto;
+      transform: translateY(20px);
+      animation: fadeUp 1.3s ease forwards;
+    }
 
-/* ==========================================
-   BG LOGO
-========================================== */
-.bg-container {
-  position: relative;
-  background: url('../../img/mindbound_logo.png') center/cover no-repeat;
-  padding: 60px 0 80px;
-}
-.bg-container::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  backdrop-filter: blur(2px);
-}
-.bg-container > * { position: relative; z-index: 2; }
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-/* ==========================================
-   LIVE TWITCH – UPDATED
-========================================== */
+    /* BG LOGO */
+    .bg-container {
+      position: relative;
+      background: url('../../img/mindbound_logo.png') center/cover no-repeat;
+      padding: 60px 0 80px;
+    }
+    .bg-container::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(2px);
+    }
+    .bg-container > * {
+      position: relative;
+      z-index: 2;
+    }
 
-.live-raid-card {
-  background: rgba(15,15,15,0.9);
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,0.15);
-  padding: 16px 18px 18px;
-  margin-bottom: 20px;
-  box-shadow: 0 0 18px rgba(120,120,255,0.35);
-}
+    main.panel {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
 
-/* Player grande quando ONLINE */
-.live-player-shell {
-  position: relative;
-  padding-bottom: 56.25%;
-  height: 0;
-  overflow: hidden;
-  border-radius: 10px;
-  margin-top: 10px;
-}
-.live-player-shell iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
+    h2.section-title {
+      text-align: center;
+      color: #fff;
+      font-size: 2rem;
+      margin: 20px 0 10px;
+    }
+    p.section-subtitle {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 25px;
+      color: #ddd;
+      font-size: 1rem;
+    }
 
-/* Card compatta quando OFFLINE */
-.live-offline-box {
-  margin-top: 10px;
-  padding: 25px;
-  text-align: center;
-  background: rgba(40,40,40,0.4);
-  border-radius: 10px;
-  border: 1px dashed rgba(255,255,255,0.25);
-  font-size: 1rem;
-  color: #ccc;
-}
+    /* GRID */
+    .widgets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      margin: 35px 0 10px;
+    }
 
-/* Pills */
-.live-status-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  padding: 4px 10px;
-  border-radius: 999px;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  border: 1px solid rgba(255,255,255,0.2);
-}
-.live-dot {
-  width: 8px; height: 8px; border-radius: 50%;
-}
-.live-status-live {
-  background: rgba(220,20,60,0.15);
-  border-color: rgba(255,80,120,0.8);
-  color: #ff9ea8;
-}
-.live-status-live .live-dot {
-  background: #ff3b5c;
-  box-shadow: 0 0 6px rgba(255,0,70,0.9);
-}
-.live-status-offline {
-  background: rgba(80,80,80,0.2);
-  color: #ccc;
-}
-.live-status-offline .live-dot {
-  background: #777;
-}
+    .widget-card {
+      background: rgba(15,15,15,0.8);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 18px 18px 16px;
+      box-shadow: 0 0 18px rgba(120,120,255,0.35);
+      backdrop-filter: blur(4px);
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.97);
+      animation: fadeZoom .7s ease forwards;
+    }
 
-/* ==========================================
-   ROSTER – UPDATED (icone classi)
-========================================== */
+    @keyframes fadeZoom {
+      to { opacity: 1; transform: scale(1); }
+    }
 
-.roster-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 10px 14px;
-  margin-top: 10px;
-}
+    /* ============ LIVE TWITCH ============ */
+    .live-raid-wrapper {
+      margin-top: 25px;
+    }
+    .live-raid-card {
+      background: rgba(15,15,15,0.9);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 16px 18px 18px;
+      box-shadow: 0 0 18px rgba(120,120,255,0.35);
+      backdrop-filter: blur(4px);
+    }
+    .live-player-shell {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+    .live-player-shell iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .live-status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .live-status-pill .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #999;
+    }
+    .live-status-live {
+      background: rgba(220,20,60,0.15);
+      border-color: rgba(255,80,120,0.8);
+      color: #ff9ea8;
+    }
+    .live-status-live .live-dot {
+      background: #ff3b5c;
+      box-shadow: 0 0 6px rgba(255,0,70,0.9);
+    }
+    .live-status-offline {
+      background: rgba(80,80,80,0.2);
+      color: #ccc;
+    }
+    .live-description {
+      font-size: 0.9rem;
+      color: #ccc;
+      margin: 0 0 4px;
+    }
 
-.roster-section-title {
-  font-size: 1.1rem;
-  margin: 18px 0 6px;
-  color: #fff;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  padding-bottom: 4px;
-}
+    /* ============ TOOLTIP DOTS ============ */
+    .dot {
+      position: relative;
+    }
+    .dot::after {
+      content: attr(data-tip);
+      position: absolute;
+      left: 50%;
+      bottom: 140%;
+      transform: translateX(-50%) translateY(6px);
+      background: rgba(5,5,5,0.95);
+      color: #f5f5f5;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      white-space: pre-line;
+      max-width: 260px;
+      text-align: left;
+      opacity: 0;
+      pointer-events: none;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+      z-index: 20;
+      transition: opacity .15s ease, transform .15s ease;
+    }
+    .dot::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: 130%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: rgba(5,5,5,0.95) transparent transparent transparent;
+      opacity: 0;
+      transition: opacity .15s ease;
+      z-index: 19;
+    }
+    .dot:hover::after,
+    .dot:hover::before {
+      opacity: 1;
+    }
+    .dot:hover::after {
+      transform: translateX(-50%) translateY(0);
+    }
 
-.roster-item-main {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.class-icon {
-  width: 18px; height: 18px;
-  background-size: cover;
-  border-radius: 3px;
-}
-
-/* class icons sample – feel free to replace with your icons */
-.class-Warrior     { background-image:url('../../img/classes/warrior.png'); }
-.class-Paladin     { background-image:url('../../img/classes/paladin.png'); }
-.class-Hunter      { background-image:url('../../img/classes/hunter.png'); }
-.class-Rogue       { background-image:url('../../img/classes/rogue.png'); }
-.class-Priest      { background-image:url('../../img/classes/priest.png'); }
-.class-DeathKnight { background-image:url('../../img/classes/deathknight.png'); }
-.class-Shaman      { background-image:url('../../img/classes/shaman.png'); }
-.class-Mage        { background-image:url('../../img/classes/mage.png'); }
-.class-Warlock     { background-image:url('../../img/classes/warlock.png'); }
-.class-Monk        { background-image:url('../../img/classes/monk.png'); }
-.class-Druid       { background-image:url('../../img/classes/druid.png'); }
-.class-DemonHunter { background-image:url('../../img/classes/demonhunter.png'); }
-
-/* role color tags */
-.roster-role-tag {
-  font-size: 0.7rem;
-  padding: 2px 6px;
-  border-radius: 999px;
-  border: 1px solid rgba(255,255,255,0.2);
-  text-transform: uppercase;
-  letter-spacing: .05em;
-}
-.roster-role-tank { border-color:#4fd1c5; }
-.roster-role-heal { border-color:#63b3ed; }
-.roster-role-dps  { border-color:#f6ad55; }
+    /* ============ ROSTER CARD ============ */
+    .session-roster-card {
+      margin-top: 25px;
+      background: rgba(15,15,15,0.85);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 16px 18px 18px;
+      box-shadow: 0 0 18px rgba(120,120,255,0.25);
+    }
+    .roster-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 8px 14px;
+      font-size: 0.9rem;
+    }
+    .roster-item-main {
+      font-weight: 600;
+    }
+    .roster-meta {
+      font-size: 0.8rem;
+      opacity: 0.85;
+    }
+    .roster-role-tag {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: inline-block;
+      margin-left: 4px;
+    }
+    .roster-role-tank {
+      border-color: #4fd1c5;
+    }
+    .roster-role-heal {
+      border-color: #63b3ed;
+    }
+    .roster-role-dps {
+      border-color: #f6ad55;
+    }
   </style>
 </head>
 
-<body>
+<body class="page-transition">
 
 <header>
   <nav class="mainnav">
@@ -204,6 +269,7 @@
   </nav>
 </header>
 
+<!-- SUBNAV MINDBOUND -->
 <nav class="subnav">
   <ul>
     <li><a href="../mindbound/mindbound.html">Home Team</a></li>
@@ -216,175 +282,459 @@
 <div class="bg-container">
   <main class="panel">
 
+    <!-- PANORAMICA -->
     <h2 class="section-title">Panoramica per difficoltà</h2>
-    <p class="section-subtitle">Stato del raid per Normal, Heroic e Mythic.</p>
+    <p class="section-subtitle">
+      Stato del raid per Normal, Heroic e Mythic.
+    </p>
 
     <div class="widgets-grid">
-      <div class="widget-card"><h3>Normal</h3><div id="card-normal">Caricamento…</div></div>
-      <div class="widget-card"><h3>Heroic</h3><div id="card-heroic">Caricamento…</div></div>
-      <div class="widget-card"><h3>Mythic</h3><div id="card-mythic">Caricamento…</div></div>
-    </div>
 
-    <!-- ==================== LIVE TWITCH ==================== -->
-    <div class="live-raid-card">
-      <div id="live-status-pill" class="live-status-pill live-status-offline">
-        <span class="live-dot"></span> Offline
+      <div class="widget-card">
+        <h3 class="widget-title">Normal</h3>
+        <div class="progress-content" id="card-normal">Caricamento…</div>
       </div>
 
-      <h3>Diretta raid – Twitch</h3>
-      <p id="live-description">Il canale è offline. Prossimo evento a breve.</p>
-
-      <div id="live-player-shell"></div>
-
-      <div id="live-offline-box" class="live-offline-box" style="display:none;">
-        Offline – prossimo evento a breve.
+      <div class="widget-card">
+        <h3 class="widget-title">Heroic</h3>
+        <div class="progress-content" id="card-heroic">Caricamento…</div>
       </div>
+
+      <div class="widget-card">
+        <h3 class="widget-title">Mythic</h3>
+        <div class="progress-content" id="card-mythic">Caricamento…</div>
+      </div>
+
     </div>
 
-    <!-- ==================== SESSIONE RAID ==================== -->
-    <h2 class="section-title">Ultima sessione raid</h2>
-    <p class="section-subtitle">Resoconto completo della serata MindBound.</p>
+    <!-- ULTIMA SESSIONE -->
+    <div class="widget-full" style="margin-top: 40px;">
+      <h2 class="section-title" id="last-session-title">
+        Ultima sessione raid
+      </h2>
+      <p class="section-subtitle">
+        Resoconto completo della serata MindBound: kill, wipe e progress.
+        Passa col mouse sui pallini per vedere i dettagli.
+      </p>
 
-    <div id="last-session-summary" class="session-summary-card">Caricamento…</div>
-    <div id="dot-timeline" class="dot-timeline-container"></div>
+      <!-- LIVE TWITCH -->
+      <div id="live-raid-wrapper" class="live-raid-wrapper">
+        <div class="live-raid-card" id="live-raid-card">
+          <div class="live-status-pill live-status-offline" id="live-status-pill">
+            <span class="live-dot"></span> Offline
+          </div>
+          <h3 class="widget-title">Diretta raid – Twitch</h3>
+          <p class="live-description" id="live-description">
+            La diretta verrà mostrata qui quando il canale sarà online.
+          </p>
+          <div class="live-player-shell" id="live-player-shell">
+            <!-- iframe Twitch verrà inserito via JS -->
+          </div>
+        </div>
+      </div>
+      <!-- /LIVE TWITCH -->
 
-    <div style="text-align:center; margin-top:20px;">
-      <a id="last-session-report-link" class="apply-button" target="_blank" style="display:none;">
-        Apri il report dell’ultima sessione
-      </a>
-    </div>
+      <div class="session-summary-card" id="last-session-summary">
+        Caricamento…
+      </div>
 
-    <!-- ==================== ROSTER ==================== -->
-    <div class="session-roster-card">
-      <h3 class="widget-title">Roster ultimo pull</h3>
-      <div id="live-roster">Caricamento roster…</div>
+      <div class="dot-timeline-container" id="dot-timeline"></div>
+
+      <div style="text-align:center; margin-top:20px;">
+        <a id="last-session-report-link"
+           href="#"
+           target="_blank"
+           class="apply-button"
+           style="display:none;">
+          Apri il report dell’ultima sessione
+        </a>
+      </div>
+
+      <!-- ROSTER DALL'ULTIMO REPORT -->
+      <div class="session-roster-card" id="live-roster-card">
+        <h3 class="widget-title">Roster attuale</h3>
+        <p class="section-subtitle" style="margin-bottom:10px;">
+          Giocatori presenti nell’ultima sessione registrata su Warcraft Logs.
+        </p>
+        <div id="live-roster">Caricamento roster…</div>
+      </div>
+
     </div>
 
   </main>
 </div>
 
-<footer><p>© 2025 Delirium Tremens</p></footer>
+<footer>
+  <p>&copy; 2025 Delirium Tremens</p>
+</footer>
 
+<!-- TRANSITION -->
 <script>
-const WORKER_FULL  = "https://red-snowflake-a386.lucasantoro2905.workers.dev";
-const WORKER_LAST  = "https://wild-mode-1b45.lucasantoro2905.workers.dev";
-const WORKER_TWITCH = "https://twitch-live.lucasantoro2905.workers.dev";
-const TWITCH_CHANNEL = "londe83";
+document.addEventListener("DOMContentLoaded", function () {
+  document.body.classList.add("page-loaded");
+});
+</script>
 
-/* ============================================================
-   TWITCH LIVE – UPDATED LOGIC
-============================================================ */
-async function fetchTwitchLive() {
-  const url = `${WORKER_TWITCH}/twitch-live?channel=${encodeURIComponent(TWITCH_CHANNEL)}`;
-  const res = await fetch(url);
-  return res.json();
-}
+<!-- URL WORKERS -->
+<script>
+  const WORKER_FULL = "https://red-snowflake-a386.lucasantoro2905.workers.dev";
+  const WORKER_LAST = "https://wild-mode-1b45.lucasantoro2905.workers.dev";
 
-function renderTwitchLive(data) {
-  const pill  = document.getElementById("live-status-pill");
-  const desc  = document.getElementById("live-description");
-  const shell = document.getElementById("live-player-shell");
-  const offlineBox = document.getElementById("live-offline-box");
+  /* LIVE TWITCH */
+  const TWITCH_CHANNEL = "londe83";
+  const WORKER_TWITCH = "https://twitch-live.lucasantoro2905.workers.dev"; // cambia se usi un altro URL
+</script>
 
-  if (!data.live) {
-    pill.classList.add("live-status-offline");
-    pill.classList.remove("live-status-live");
-    desc.innerText = "Il canale è offline. Prossimo evento a breve.";
-    shell.innerHTML = "";
-    offlineBox.style.display = "block";
-    return;
-  }
+<!-- PROGRESS LOGIC -->
+<script>
+async function loadDifficulty(diff, id) {
+  try {
+    const el = document.getElementById(id);
+    const res = await fetch(`${WORKER_FULL}/progress-full?difficulty=${diff}`);
+    const data = await res.json();
 
-  // LIVE
-  pill.classList.remove("live-status-offline");
-  pill.classList.add("live-status-live");
-  offlineBox.style.display = "none";
+    const bosses = Object.keys(data.bosses || {});
+    const killed = bosses.filter(b => data.bosses[b].kills > 0);
+    const inProgress = bosses.filter(
+      b => data.bosses[b].kills === 0 &&
+           data.bosses[b].bestPercentage != null &&
+           data.bosses[b].bestPercentage < 100
+    );
 
-  desc.innerText = `${data.title || "Diretta raid"} • ${data.game_name || ""}`;
-
-  const parent = window.location.hostname;
-  const embed = `https://player.twitch.tv/?channel=${TWITCH_CHANNEL}&parent=${parent}`;
-
-  shell.innerHTML = `
-    <iframe src="${embed}" allowfullscreen="true" allow="autoplay;fullscreen"></iframe>
-  `;
-}
-
-/* ============================================================
-   ROSTER LAST PULL – UPDATED
-============================================================ */
-function renderRoster(last) {
-  const container = document.getElementById("live-roster");
-  if (!last.lastPullRoster) {
-    container.innerHTML = "Roster non disponibile.";
-    return;
-  }
-
-  const roster = last.lastPullRoster;
-
-  const groups = { tank: [], healer: [], dps: [] };
-
-  roster.forEach(p => {
-    const role = (p.role || "").toLowerCase();
-    if (role.includes("tank")) groups.tank.push(p);
-    else if (role.includes("heal")) groups.healer.push(p);
-    else groups.dps.push(p);
-  });
-
-  function block(name, list) {
-    if (!list.length) return "";
-    return `
-      <div class="roster-section-title">${name}</div>
-      <div class="roster-grid">
-        ${list.map(p => `
-          <div class="roster-item">
-            <div class="roster-item-main">
-              <div class="class-icon class-${p.class}"></div>
-              ${p.name}
-              <span class="roster-role-tag roster-role-${p.role}">${p.role}</span>
-            </div>
-            <div class="roster-meta">${p.class} – ${p.spec || ""}</div>
-          </div>
-        `).join("")}
-      </div>
+    let html = `
+      <strong>Kill:</strong> ${killed.length} / ${bosses.length}<br>
+      <strong>Progress:</strong> ${inProgress.length}<br>
+      <strong>Miglior try:</strong>
+      ${inProgress.length ? Math.min(...inProgress.map(b => data.bosses[b].bestPercentage)) + "%" : "—"}
+      <div class="boss-list">
     `;
+
+    killed.forEach(b => html += `<span class="boss-killed">${b}</span>`);
+    inProgress.forEach(b => html += `<span class="boss-progress">${b} (${data.bosses[b].bestPercentage}%)</span>`);
+
+    html += "</div>";
+    el.innerHTML = html;
+
+  } catch (e) {
+    document.getElementById(id).textContent = "Errore nel caricamento.";
   }
-
-  container.innerHTML =
-    block("Tank", groups.tank) +
-    block("Healer", groups.healer) +
-    block("DPS", groups.dps);
 }
-
-/* ============================================================
-   SESSION, DIFFICULTIES, ETC.
-   (tutta la tua logica originale rimane invariata)
-============================================================ */
 
 async function fetchLastSession() {
   const res = await fetch(`${WORKER_LAST}/progress-last`);
   return res.json();
 }
 
-/* ... (tutta la tua parte timeline e difficulty resta lì invariata) ... */
+/* ========= LIVE TWITCH ========= */
+async function fetchTwitchLive() {
+  const url = `${WORKER_TWITCH}/twitch-live?channel=${encodeURIComponent(TWITCH_CHANNEL)}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error("Errore worker Twitch");
+  return res.json();
+}
 
-/* ============================================================
-   INIT
-============================================================ */
-(async function init() {
-  // load diff cards
+function renderTwitchLive(liveData) {
+  const pill = document.getElementById("live-status-pill");
+  const descr = document.getElementById("live-description");
+  const shell = document.getElementById("live-player-shell");
+  if (!pill || !descr || !shell) return;
+
+  if (!liveData || !liveData.live) {
+    pill.classList.remove("live-status-live");
+    pill.classList.add("live-status-offline");
+    pill.innerHTML = '<span class="live-dot"></span> Offline';
+    descr.textContent = "Il canale Twitch è attualmente offline. La prossima diretta raid verrà mostrata qui appena saremo live.";
+    shell.innerHTML = "";
+    return;
+  }
+
+  pill.classList.remove("live-status-offline");
+  pill.classList.add("live-status-live");
+  pill.innerHTML = '<span class="live-dot"></span> Live ora';
+
+  const title = liveData.title || "Diretta raid MindBound";
+  const game = liveData.game_name;
+  const viewers = liveData.viewer_count;
+
+  let descText = title;
+  if (game) descText += ` • Giocando: ${game}`;
+  if (viewers != null) descText += ` • Viewers: ${viewers}`;
+  descr.textContent = descText;
+
+  const parent = window.location.hostname;
+  const embedUrl =
+    `https://player.twitch.tv/?channel=${encodeURIComponent(TWITCH_CHANNEL)}&parent=${encodeURIComponent(parent)}`;
+
+  shell.innerHTML = `
+    <iframe
+      src="${embedUrl}"
+      allowfullscreen="true"
+      scrolling="no"
+      allow="autoplay; fullscreen">
+    </iframe>
+  `;
+}
+
+/* ========= ROSTER ========= */
+/* ========= ROSTER ULTIMO PULL ========= */
+
+function classIcon(className) {
+  if (!className) return "";
+  const cl = className.toLowerCase().replace(/\s+/g, "");
+  return `../../img/classes/${cl}.png`; 
+}
+
+function extractLastPullRoster(last) {
+  if (!last || !last.bosses) return [];
+
+  let latest = null;
+
+  // Trova il pull più recente tra tutti i boss
+  for (const boss of Object.values(last.bosses)) {
+    if (!boss.pullsDetail) continue;
+
+    boss.pullsDetail.forEach((p, idx) => {
+      if (!p) return;
+
+      const timestamp = p.end || p.start || 0;
+
+      if (!latest || timestamp > latest.timestamp) {
+        latest = {
+          roster: p.friendlyPlayers || [],
+          timestamp
+        };
+      }
+    });
+  }
+
+  return latest ? latest.roster : [];
+}
+
+function roleFromSpecSafe(spec) {
+  if (!spec) return "";
+  const s = spec.toLowerCase();
+
+  if (s.includes("protection") || s.includes("blood") || s.includes("guardian"))
+    return "tank";
+
+  if (s.includes("holy") || s.includes("restoration") || s.includes("disc") || s.includes("disci"))
+    return "healer";
+
+  return "dps";
+}
+
+function renderRoster(last) {
+  const container = document.getElementById("live-roster");
+  if (!container) return;
+
+  const pullRoster = extractLastPullRoster(last);
+
+  if (!pullRoster.length) {
+    container.textContent = "Nessun roster trovato nell’ultimo pull.";
+    return;
+  }
+
+  // Arricchisci i dati
+  const enriched = pullRoster.map(p => ({
+    name: p.name,
+    class: p.class || p.icon || "",
+    spec: p.spec || "",
+    role: roleFromSpecSafe(p.spec)
+  }));
+
+  // Ordine per ruolo
+  const order = { tank: 0, healer: 1, dps: 2 };
+  enriched.sort((a, b) => {
+    const ra = order[a.role] ?? 99;
+    const rb = order[b.role] ?? 99;
+    if (ra !== rb) return ra - rb;
+    return a.name.localeCompare(b.name);
+  });
+
+  const html = enriched.map(p => {
+    const icon = classIcon(p.class);
+    const role = p.role || "";
+    const roleClass =
+      role === "tank" ? "roster-role-tank" :
+      role === "healer" ? "roster-role-heal" :
+      role === "dps" ? "roster-role-dps" : "";
+
+    return `
+      <div class="roster-item">
+        <div class="roster-item-main">
+          <img src="${icon}" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;">
+          ${p.name}
+          <span class="roster-role-tag ${roleClass}">${role}</span>
+        </div>
+        <div class="roster-meta">
+          ${p.class} – ${p.spec}
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  container.innerHTML = `<div class="roster-grid">${html}</div>`;
+}
+
+
+/* ========= TIMELINE A PALLINI ========= */
+
+function diffLabel(diff) {
+  switch (diff) {
+    case 3: return "Normal";
+    case 4: return "Heroic";
+    case 5: return "Mythic";
+    default: return diff != null ? `Diff ${diff}` : "Sconosciuta";
+  }
+}
+
+function renderLastSessionTimeline(last) {
+  const timeline = document.getElementById("dot-timeline");
+  const summary = document.getElementById("last-session-summary");
+  const bosses = Object.values(last.bosses || {});
+
+  if (!bosses.length) {
+    summary.innerHTML = "Nessun dato.";
+    return;
+  }
+
+  // summary
+  const pulls = bosses.reduce((s,b)=>s+b.pulls,0);
+  const wipes = bosses.reduce((s,b)=>s+b.wipes,0);
+  const kills = bosses.reduce((s,b)=>s+b.kills,0);
+
+  summary.innerHTML = `
+    <strong>Boss:</strong> ${bosses.length}<br>
+    <strong>Pull totali:</strong> ${pulls}<br>
+    <strong>Wipe totali:</strong> ${wipes}<br>
+    <strong>Kill totali:</strong> ${kills}
+  `;
+
+  // link report
+  if (last.latestReport?.code) {
+    const a = document.getElementById("last-session-report-link");
+    a.href = `https://www.warcraftlogs.com/reports/${last.latestReport.code}`;
+    a.style.display = "inline-block";
+  }
+
+  timeline.innerHTML = "";
+  bosses.sort((a,b)=>a.bossName.localeCompare(b.bossName));
+
+  bosses.forEach(b => {
+
+    const row = document.createElement("div");
+    row.className = "dot-row";
+
+    row.innerHTML = `<div class="dot-boss-name">${b.bossName}</div>`;
+
+    const line = document.createElement("div");
+    line.className = "dot-line";
+
+    for (let i = 0; i < b.pulls; i++) {
+
+      const d = document.createElement("div");
+      let cls = "dot-wipe";
+
+      const pullNumber = i + 1;
+      const isKill = (i === b.pulls - 1 && b.kills > 0);
+      const isBest = (b.bestPullIndex === i);
+
+      const parts = [];
+
+      if (isKill) {
+        parts.push(`KILL – Pull #${pullNumber}`);
+      } else if (isBest) {
+        parts.push(`Best try – ${b.bestPercentage}% – Pull #${pullNumber}`);
+      } else {
+        parts.push(`Wipe – Pull #${pullNumber}`);
+      }
+
+      // Difficoltà (da pullsDetail se presente, altrimenti da difficultiesSeen)
+      const detail = b.pullsDetail && b.pullsDetail[i];
+      let diff = detail ? detail.difficulty : null;
+      if (diff == null && Array.isArray(b.difficultiesSeen) && b.difficultiesSeen.length) {
+        diff = b.difficultiesSeen[0];
+      }
+      if (diff != null) {
+        parts.push(`Difficoltà: ${diffLabel(diff)}`);
+      }
+
+      // HP rimanente
+      if (!isKill && b.hpPercentHistory && b.hpPercentHistory[i] != null) {
+        parts.push(`HP boss: ${b.hpPercentHistory[i]}%`);
+      }
+
+      // Durata (in secondi) se presente: b.pullDurations[i]
+      if (b.pullDurations && b.pullDurations[i] != null) {
+        const sec = b.pullDurations[i];
+        const m = Math.floor(sec / 60);
+        const s = sec % 60;
+        const durStr = m > 0 ? `${m}m ${s}s` : `${s}s`;
+        parts.push(`Durata: ${durStr}`);
+      }
+
+      let tip = parts.join(" • ");
+
+      // classi colore
+      if (isKill) {
+        cls = "dot-kill";
+      } else if (isBest) {
+        cls = "dot-progress";
+      } else {
+        cls = "dot-wipe";
+      }
+
+      d.className = `dot ${cls}`;
+      d.setAttribute("data-tip", tip);
+
+      // link al pull
+      if (b.fightIDs && b.fightIDs[i] != null && last.latestReport?.code) {
+        const reportCode = last.latestReport.code;
+        const fightID = b.fightIDs[i];
+
+        d.style.cursor = "pointer";
+        d.addEventListener("click", () => {
+          window.open(
+            `https://www.warcraftlogs.com/reports/${reportCode}#fight=${fightID}`,
+            "_blank"
+          );
+        });
+      }
+
+      line.appendChild(d);
+    }
+
+    row.appendChild(line);
+    timeline.appendChild(row);
+  });
+}
+
+/* ========= INIT ========= */
+(async () => {
   loadDifficulty("normal", "card-normal");
   loadDifficulty("heroic", "card-heroic");
   loadDifficulty("mythic", "card-mythic");
 
-  // last session
-  const last = await fetchLastSession();
-  renderLastSessionTimeline(last);
-  renderRoster(last);
+  try {
+    const last = await fetchLastSession();
+    renderLastSessionTimeline(last);
+    renderRoster(last);
+  } catch (e) {
+    document.getElementById("last-session-summary").textContent =
+      "Errore nel caricare l'ultima sessione.";
+    const roster = document.getElementById("live-roster");
+    if (roster) roster.textContent = "Errore nel caricare il roster.";
+  }
 
-  // twitch
-  const live = await fetchTwitchLive();
-  renderTwitchLive(live);
+  // LIVE TWITCH
+  try {
+    const live = await fetchTwitchLive();
+    renderTwitchLive(live);
+  } catch (e) {
+    console.error(e);
+    const d = document.getElementById("live-description");
+    if (d) d.textContent = "Impossibile controllare lo stato della live Twitch.";
+  }
 })();
 </script>
 
