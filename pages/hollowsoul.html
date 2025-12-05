@@ -166,7 +166,7 @@ async function loadHollowSoulStats() {
   const note     = document.getElementById("stats-note");
 
   try {
-    const res = await fetch("https://broad-block-f85c.lucasantoro2905.workers.dev/rio-search");
+    const res = await fetch("https://hollow-stats-api.lucasantoro2905.workers.dev/");
     const data = await res.json();
 
     elChars.textContent = data.totalCharacters ?? "–";
