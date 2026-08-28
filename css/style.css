@@ -3572,6 +3572,42 @@ header nav a.active {
   grid-column: auto;
 }
 
+.guide-card--compact {
+  min-height: 250px;
+}
+
+.guide-card--compact .guide-card__body {
+  align-content: start;
+  padding: 30px;
+}
+
+.guide-card--compact .guide-card__body p {
+  color: var(--muted);
+}
+
+.guide-card--compact .guide-card__actions {
+  justify-content: flex-start;
+  margin-top: auto;
+}
+
+.guide-card__document-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.guide-card__document-meta span {
+  padding: 6px 10px;
+  border: 1px solid rgba(240, 200, 104, 0.25);
+  border-radius: 999px;
+  color: var(--accent-2);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 .guide-library-groups,
 .guide-library-group {
   display: grid;

@@ -71,19 +71,29 @@ function renderGuideCard(guide) {
   const href = resolveAsset(guide.href);
   const metaLeft = guide.expansion || (guide.type === "raid" ? "Raid" : "Achievement");
   const metaRight = guide.instance || guide.badge || "Guida";
-  const cover = guide.coverImage
-    ? `<img src="${escapeHtml(resolveAsset(guide.coverImage))}" alt="${escapeHtml(guide.title)}" loading="lazy">`
-    : `<div class="guide-card__book" aria-hidden="true"><span>BJ</span><strong>${escapeHtml(guide.type === "raid" ? "RAID" : "GUIDA")}</strong></div>`;
   const detail = guide.type === "raid" && guide.pages
     ? `${guide.pages} pagine - PDF`
     : guide.updated ? `Aggiornata ${formatDate(guide.updated)}` : guide.badge || "Guida";
+  const media = guide.coverImage
+    ? `<a class="guide-card__media" href="${escapeHtml(href)}" aria-label="Apri ${escapeHtml(guide.title)}">
+        <img src="${escapeHtml(resolveAsset(guide.coverImage))}" alt="${escapeHtml(guide.title)}" loading="lazy">
+        <span class="guide-card__format">${escapeHtml(detail)}</span>
+      </a>`
+    : guide.type === "achievement"
+      ? `<a class="guide-card__media" href="${escapeHtml(href)}" aria-label="Apri ${escapeHtml(guide.title)}">
+          <div class="guide-card__book" aria-hidden="true"><span>BJ</span><strong>GUIDA</strong></div>
+          <span class="guide-card__format">${escapeHtml(detail)}</span>
+        </a>`
+      : "";
+  const documentMeta = guide.type === "raid"
+    ? `<div class="guide-card__document-meta"><span>${escapeHtml(detail)}</span><span>${escapeHtml(guide.subtitle || guide.badge || "Raid")}</span></div>`
+    : "";
   const actionLabel = guide.section === "addons" ? "Vedi gli addon" : guide.type === "raid" ? "Leggi la guida" : "Apri guida";
   return `
-    <article class="guide-card ${guide.type === "raid" ? "guide-card--raid" : "guide-card--feature"}">
-      <a class="guide-card__media" href="${escapeHtml(href)}" aria-label="Apri ${escapeHtml(guide.title)}">
-        ${cover}<span class="guide-card__format">${escapeHtml(detail)}</span>
-      </a>
+    <article class="guide-card ${guide.type === "raid" ? "guide-card--raid guide-card--compact" : "guide-card--feature"}">
+      ${media}
       <div class="guide-card__body">
+        ${documentMeta}
         <div class="editorial-card__meta"><span>${escapeHtml(metaLeft)}</span><strong>${escapeHtml(metaRight)}</strong></div>
         <h3>${escapeHtml(guide.title)}</h3>
         <p>${escapeHtml(guide.summary || guide.subtitle || "Guida della gilda.")}</p>
