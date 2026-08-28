@@ -1,0 +1,38 @@
+{
+  "title": "Addon obbligatori per il raid",
+  "summary": "La configurazione minima richiesta a ogni raider Blackjack. Installali prima della serata e mantienili aggiornati.",
+  "addons": [
+    {
+      "name": "BigWigs Bossmods",
+      "purpose": "Timer, avvisi e strumenti essenziali per leggere le meccaniche dei boss.",
+      "url": "https://www.curseforge.com/wow/addons/bigwigs"
+    },
+    {
+      "name": "RCLootCouncil",
+      "purpose": "Gestione della distribuzione del loot e delle risposte dei raider.",
+      "url": "https://www.curseforge.com/wow/addons/rclootcouncil"
+    },
+    {
+      "name": "RCLootCouncil - WoWAudit",
+      "purpose": "Porta wishlist e risultati Droptimizer di WoWAudit direttamente nelle finestre del loot council.",
+      "url": "https://www.curseforge.com/wow/addons/rclootcouncil-wowaudit"
+    },
+    {
+      "name": "Method Raid Tools",
+      "purpose": "Note di raid, reminder, controlli, timer e strumenti operativi per raider e officer.",
+      "url": "https://www.curseforge.com/wow/addons/method-raid-tools"
+    },
+    {
+      "name": "Northern Sky Raid Tools",
+      "purpose": "Strumenti aggiuntivi usati dalla gilda per coordinare esecuzione e informazioni durante i fight.",
+      "url": "https://www.curseforge.com/wow/addons/northern-sky-raid-tools"
+    }
+  ],
+  "preRaidTools": [
+    {
+      "name": "SimulationCraft",
+      "purpose": "Serve a generare con /simc la stringa richiesta dalla procedura di caricamento delle simulazioni su WoWAudit.",
+      "url": "https://www.curseforge.com/wow/addons/simulationcraft"
+    }
+  ]
+}

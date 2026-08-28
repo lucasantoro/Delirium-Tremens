@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="../js/force-https.js"></script>
+  <title>Blackjack - Guida raid</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+</head>
+<body class="page-transition blackjack-bg blackjack-bg--raid">
+<header>
+  <nav class="mainnav">
+    <a href="../index.html" class="nav-brand" aria-label="Blackjack Home"><img src="../img/blackjack_logo.png" alt="Blackjack"><span>Blackjack</span></a>
+    <ul>
+      <li><a href="../index.html">Home</a></li><li><a href="raider.html">Raider</a></li><li><a href="spettatori.html">Spettatori</a></li>
+      <li><a href="guide.html" class="active">Guide</a></li><li><a href="recruiting.html">Reclutamento</a></li><li><a href="statuto.html">Statuto</a></li>
+    </ul>
+  </nav>
+</header>
+<nav class="subnav"><ul><li><a href="guide.html">Tutte le guide</a></li><li><a href="#reader" class="active">Lettore raid</a></li></ul></nav>
+
+<section class="hero guide-hero guide-raid-hero" id="raid-guide-hero">
+  <div class="hero-content hero-content--wide"><div class="hero-tagline">Guida raid</div><h2>Caricamento guida...</h2><p>Preparazione del lettore PDF.</p></div>
+</section>
+
+<div class="bg-container bg-main-logo">
+  <main class="panel guide-pdf-shell" id="reader">
+    <div class="pdf-reader-toolbar" aria-label="Controlli lettore PDF">
+      <a href="guide.html" class="button-secondary">Torna alle guide</a>
+      <div class="pdf-reader-nav">
+        <button type="button" class="guide-reader-btn" id="pdf-prev" aria-label="Pagina precedente">&#8592;</button>
+        <label class="pdf-page-control">Pagina <input id="pdf-page-number" type="number" min="1" value="1" inputmode="numeric"> <span>/ <strong id="pdf-page-count">-</strong></span></label>
+        <button type="button" class="guide-reader-btn" id="pdf-next" aria-label="Pagina successiva">&#8594;</button>
+      </div>
+      <div class="pdf-reader-actions">
+        <button type="button" class="guide-reader-btn" id="pdf-zoom-out" aria-label="Riduci zoom">-</button>
+        <span id="pdf-zoom-label">100%</span>
+        <button type="button" class="guide-reader-btn" id="pdf-zoom-in" aria-label="Aumenta zoom">+</button>
+        <button type="button" class="guide-reader-btn guide-reader-btn--text" id="pdf-spread">Vista doppia</button>
+        <button type="button" class="guide-reader-btn guide-reader-btn--text" id="pdf-fullscreen">Schermo intero</button>
+        <a class="team-btn" id="pdf-download" href="#" download>Scarica PDF</a>
+      </div>
+    </div>
+
+    <div class="pdf-reader-status" id="pdf-reader-status" role="status">Caricamento documento...</div>
+    <div class="pdf-book-stage" id="pdf-book-stage" aria-live="polite"></div>
+    <div class="pdf-reader-progress" aria-hidden="true"><span id="pdf-reader-progress-bar"></span></div>
+  </main>
+</div>
+<footer><p id="raid-guide-footer">&copy; 2026 Blackjack | Guida raid</p></footer>
+<script type="module" src="../js/guide-raid.js"></script>
+</body>
+</html>

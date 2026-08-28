@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="../js/force-https.js"></script>
+<title>Reclutamento - Blackjack</title>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit" async defer></script>
+</head>
+
+<body class="page-transition blackjack-bg blackjack-bg--raid">
+
+<header>
+  <nav class="mainnav">
+    <a href="../index.html" class="nav-brand" aria-label="Blackjack Home">
+      <img src="../img/blackjack_logo.png" alt="Blackjack">
+      <span>Blackjack</span>
+    </a>
+    <ul>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="raider.html">Raider</a></li>
+      <li><a href="spettatori.html">Spettatori</a></li>
+      <li><a href="guide.html">Guide</a></li>
+      <li><a href="recruiting.html" class="active">Reclutamento</a></li>
+      <li><a href="statuto.html">Statuto</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-content">
+    <h2>Reclutamento</h2>
+    <p>Compila il modulo con i dati che servono davvero per capire chi sei, come giochi e cosa cerchi in gilda.</p>
+  </div>
+</section>
+
+<div class="bg-container bg-main-logo">
+  <main class="panel recruit">
+
+    <div class="section-head section-head--center">
+      <div class="eyebrow">Candidatura</div>
+      <h2 class="section-title">Modulo di ingresso</h2>
+      <p class="section-subtitle">Classe e specializzazione sono aggiornate all'assetto attuale, inclusa Devourer per Demon Hunter.</p>
+    </div>
+
+    <form id="applyForm" class="apply-form">
+      <label for="discordInput">Discord</label>
+      <input id="discordInput" type="text" name="Discord" placeholder="es: nickname o user Discord" required>
+
+      <label for="characterInput">Nome del personaggio</label>
+      <input id="characterInput" type="text" name="Personaggio" placeholder="Il tuo main" required>
+
+      <label for="classSelect">Classe</label>
+      <select id="classSelect" name="Classe" required>
+        <option value="">Seleziona la classe...</option>
+        <option>Death Knight</option>
+        <option>Demon Hunter</option>
+        <option>Druid</option>
+        <option>Evoker</option>
+        <option>Hunter</option>
+        <option>Mage</option>
+        <option>Monk</option>
+        <option>Paladin</option>
+        <option>Priest</option>
+        <option>Rogue</option>
+        <option>Shaman</option>
+        <option>Warlock</option>
+        <option>Warrior</option>
+      </select>
+
+      <label for="specSelect">Specializzazione</label>
+      <select id="specSelect" name="Spec" required>
+        <option value="">Seleziona prima una classe...</option>
+      </select>
+
+      <label for="logsInput">Link a Raider.IO o Warcraft Logs</label>
+      <input id="logsInput" type="url" name="Logs" placeholder="URL del profilo o del report">
+
+      <label for="availabilityInput">Disponibilita</label>
+      <textarea id="availabilityInput" name="Disponibilita" placeholder="Giorni e orari in cui giochi di solito" required></textarea>
+
+      <label for="motivationInput">Cosa cerchi nei Blackjack</label>
+      <textarea id="motivationInput" name="Motivazione" placeholder="Obiettivi, aspettative e tipo di ambiente che vuoi trovare" required></textarea>
+
+      <div class="apply-honeypot" aria-hidden="true">
+        <label for="websiteInput">Website</label>
+        <input id="websiteInput" type="text" name="Website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <div class="turnstile-shell">
+        <div id="turnstile-container" class="turnstile-container"></div>
+        <p class="apply-note" id="turnstile-note">Verifica anti-bot in caricamento...</p>
+      </div>
+
+      <p class="apply-status" id="apply-status" role="status" aria-live="polite"></p>
+
+      <div class="apply-actions">
+        <button type="submit" class="apply-button" id="apply-submit" disabled aria-disabled="true">Invia candidatura</button>
+      </div>
+    </form>
+
+  </main>
+</div>
+
+<footer>
+  <p>&copy; 2026 Blackjack</p>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  document.body.classList.add("page-loaded");
+});
+
+document.querySelectorAll("a").forEach(link => {
+  if (link.hostname === window.location.hostname) {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const href = this.getAttribute("href");
+      document.body.classList.remove("page-loaded");
+      setTimeout(() => { window.location.href = href; }, 300);
+    });
+  }
+});
+</script>
+
+<script>
+const specByClass = {
+  "Death Knight": ["Blood", "Frost", "Unholy"],
+  "Demon Hunter": ["Devourer", "Havoc", "Vengeance"],
+  "Druid": ["Balance", "Feral", "Guardian", "Restoration"],
+  "Evoker": ["Augmentation", "Devastation", "Preservation"],
+  "Hunter": ["Beast Mastery", "Marksmanship", "Survival"],
+  "Mage": ["Arcane", "Fire", "Frost"],
+  "Monk": ["Brewmaster", "Mistweaver", "Windwalker"],
+  "Paladin": ["Holy", "Protection", "Retribution"],
+  "Priest": ["Discipline", "Holy", "Shadow"],
+  "Rogue": ["Assassination", "Outlaw", "Subtlety"],
+  "Shaman": ["Elemental", "Enhancement", "Restoration"],
+  "Warlock": ["Affliction", "Demonology", "Destruction"],
+  "Warrior": ["Arms", "Fury", "Protection"]
+};
+
+const RECRUITING_WORKER = "https://blackjack-recruiting.lucasantoro2905.workers.dev";
+const classSelect = document.getElementById("classSelect");
+const specSelect = document.getElementById("specSelect");
+const applyForm = document.getElementById("applyForm");
+const applyStatus = document.getElementById("apply-status");
+const applySubmit = document.getElementById("apply-submit");
+const turnstileNote = document.getElementById("turnstile-note");
+
+let turnstileWidgetId = null;
+let turnstileToken = "";
+let turnstileReady = false;
+
+classSelect.addEventListener("change", () => {
+  const selectedClass = classSelect.value;
+  specSelect.innerHTML = "";
+
+  if (!selectedClass || !specByClass[selectedClass]) {
+    specSelect.innerHTML = `<option value="">Seleziona prima una classe...</option>`;
+    return;
+  }
+
+  specSelect.innerHTML = `<option value="">Seleziona la specializzazione...</option>`;
+  specByClass[selectedClass].forEach(spec => {
+    const option = document.createElement("option");
+    option.value = spec;
+    option.textContent = spec;
+    specSelect.appendChild(option);
+  });
+});
+
+function setApplyStatus(message, kind = "") {
+  applyStatus.textContent = message || "";
+  applyStatus.className = kind ? `apply-status is-${kind}` : "apply-status";
+}
+
+function syncSubmitState() {
+  const enabled = turnstileReady && Boolean(turnstileToken);
+  applySubmit.disabled = !enabled;
+  applySubmit.setAttribute("aria-disabled", enabled ? "false" : "true");
+}
+
+function resetTurnstileState(message) {
+  turnstileReady = true;
+  turnstileToken = "";
+  if (message) {
+    turnstileNote.textContent = message;
+  }
+  syncSubmitState();
+}
+
+async function loadTurnstile() {
+  try {
+    const response = await fetch(`${RECRUITING_WORKER}/config`, { cache: "no-store" });
+    if (!response.ok) {
+      throw new Error("Config Turnstile non disponibile");
+    }
+
+    const payload = await response.json();
+    if (!payload?.siteKey) {
+      throw new Error("TURNSTILE_SITE_KEY non configurata");
+    }
+
+    const container = document.getElementById("turnstile-container");
+    const renderWidget = () => {
+      if (!window.turnstile || !container || turnstileWidgetId !== null) return;
+      turnstileWidgetId = window.turnstile.render(container, {
+        sitekey: payload.siteKey,
+        theme: "dark",
+        callback(token) {
+          turnstileReady = true;
+          turnstileToken = token || "";
+          turnstileNote.textContent = "Verifica completata. Ora puoi inviare la candidatura.";
+          syncSubmitState();
+        },
+        "expired-callback"() {
+          resetTurnstileState("La verifica anti-bot e scaduta. Completala di nuovo.");
+        },
+        "timeout-callback"() {
+          resetTurnstileState("La verifica anti-bot e scaduta. Completala di nuovo.");
+        },
+        "error-callback"(code) {
+          turnstileReady = false;
+          turnstileToken = "";
+          turnstileNote.textContent = `Errore verifica anti-bot (${code || "sconosciuto"}). Ricarica la pagina oppure riprova tra poco.`;
+          syncSubmitState();
+        }
+      });
+      turnstileReady = true;
+      turnstileNote.textContent = "Completa la verifica anti-bot prima di inviare la candidatura.";
+      syncSubmitState();
+    };
+
+    if (window.turnstile) {
+      renderWidget();
+      return;
+    }
+
+    let attempts = 0;
+    const timer = setInterval(() => {
+      attempts += 1;
+      if (window.turnstile) {
+        clearInterval(timer);
+        renderWidget();
+      } else if (attempts > 50) {
+        clearInterval(timer);
+        turnstileReady = false;
+        turnstileToken = "";
+        turnstileNote.textContent = "Impossibile caricare la verifica anti-bot.";
+        syncSubmitState();
+      }
+    }, 200);
+  } catch (error) {
+    turnstileReady = false;
+    turnstileToken = "";
+    turnstileNote.textContent = error instanceof Error ? error.message : "Impossibile caricare la verifica anti-bot.";
+    syncSubmitState();
+  }
+}
+
+applyForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  setApplyStatus("");
+
+  if (turnstileWidgetId === null || !window.turnstile) {
+    setApplyStatus("La verifica anti-bot non e pronta. Ricarica la pagina e riprova.", "error");
+    return;
+  }
+
+  if (!turnstileToken) {
+    setApplyStatus("Completa la verifica anti-bot prima di inviare la candidatura.", "error");
+    return;
+  }
+
+  const payload = {
+    discord: document.getElementById("discordInput").value,
+    character: document.getElementById("characterInput").value,
+    className: classSelect.value,
+    spec: specSelect.value,
+    logs: document.getElementById("logsInput").value,
+    availability: document.getElementById("availabilityInput").value,
+    motivation: document.getElementById("motivationInput").value,
+    website: document.getElementById("websiteInput").value,
+    turnstileToken
+  };
+
+  applySubmit.disabled = true;
+  applySubmit.setAttribute("aria-disabled", "true");
+  setApplyStatus("Invio candidatura in corso...", "pending");
+
+  try {
+    const response = await fetch(RECRUITING_WORKER, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || !result?.ok) {
+      throw new Error(result?.details || result?.error || "Invio candidatura non riuscito");
+    }
+
+    applyForm.reset();
+    specSelect.innerHTML = `<option value="">Seleziona prima una classe...</option>`;
+    window.turnstile.reset(turnstileWidgetId);
+    resetTurnstileState("Completa di nuovo la verifica anti-bot se vuoi inviare un'altra candidatura.");
+    setApplyStatus("Candidatura inviata con successo.", "success");
+  } catch (error) {
+    if (window.turnstile && turnstileWidgetId !== null) {
+      window.turnstile.reset(turnstileWidgetId);
+    }
+    resetTurnstileState("Completa di nuovo la verifica anti-bot prima di riprovare.");
+    setApplyStatus(error instanceof Error ? error.message : "Invio candidatura non riuscito.", "error");
+  } finally {
+    syncSubmitState();
+  }
+});
+
+syncSubmitState();
+loadTurnstile();
+</script>
+
+</body>
+</html>

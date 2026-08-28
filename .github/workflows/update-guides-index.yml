@@ -1,0 +1,49 @@
+name: Aggiorna indice guide
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "content/guides/achievements/**"
+      - "content/guides/raids/**"
+      - "content/guides/raid-addons.json"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: guide-index-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-index:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Genera e valida indice
+        run: node scripts/build_guides_manifest.mjs
+
+      - name: Pubblica indice aggiornato
+        shell: bash
+        run: |
+          if git diff --quiet -- data/guides-manifest.json; then
+            echo "Indice gia aggiornato."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/guides-manifest.json
+          git commit -m "Aggiorna indice guide"
+          git push

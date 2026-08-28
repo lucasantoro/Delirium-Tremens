@@ -1,0 +1,212 @@
+{
+  "id": "firelands",
+  "title": "Glory of the Firelands Raider",
+  "subtitle": "Guida rapida per completare il meta achievement in modalita Heroic e ottenere il Corrupted Egg of Millagazor.",
+  "summary": "Guida per completare i 12 criteri del meta achievement e ottenere il Corrupted Egg of Millagazor.",
+  "expansion": "Cataclysm",
+  "instance": "Firelands",
+  "badge": "Glory",
+  "updated": "2026-08-25",
+  "cover": {
+    "image": "img/guides/firelands/firelands-04.jpg",
+    "alt": "Corrupted Fire Hawk, ricompensa Firelands",
+    "modelType": "npc",
+    "modelDisplayId": 38046
+  },
+  "stats": [
+    { "value": "12", "label": "criteri richiesti" },
+    { "value": "6", "label": "kill Heroic dirette" },
+    { "value": "Egg", "label": "Corrupted Egg of Millagazor" }
+  ],
+  "preparation": {
+    "title": "Prima di entrare",
+    "paragraphs": [
+      "Glory of the Firelands Raider e il meta achievement di Firelands legato alla ricompensa Corrupted Egg of Millagazor. La run attraversa i sei boss principali del raid: per ognuno c'e almeno un criterio Heroic e, in alcuni casi, una condizione aggiuntiva da rispettare.",
+      "Porta una macro /kneel per Majordomo, un addon coordinate come TomTom per Bucket List e riduci il danno AoE quando serve controllare il boss invece di eliminarlo subito."
+    ],
+    "checklist": [
+      "Macro /kneel pronta per Majordomo",
+      "TomTom o addon coordinate per Bucket List",
+      "Danno AoE controllato quando la meccanica richiede tempo"
+    ]
+  },
+  "bosses": [
+    {
+      "id": "rhyolith",
+      "name": "Lord Rhyolith",
+      "image": "img/guides/firelands/firelands-03.jpg",
+      "imageAlt": "Lord Rhyolith",
+      "modelType": "npc",
+      "modelDisplayId": 38414,
+      "intro": "Controlla il danno e rispetta la direzione richiesta prima della kill.",
+      "achievements": [
+        {
+          "name": "Heroic: Lord Rhyolith",
+          "description": "Uccidi Lord Rhyolith in modalita Heroic.",
+          "steps": [],
+          "waypoints": []
+        },
+        {
+          "name": "Not an Ambi-Turner",
+          "description": "Colpisci solo la gamba destra con attacchi single target. Evita danno AoE e burst incontrollato: se il boss muore subito senza rispettare la condizione, l'achievement puo non essere assegnato.",
+          "steps": [],
+          "waypoints": []
+        }
+      ],
+      "notes": [],
+      "references": []
+    },
+    {
+      "id": "shannox",
+      "name": "Shannox",
+      "image": "img/guides/firelands/firelands-08.jpg",
+      "imageAlt": "Shannox",
+      "modelType": "npc",
+      "modelDisplayId": 38448,
+      "intro": "Porta Shannox in tutte le aree richieste prima di chiudere il combattimento.",
+      "achievements": [
+        {
+          "name": "Heroic: Shannox",
+          "description": "Uccidi Shannox in modalita Heroic.",
+          "steps": [],
+          "waypoints": []
+        },
+        {
+          "name": "Bucket List",
+          "description": "Tieni Shannox in vita, tauntalo e portalo in tutte le aree richieste del raid. Quando tutte le zone sono state visitate, puoi chiudere il combattimento.",
+          "steps": [],
+          "waypoints": [
+            "/way 32.67 76.93 Flamebreach",
+            "/way 29.94 42.03 Beth'tilac's Lair",
+            "/way 35.04 36.82 Path of Corruption",
+            "/way 64.39 52.62 Shatterstone",
+            "/way 64.37 56.62 The Ridge of Ancient Flame"
+          ]
+        }
+      ],
+      "notes": [],
+      "references": [
+        {
+          "image": "img/guides/firelands/firelands-09.jpg",
+          "alt": "Mappa Firelands con aree Bucket List",
+          "caption": "Mappa delle aree richieste per Bucket List."
+        }
+      ]
+    },
+    {
+      "id": "beth-tilac",
+      "name": "Beth'tilac",
+      "image": "img/guides/firelands/firelands-07.jpg",
+      "imageAlt": "Beth'tilac",
+      "modelType": "npc",
+      "modelDisplayId": 38227,
+      "intro": "Lascia partire la fase superiore prima di infliggere il danno finale.",
+      "achievements": [
+        {
+          "name": "Heroic: Beth'tilac",
+          "description": "Uccidi Beth'tilac in modalita Heroic.",
+          "steps": [],
+          "waypoints": []
+        },
+        {
+          "name": "Death from Above",
+          "description": "Ingaggia il boss e lascia partire la fase superiore prima di chiudere il combattimento. Non forzare una kill istantanea appena entri: dai tempo all'incontro di attivare la meccanica necessaria.",
+          "steps": [],
+          "waypoints": []
+        }
+      ],
+      "notes": [],
+      "references": []
+    },
+    {
+      "id": "alysrazor",
+      "name": "Alysrazor",
+      "image": "img/guides/firelands/firelands-05.jpg",
+      "imageAlt": "Alysrazor",
+      "modelType": "npc",
+      "modelDisplayId": 38446,
+      "intro": "Completa la normale sequenza Heroic e controlla l'assegnazione del criterio.",
+      "achievements": [
+        {
+          "name": "Heroic: Alysrazor",
+          "description": "Uccidi Alysrazor in modalita Heroic.",
+          "steps": [],
+          "waypoints": []
+        },
+        {
+          "name": "Do a Barrel Roll!",
+          "description": "Nel documento di gilda questo criterio viene trattato come ottenibile con la normale kill Heroic al livello attuale. Controlla comunque che l'achievement venga assegnato prima di uscire dall'istanza.",
+          "steps": [],
+          "waypoints": []
+        }
+      ],
+      "notes": [],
+      "references": []
+    },
+    {
+      "id": "baleroc",
+      "name": "Baleroc",
+      "image": "img/guides/firelands/firelands-06.jpg",
+      "imageAlt": "Baleroc",
+      "modelType": "npc",
+      "modelDisplayId": 38621,
+      "intro": "Chiudi il combattimento in Heroic senza allungare inutilmente il pull.",
+      "achievements": [
+        {
+          "name": "Heroic: Baleroc",
+          "description": "Uccidi Baleroc in modalita Heroic.",
+          "steps": [],
+          "waypoints": []
+        },
+        {
+          "name": "Share the Pain",
+          "description": "Nel documento di gilda questo criterio viene indicato come completabile con la kill Heroic al livello attuale. Evita di allungare inutilmente il combattimento e chiudi appena il pull e stabile.",
+          "steps": [],
+          "waypoints": []
+        }
+      ],
+      "notes": [],
+      "references": []
+    },
+    {
+      "id": "majordomo",
+      "name": "Majordomo Fandral Staghelm",
+      "image": "img/guides/firelands/firelands-01.jpg",
+      "imageAlt": "Majordomo Fandral Staghelm",
+      "modelType": "npc",
+      "modelDisplayId": 37953,
+      "intro": "Sincronizza /kneel con il cast e attiva entrambe le sfere senza errori.",
+      "achievements": [
+        {
+          "name": "Heroic: Majordomo Fandral Staghelm",
+          "description": "Uccidi Majordomo Fandral Staghelm in modalita Heroic.",
+          "steps": [],
+          "waypoints": []
+        },
+        {
+          "name": "Only the Penitent...",
+          "description": "Attiva le due sfere di magma ai lati di Fandral senza farti colpire da Kneel to the Flame. Quando Fandral lancia la spell, usa /kneel, muoviti durante i 5 secondi di cast, poi inginocchiati di nuovo al cast successivo. Ripeti fino ad attivare entrambe le sfere, poi uccidi il boss.",
+          "steps": [
+            "Tutti i giocatori devono seguire lo stesso ritmo.",
+            "Un solo player colpito puo far fallire l'achievement."
+          ],
+          "waypoints": []
+        }
+      ],
+      "notes": [],
+      "references": [
+        {
+          "image": "img/guides/firelands/firelands-02.jpg",
+          "alt": "Sfera di magma per Only the Penitent",
+          "caption": "Una delle sfere da attivare senza essere colpiti da Kneel to the Flame."
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Articolo della serata",
+      "url": "pages/spettatori-diario.html?article=serata-cataclysm-achievements"
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="base" x1="960" y1="0" x2="960" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#071114"/>
+      <stop offset="0.55" stop-color="#06090B"/>
+      <stop offset="1" stop-color="#020405"/>
+    </linearGradient>
+    <radialGradient id="greenGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(920 132) rotate(90) scale(440 920)">
+      <stop stop-color="#36F56E" stop-opacity="0.16"/>
+      <stop offset="1" stop-color="#36F56E" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="blueGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1450 230) rotate(90) scale(240 420)">
+      <stop stop-color="#69C9FF" stop-opacity="0.12"/>
+      <stop offset="1" stop-color="#69C9FF" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="noise" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="2" seed="21"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="table" tableValues="0 0.028"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#base)"/>
+  <rect width="1920" height="1080" fill="url(#greenGlow)"/>
+  <rect width="1920" height="1080" fill="url(#blueGlow)"/>
+  <path d="M0 814C216 760 406 716 574 742C766 771 858 884 1052 905C1236 925 1388 841 1579 784C1705 746 1812 742 1920 756V1080H0V814Z" fill="#030607"/>
+  <path d="M318 196C514 150 686 151 850 191C1010 229 1116 242 1280 214C1448 184 1603 176 1774 198" stroke="#62E99B" stroke-opacity="0.22" stroke-width="3" stroke-linecap="round"/>
+  <path d="M486 120L548 171L606 131L668 179L736 132L798 184L860 136" stroke="#8DF7B5" stroke-opacity="0.34" stroke-width="4" stroke-linecap="round"/>
+  <path d="M1118 116L1178 167L1238 129L1298 176L1368 134L1428 181" stroke="#8CCFFF" stroke-opacity="0.28" stroke-width="4" stroke-linecap="round"/>
+  <g opacity="0.12">
+    <path d="M610 320C610 302 624 288 642 288H652C670 288 684 302 684 320V388H610V320Z" stroke="#F0C868" stroke-width="3"/>
+    <path d="M1228 302C1228 286 1242 272 1258 272H1268C1284 272 1298 286 1298 302V364H1228V302Z" stroke="#69C9FF" stroke-width="3"/>
+    <path d="M939 278C939 251 960.9 229 988 229C1015.1 229 1037 251 1037 278C1037 304 1018 330 988 362C958 330 939 304 939 278Z" stroke="#8DF7B5" stroke-width="3"/>
+  </g>
+  <rect width="1920" height="1080" filter="url(#noise)"/>
+</svg>

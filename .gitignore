@@ -1,0 +1,6 @@
+scripts/__pycache__/
+*.py[cod]
+.wrangler/
+/workers/cloudflare/
+Blackjack/
+Thumbs.db

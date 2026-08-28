@@ -1,0 +1,70 @@
+{
+  "id": "nome-guida-in-minuscolo",
+  "title": "Titolo completo della guida",
+  "subtitle": "Breve sottotitolo mostrato nella testata",
+  "summary": "Descrizione breve usata nella scheda dell'archivio guide.",
+  "expansion": "Espansione",
+  "instance": "Nome raid o istanza",
+  "badge": "Achievement",
+  "updated": "2026-08-25",
+  "cover": {
+    "image": "",
+    "alt": "Descrizione dell'immagine di copertina",
+    "modelType": "npc",
+    "modelDisplayId": null
+  },
+  "stats": [
+    { "value": "0", "label": "criteri richiesti" },
+    { "value": "0", "label": "boss coinvolti" },
+    { "value": "Ricompensa", "label": "nome ricompensa" }
+  ],
+  "preparation": {
+    "title": "Prima di entrare",
+    "paragraphs": [
+      "Spiega in poche righe lo scopo della run e la ricompensa.",
+      "Indica addon, macro, oggetti o accorgimenti da preparare."
+    ],
+    "checklist": [
+      "Primo controllo da fare prima della partenza",
+      "Secondo controllo da fare prima della partenza"
+    ]
+  },
+  "bosses": [
+    {
+      "id": "nome-boss",
+      "name": "Nome del boss",
+      "image": "",
+      "imageAlt": "Nome del boss",
+      "modelType": "npc",
+      "modelDisplayId": null,
+      "intro": "Una frase che riassume cosa conta in questo incontro.",
+      "achievements": [
+        {
+          "name": "Nome achievement",
+          "description": "Descrizione chiara della condizione da rispettare.",
+          "steps": [
+            "Primo passaggio operativo",
+            "Secondo passaggio operativo"
+          ],
+          "waypoints": []
+        }
+      ],
+      "notes": [
+        "Nota o avvertimento opzionale."
+      ],
+      "references": [
+        {
+          "image": "",
+          "alt": "Descrizione immagine",
+          "caption": "Didascalia opzionale"
+        }
+      ]
+    }
+  ],
+  "links": [
+    {
+      "label": "Articolo della serata",
+      "url": ""
+    }
+  ]
+}

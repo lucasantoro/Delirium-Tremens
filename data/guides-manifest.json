@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "categories": [
+    {
+      "id": "achievement",
+      "title": "Achievement e collezioni",
+      "description": "Glory, cavalcature e obiettivi organizzati boss per boss."
+    },
+    {
+      "id": "raid",
+      "title": "Raid",
+      "description": "Fight, preparazione e strumenti obbligatori per arrivare pronti al raid."
+    }
+  ],
+  "guides": [
+    {
+      "id": "firelands",
+      "type": "achievement",
+      "title": "Glory of the Firelands Raider",
+      "subtitle": "Guida rapida per completare il meta achievement in modalita Heroic e ottenere il Corrupted Egg of Millagazor.",
+      "summary": "Guida per completare i 12 criteri del meta achievement e ottenere il Corrupted Egg of Millagazor.",
+      "expansion": "Cataclysm",
+      "instance": "Firelands",
+      "updated": "2026-08-25",
+      "badge": "Glory",
+      "coverImage": "img/guides/firelands/firelands-04.jpg",
+      "source": "content/guides/achievements/firelands.json",
+      "href": "pages/guide-detail.html?id=firelands"
+    },
+    {
+      "id": "addon-obbligatori-raid",
+      "type": "raid",
+      "section": "addons",
+      "title": "Addon obbligatori per il raid",
+      "subtitle": "Configurazione minima del raider",
+      "summary": "La configurazione minima richiesta a ogni raider Blackjack. Installali prima della serata e mantienili aggiornati.",
+      "badge": "Addon",
+      "source": "content/guides/raid-addons.json",
+      "href": "pages/guide-raid-addons.html"
+    },
+    {
+      "id": "procedura-per-il-caricamento-delle-sim-su-wowaudit",
+      "type": "raid",
+      "section": "preparation",
+      "title": "Procedura per il caricamento delle Sim su WoWAudit",
+      "subtitle": "Attività prima del raid",
+      "summary": "Procedura da completare prima del raid, consultabile pagina per pagina.",
+      "badge": "Preparazione",
+      "file": "content/guides/raids/preparation/Procedura per il caricamento delle Sim su WoWAudit.pdf",
+      "href": "pages/guide-raid.html?id=procedura-per-il-caricamento-delle-sim-su-wowaudit",
+      "pages": 3,
+      "sizeBytes": 1460064
+    },
+    {
+      "id": "the-venomous-abyss-guida-normal-e-heroic",
+      "type": "raid",
+      "section": "fights",
+      "title": "The Venomous Abyss Guida Normal e Heroic",
+      "subtitle": "Guida ai fight",
+      "summary": "Strategie Normal e Heroic consultabili pagina per pagina.",
+      "badge": "Fight",
+      "file": "content/guides/raids/fights/The Venomous Abyss Guida Normal e Heroic.pdf",
+      "href": "pages/guide-raid.html?id=the-venomous-abyss-guida-normal-e-heroic",
+      "pages": 11,
+      "sizeBytes": 735578
+    }
+  ]
+}
