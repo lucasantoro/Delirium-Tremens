@@ -42,12 +42,12 @@
     <div class="section-head section-head--center">
       <div class="eyebrow">Candidatura</div>
       <h2 class="section-title">Modulo di ingresso</h2>
-      <p class="section-subtitle">Classe e specializzazione sono aggiornate all'assetto attuale, inclusa Devourer per Demon Hunter.</p>
     </div>
 
     <form id="applyForm" class="apply-form">
-      <label for="discordInput">Discord</label>
-      <input id="discordInput" type="text" name="Discord" placeholder="es: nickname o user Discord" required>
+      <label for="discordInput">Discord del candidato</label>
+      <input id="discordInput" type="text" name="Discord" placeholder="Inserisci il tuo username Discord" aria-describedby="discordTip" title="Inserisci il Discord personale del giocatore che presenta la candidatura" required>
+      <p class="apply-note" id="discordTip">Indica il tuo Discord personale: verrà usato dallo staff per contattarti successivamente.</p>
 
       <label for="characterInput">Nome del personaggio</label>
       <input id="characterInput" type="text" name="Personaggio" placeholder="Il tuo main" required>
@@ -76,7 +76,7 @@
       </select>
 
       <label for="logsInput">Link a Raider.IO o Warcraft Logs</label>
-      <input id="logsInput" type="url" name="Logs" placeholder="URL del profilo o del report">
+      <input id="logsInput" type="url" name="Logs" placeholder="URL del profilo o del report" required>
 
       <label for="availabilityInput">Disponibilita</label>
       <textarea id="availabilityInput" name="Disponibilita" placeholder="Giorni e orari in cui giochi di solito" required></textarea>
