@@ -74,24 +74,13 @@ function renderGuideCard(guide) {
   const detail = guide.type === "raid" && guide.pages
     ? `${guide.pages} pagine - PDF`
     : guide.updated ? `Aggiornata ${formatDate(guide.updated)}` : guide.badge || "Guida";
-  const media = guide.coverImage
-    ? `<a class="guide-card__media" href="${escapeHtml(href)}" aria-label="Apri ${escapeHtml(guide.title)}">
-        <img src="${escapeHtml(resolveAsset(guide.coverImage))}" alt="${escapeHtml(guide.title)}" loading="lazy">
-        <span class="guide-card__format">${escapeHtml(detail)}</span>
-      </a>`
-    : guide.type === "achievement"
-      ? `<a class="guide-card__media" href="${escapeHtml(href)}" aria-label="Apri ${escapeHtml(guide.title)}">
-          <div class="guide-card__book" aria-hidden="true"><span>BJ</span><strong>GUIDA</strong></div>
-          <span class="guide-card__format">${escapeHtml(detail)}</span>
-        </a>`
-      : "";
-  const documentMeta = guide.type === "raid"
-    ? `<div class="guide-card__document-meta"><span>${escapeHtml(detail)}</span><span>${escapeHtml(guide.subtitle || guide.badge || "Raid")}</span></div>`
-    : "";
+  const compactLabel = guide.type === "raid"
+    ? guide.subtitle || guide.badge || "Raid"
+    : guide.badge || guide.instance || "Achievement";
+  const documentMeta = `<div class="guide-card__document-meta"><span>${escapeHtml(detail)}</span><span>${escapeHtml(compactLabel)}</span></div>`;
   const actionLabel = guide.section === "addons" ? "Vedi gli addon" : guide.type === "raid" ? "Leggi la guida" : "Apri guida";
   return `
-    <article class="guide-card ${guide.type === "raid" ? "guide-card--raid guide-card--compact" : "guide-card--feature"}">
-      ${media}
+    <article class="guide-card guide-card--compact ${guide.type === "raid" ? "guide-card--raid" : "guide-card--feature"}">
       <div class="guide-card__body">
         ${documentMeta}
         <div class="editorial-card__meta"><span>${escapeHtml(metaLeft)}</span><strong>${escapeHtml(metaRight)}</strong></div>
